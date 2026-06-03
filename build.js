@@ -1569,7 +1569,7 @@ function renderFaqs(faqs){
 
 // Set this to your AdSense publisher ID after approval, e.g. 'ca-pub-1234567890123456'.
 // When set, the AdSense loader is injected into every page head and ads.txt is generated.
-const ADSENSE_PUB = '';
+const ADSENSE_PUB = 'ca-pub-5602511390549170';
 const ADSENSE_HEAD = ADSENSE_PUB
   ? `\n<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUB}" crossorigin="anonymous"></script>`
   : '';
