@@ -1567,6 +1567,112 @@ function renderFaqs(faqs){
   return faqs.map(f=>`    <h3>${f.q}</h3>\n    <p>${f.a}</p>`).join('\n');
 }
 
+// Set this to your AdSense publisher ID after approval, e.g. 'ca-pub-1234567890123456'.
+// When set, the AdSense loader is injected into every page head and ads.txt is generated.
+const ADSENSE_PUB = '';
+const ADSENSE_HEAD = ADSENSE_PUB
+  ? `\n<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUB}" crossorigin="anonymous"></script>`
+  : '';
+
+const HEADER = `<header class="site">
+  <div class="container">
+    <a class="brand" href="/index.html"><span class="wm">Calcula<i>pedia</i></span></a>
+    <nav><a href="/index.html">All calculators</a></nav>
+  </div>
+</header>`;
+
+const FOOTER = `<footer class="site">
+  <div class="container">
+    <nav class="foot-nav"><a href="/index.html">Calculators</a> · <a href="/about.html">About</a> · <a href="/privacy.html">Privacy</a> · <a href="/contact.html">Contact</a></nav>
+    <div>© <span id="yr"></span> Calculapedia — free project calculators.</div>
+    <div class="disclaimer">Estimates are for planning only. Always confirm quantities with your supplier or contractor before purchasing. Some links may be affiliate links.</div>
+  </div>
+</footer>`;
+
+const STATIC = [
+  {
+    slug:'about',
+    title:'About Calculapedia — Free Material &amp; Cost Calculators',
+    desc:'Calculapedia is a free collection of material and cost calculators for home and building projects.',
+    h1:'About Calculapedia',
+    body:`    <p>Calculapedia is a free collection of material and cost calculators for home and building projects. Whether you&rsquo;re pouring a concrete slab, mulching a garden bed, or tiling a floor, our tools tell you exactly how much material to buy &mdash; and roughly what it will cost &mdash; in seconds.</p>
+    <h2>Why we built it</h2>
+    <p>Estimating materials usually means hunting for a formula, converting units, and second-guessing yourself at the store. We wanted a faster way: enter your measurements, get a clear answer with a sensible waste allowance built in, and get on with the project.</p>
+    <h2>How the estimates work</h2>
+    <p>Every calculator uses standard industry formulas and rounds up with a reasonable allowance for waste and offcuts, so you&rsquo;re less likely to run short. Each one shows a worked example so you can see exactly how the number was reached.</p>
+    <p>Our estimates are for planning only &mdash; always confirm quantities with your supplier or contractor before buying.</p>
+    <h2>Free to use, free to share</h2>
+    <p>All calculators are free, with no signup. You&rsquo;re welcome to embed any of them on your own website using the embed code at the bottom of each calculator page.</p>`
+  },
+  {
+    slug:'privacy',
+    title:'Privacy Policy — Calculapedia',
+    desc:'How Calculapedia handles information, cookies, advertising, and affiliate links.',
+    h1:'Privacy Policy',
+    body:`    <p class="muted-date">Last updated: June 3, 2026</p>
+    <p>Calculapedia (&ldquo;we&rdquo;, &ldquo;us&rdquo;) operates calculapedia.com. This page explains what information is involved when you use our calculators and how it is handled.</p>
+    <h2>Information we collect</h2>
+    <p>Our calculators run entirely in your browser. We do not ask you to create an account, and the numbers you type into a calculator are not sent to us or stored on our servers.</p>
+    <h2>Cookies and advertising</h2>
+    <p>We use third-party advertising companies, including Google, to serve ads when you visit the site. These companies may use cookies and similar technologies to show ads based on your visits to this and other websites.</p>
+    <ul>
+      <li>Google&rsquo;s use of advertising cookies enables it and its partners to serve ads to you based on your visits to our site and/or other sites on the internet.</li>
+      <li>You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a>.</li>
+      <li>You can also opt out of some third-party vendors&rsquo; use of cookies for personalized advertising at <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener">aboutads.info/choices</a>.</li>
+    </ul>
+    <h2>Analytics</h2>
+    <p>We may use privacy-respecting analytics to understand which calculators are popular and how the site performs. Any such data is aggregated and does not identify you personally.</p>
+    <h2>Affiliate links</h2>
+    <p>Some &ldquo;Shop&rdquo; links on our calculators are affiliate links. If you buy through them, we may earn a small commission at no extra cost to you. This helps keep the calculators free.</p>
+    <h2>Children&rsquo;s privacy</h2>
+    <p>Our site is intended for a general audience and is not directed at children under 13.</p>
+    <h2>Changes to this policy</h2>
+    <p>We may update this policy from time to time. The &ldquo;last updated&rdquo; date above reflects the latest revision.</p>
+    <h2>Contact</h2>
+    <p>Questions about this policy? Email <a href="mailto:hello@calculapedia.com">hello@calculapedia.com</a>.</p>`
+  },
+  {
+    slug:'contact',
+    title:'Contact — Calculapedia',
+    desc:'Get in touch with Calculapedia to report an error, suggest a calculator, or ask a question.',
+    h1:'Contact Us',
+    body:`    <p>We&rsquo;d love to hear from you &mdash; whether you&rsquo;ve spotted an error in a calculation, want a new calculator added, or have a partnership question.</p>
+    <h2>Email</h2>
+    <p>Reach us at <a href="mailto:hello@calculapedia.com">hello@calculapedia.com</a> and we&rsquo;ll get back to you as soon as we can.</p>
+    <h2>Suggest a calculator</h2>
+    <p>Is there a material or project calculator you wish existed? Tell us what you&rsquo;d find useful and we&rsquo;ll consider adding it to the site.</p>`
+  }
+];
+
+function staticPage(p){
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${p.title}</title>
+<meta name="description" content="${p.desc}">
+<link rel="canonical" href="${SITE}/${p.slug}.html">
+${FONT}${ADSENSE_HEAD}
+<link rel="stylesheet" href="style.css?v=${VERSION}">
+</head>
+<body>
+${HEADER}
+
+<main class="container">
+  <article class="content prose">
+    <h1>${p.h1}</h1>
+${p.body}
+  </article>
+</main>
+
+${FOOTER}
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>
+`;
+}
+
 function page(c){
   return `<!DOCTYPE html>
 <html lang="en">
@@ -1576,19 +1682,14 @@ function page(c){
 <title>${c.title}</title>
 <meta name="description" content="${c.desc}">
 <link rel="canonical" href="${SITE}/${c.slug}.html">
-${FONT}
+${FONT}${ADSENSE_HEAD}
 <link rel="stylesheet" href="style.css?v=${VERSION}">
 <script type="application/ld+json">
 ${faqSchema(c)}
 </script>
 </head>
 <body>
-<header class="site">
-  <div class="container">
-    <a class="brand" href="index.html"><span class="wm">Calcula<i>pedia</i></span></a>
-    <nav><a href="index.html">All calculators</a></nav>
-  </div>
-</header>
+${HEADER}
 
 <main class="container">
   <div class="layout">
@@ -1631,12 +1732,7 @@ ${renderFaqs(c.content.faqs)}
   </section>
 </main>
 
-<footer class="site">
-  <div class="container">
-    <div>© <span id="yr"></span> Calculapedia — free project calculators.</div>
-    <div class="disclaimer">Estimates are for planning only. Confirm quantities with your supplier before purchasing. Some links may be affiliate links.</div>
-  </div>
-</footer>
+${FOOTER}
 
 <script>
 document.getElementById('yr').textContent=new Date().getFullYear();
@@ -1688,19 +1784,14 @@ function homepage(){
 <title>Calculapedia — Free Material &amp; Cost Calculators for DIY and Contractors</title>
 <meta name="description" content="Free, instant material calculators: figure out exactly how much concrete, mulch, gravel, paint, tile, drywall and more you need — and what it will cost. No signup.">
 <link rel="canonical" href="${SITE}/">
-${FONT}
+${FONT}${ADSENSE_HEAD}
 <link rel="stylesheet" href="style.css?v=${VERSION}">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"Calculapedia","url":"${SITE}/","description":"Free material and cost calculators for home projects."}
 </script>
 </head>
 <body>
-<header class="site">
-  <div class="container">
-    <a class="brand" href="index.html"><span class="wm">Calcula<i>pedia</i></span></a>
-    <nav><a href="index.html">All calculators</a></nav>
-  </div>
-</header>
+${HEADER}
 
 <main class="container">
   <section class="hero">
@@ -1730,12 +1821,7 @@ ${tiles}
   </section>
 </main>
 
-<footer class="site">
-  <div class="container">
-    <div>© <span id="yr"></span> Calculapedia — free project calculators.</div>
-    <div class="disclaimer">Estimates are for planning only. Always confirm quantities with your supplier or contractor before purchasing. Some links may be affiliate links.</div>
-  </div>
-</footer>
+${FOOTER}
 <script>
 document.getElementById('yr').textContent=new Date().getFullYear();
 (function(){
@@ -1772,7 +1858,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
 }
 
 function sitemap(){
-  const urls = ['', ...C.map(c=>c.slug+'.html')];
+  const urls = ['', ...C.map(c=>c.slug+'.html'), ...STATIC.map(s=>s.slug+'.html')];
   const body = urls.map(u=>`  <url><loc>${SITE}/${u}</loc></url>`).join('\n');
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
 }
@@ -1781,7 +1867,9 @@ function sitemap(){
 fs.mkdirSync(OUT, { recursive: true });
 let count = 0;
 for (const c of C){ fs.writeFileSync(path.join(OUT, c.slug+'.html'), page(c)); count++; }
+for (const s of STATIC){ fs.writeFileSync(path.join(OUT, s.slug+'.html'), staticPage(s)); }
 fs.writeFileSync(path.join(OUT,'index.html'), homepage());
+if (ADSENSE_PUB){ fs.writeFileSync(path.join(OUT,'ads.txt'), `google.com, ${ADSENSE_PUB.replace(/^ca-/,'')}, DIRECT, f08c47fec0942fa0\n`); }
 fs.writeFileSync(path.join(OUT,'sitemap.xml'), sitemap());
 fs.writeFileSync(path.join(OUT,'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${SITE}/sitemap.xml\n`);
 const EMBED_DIR = path.join(OUT,'embed');
