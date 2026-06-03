@@ -1510,6 +1510,56 @@ function faqSchema(c){
   return JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":items});
 }
 function stripTags(s){ return s.replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' ').replace(/&rsquo;/g,"'").replace(/&ldquo;|&rdquo;/g,'"').replace(/&amp;/g,'&'); }
+function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// Fixed iframe height per calculator (inputs render 2-up inside the embed).
+function embedHeight(c){ return 70 + Math.ceil(c.inputs.length/2)*90 + 70 + c.lines.length*34 + 60; }
+function embedSnippet(c){
+  return '<iframe src="'+SITE+'/embed/'+c.slug+'.html" width="100%" height="'+embedHeight(c)+'" '
+    + 'style="border:1px solid #e5e7eb;border-radius:14px;max-width:480px" '
+    + 'title="'+stripTags(c.h1)+' — Calculapedia" loading="lazy"></iframe>';
+}
+function embedPage(c){
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${c.h1} — Calculapedia</title>
+<meta name="robots" content="noindex">
+${FONT}
+<link rel="stylesheet" href="../style.css?v=${VERSION}">
+</head>
+<body class="embed">
+<div class="container">
+  <section class="calc">
+    <h1 style="font-size:21px;margin:0 0 14px;">${c.h1}</h1>
+${renderInputs(c.inputs)}
+    <div class="result">
+      <div class="big" id="main">—</div>
+      <div class="lines">
+${renderLines(c.lines)}
+      </div>
+    </div>
+    <a class="embed-credit" href="${SITE}/${c.slug}.html" target="_blank" rel="noopener">Powered by <b>Calculapedia</b> ↗</a>
+  </section>
+</div>
+<script>
+(function(){
+function num(id){var e=document.getElementById(id);if(!e)return 0;var v=parseFloat(e.value);return isFinite(v)&&v>0?v:0;}
+function val(id){var e=document.getElementById(id);return e?e.value:'';}
+function intval(id){var v=parseInt(val(id),10);return isFinite(v)&&v>0?v:0;}
+function money(n){return '$'+Math.round(n).toLocaleString();}
+function set(id,t){var e=document.getElementById(id);if(e)e.textContent=t;}
+function calc(){${c.body}}
+document.querySelectorAll('.calc input, .calc select').forEach(function(el){el.addEventListener('input',calc);});
+calc();
+})();
+</script>
+</body>
+</html>
+`;
+}
 
 function renderFaqs(faqs){
   return faqs.map(f=>`    <h3>${f.q}</h3>\n    <p>${f.a}</p>`).join('\n');
@@ -1570,6 +1620,13 @@ ${renderLines(c.lines)}
 ${renderFaqs(c.content.faqs)}
     </section>
   </div>
+
+  <section class="embed-box">
+    <h2>Add this calculator to your site &mdash; free</h2>
+    <p>Paste this code onto any web page (blog, forum, business site). It always shows the latest version and links back here.</p>
+    <textarea class="embed-code" readonly rows="3" onclick="this.select()">${escapeHtml(embedSnippet(c))}</textarea>
+    <div class="embed-actions"><button class="embed-copy" type="button">Copy code</button> <span class="embed-copied" hidden>Copied!</span></div>
+  </section>
 </main>
 
 <footer class="site">
@@ -1590,6 +1647,17 @@ function set(id,t){var e=document.getElementById(id);if(e)e.textContent=t;}
 function calc(){${c.body}}
 document.querySelectorAll('.calc input, .calc select').forEach(function(el){el.addEventListener('input',calc);});
 calc();
+})();
+(function(){
+var cp=document.querySelector('.embed-copy');
+if(!cp)return;
+cp.addEventListener('click',function(){
+  var ta=document.querySelector('.embed-code');
+  ta.focus(); ta.select();
+  try{ navigator.clipboard.writeText(ta.value); }catch(e){ try{ document.execCommand('copy'); }catch(_){} }
+  var m=document.querySelector('.embed-copied');
+  if(m){ m.hidden=false; setTimeout(function(){ m.hidden=true; },2000); }
+});
 })();
 </script>
 </body>
@@ -1714,6 +1782,9 @@ for (const c of C){ fs.writeFileSync(path.join(OUT, c.slug+'.html'), page(c)); c
 fs.writeFileSync(path.join(OUT,'index.html'), homepage());
 fs.writeFileSync(path.join(OUT,'sitemap.xml'), sitemap());
 fs.writeFileSync(path.join(OUT,'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${SITE}/sitemap.xml\n`);
+const EMBED_DIR = path.join(OUT,'embed');
+fs.mkdirSync(EMBED_DIR,{recursive:true});
+for (const c of C){ fs.writeFileSync(path.join(EMBED_DIR, c.slug+'.html'), embedPage(c)); }
 fs.copyFileSync(path.join(__dirname,'style.css'), path.join(OUT,'style.css'));
 console.log('Generated '+count+' calculator pages + index.html, sitemap.xml, robots.txt, style.css into /dist');
 console.log('Calculators: '+C.map(c=>c.slug).join(', '));
