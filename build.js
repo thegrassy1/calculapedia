@@ -1474,7 +1474,9 @@ const CAT = {
 function catOf(slug){ return CAT[slug] || 'Other'; }
 
 /* ---------- templates ---------- */
-const FONT = `<link rel="preconnect" href="https://fonts.googleapis.com">
+const FONT = `<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#ff5c35">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">`;
 
@@ -1786,5 +1788,6 @@ const EMBED_DIR = path.join(OUT,'embed');
 fs.mkdirSync(EMBED_DIR,{recursive:true});
 for (const c of C){ fs.writeFileSync(path.join(EMBED_DIR, c.slug+'.html'), embedPage(c)); }
 fs.copyFileSync(path.join(__dirname,'style.css'), path.join(OUT,'style.css'));
+fs.copyFileSync(path.join(__dirname,'favicon.svg'), path.join(OUT,'favicon.svg'));
 console.log('Generated '+count+' calculator pages + index.html, sitemap.xml, robots.txt, style.css into /dist');
 console.log('Calculators: '+C.map(c=>c.slug).join(', '));
