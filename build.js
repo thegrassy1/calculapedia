@@ -703,34 +703,38 @@ set('cost',P>0?money(Math.ceil(gal)*P):'—');`,
 
 C.push({
   slug:'grass-seed-calculator', emoji:'🌾', name:'Grass Seed Calculator',
-  tile:'Pounds of seed for a lawn',
-  title:'Grass Seed Calculator — How Much Grass Seed Do I Need?',
-  desc:'Free grass seed calculator. Enter lawn size and whether you are seeding new or overseeding for the pounds of seed needed and cost.',
-  h1:'Grass Seed Calculator', sub:'How much grass seed do you need? Enter your lawn size.',
+  tile:'Pounds of seed by grass type',
+  title:'Grass Seed Calculator — How Much Grass Seed Do I Need? (By Grass Type)',
+  desc:'Free grass seed calculator. Pick your grass type (tall fescue, ryegrass, Kentucky bluegrass, bahia) and lawn size for the pounds of seed needed — new lawn or overseeding.',
+  h1:'Grass Seed Calculator', sub:'How much grass seed do you need? Pick your grass type and lawn size.',
   buy:'Shop grass seed →',
   inputs:[
     {id:'len',label:'Lawn length',hint:'(feet)',value:'50',step:'0.1'},
     {id:'wid',label:'Lawn width',hint:'(feet)',value:'40',step:'0.1'},
-    {id:'rate',label:'Seeding type',type:'select',options:[{v:'5',t:'New lawn (5 lb / 1000 sq ft)',sel:true},{v:'3',t:'Overseeding (3 lb / 1000 sq ft)'}]},
+    {id:'grass',label:'Grass type',type:'select',options:[{v:'3|5',t:'General / mixed (3–5 lb)',sel:true},{v:'4|6',t:'Tall fescue (4–6 lb)'},{v:'5|8',t:'Perennial ryegrass (5–8 lb)'},{v:'2|3',t:'Kentucky bluegrass (2–3 lb)'},{v:'5|10',t:'Bahia (5–10 lb)'}]},
+    {id:'mode',label:'Seeding type',type:'select',options:[{v:'new',t:'New lawn (full rate)',sel:true},{v:'over',t:'Overseeding (lighter rate)'}]},
     {id:'price',label:'Price per pound',hint:'(optional, $)',value:'5',step:'0.5'}
   ],
   lines:[
     {id:'area',label:'Lawn area'},
+    {id:'rateUsed',label:'Rate applied'},
     {id:'cost',label:'Estimated cost'}
   ],
-  body:`var L=num('len'),W=num('wid'),rate=parseFloat(val('rate'))||5,P=num('price');
-var area=L*W,lbs=area/1000*rate;
+  body:`var L=num('len'),W=num('wid'),P=num('price');
+var parts=(val('grass')||'3|5').split('|'),low=parseFloat(parts[0])||3,high=parseFloat(parts[1])||5;
+var rate=val('mode')==='over'?low:high,area=L*W,lbs=area/1000*rate;
 set('main',lbs.toFixed(1)+' pounds');
 set('area',area.toFixed(0)+' sq ft');
+set('rateUsed',rate+' lb / 1000 sq ft');
 set('cost',P>0?money(Math.ceil(lbs)*P):'—');`,
   content:{
-    intro:'Seeding rates are quoted per 1,000 square feet. The calculator multiplies your lawn area by the rate for a new lawn or for overseeding an existing one.',
-    example:'<strong>Worked example — a 50&nbsp;ft × 40&nbsp;ft new lawn:</strong><br>2,000 sq ft ÷ 1,000 × 5 = <strong>10 pounds</strong> of seed.',
-    h3:'New lawn vs. overseeding',
-    p:'Bare soil needs a heavier rate (about 5 lb per 1,000 sq ft); refreshing a thin existing lawn needs less (about 3 lb). Rates vary by grass type, so check the bag.',
+    intro:'Seeding rates depend on both the grass species and whether you&rsquo;re starting a new lawn or overseeding. Pick your grass type and the calculator applies the right rate per 1,000 sq ft — the heavier rate for a new lawn, a lighter rate for overseeding.',
+    example:'<strong>Worked example — a 50&nbsp;ft × 40&nbsp;ft (2,000 sq ft) new lawn in tall fescue (6 lb / 1,000 sq ft):</strong><br>2,000 ÷ 1,000 × 6 = <strong>12 pounds</strong> of seed.',
+    h3:'Why grass type matters',
+    p:'Seed size, growth habit, and germination speed change how much you need. Spreading grasses like Kentucky bluegrass (2–3 lb) need less; bunch-type or large-seeded grasses like tall fescue (4–6 lb), perennial ryegrass (5–8 lb), and bahia (5–10 lb) need more. A new lawn uses roughly double the overseeding rate.',
     faqs:[
-      {q:'How much grass seed per 1000 square feet?',a:'About <strong>5 lb for a new lawn</strong> and <strong>3 lb for overseeding</strong>, depending on the grass species.'},
-      {q:'Can I use too much seed?',a:'Yes — overcrowded seedlings compete and grow weak. Stick close to the recommended rate.'}
+      {q:'How much grass seed per 1,000 sq ft by type?',a:'For a new lawn, roughly: Kentucky bluegrass <strong>2–3 lb</strong>, tall fescue <strong>4–6 lb</strong>, perennial ryegrass <strong>5–8 lb</strong>, and bahia <strong>5–10 lb</strong> per 1,000 sq ft.'},
+      {q:'How much seed for overseeding vs a new lawn?',a:'Overseeding uses about <strong>half</strong> the new-lawn rate — enough to thicken existing turf without crowding it.'}
     ]
   }
 });
