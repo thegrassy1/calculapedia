@@ -26,9 +26,16 @@ body {
   margin: 0;
   font-family: var(--font);
   color: var(--ink);
-  background:
-    radial-gradient(1200px 480px at 50% -200px, #ffe9e2 0%, rgba(255,233,226,0) 70%),
-    var(--bg);
+  background-color: var(--bg);
+  /* Faint graph-paper grid: minor lines every 26px, bolder lines every 130px. */
+  background-image:
+    linear-gradient(rgba(17,21,26,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17,21,26,.05) 1px, transparent 1px),
+    linear-gradient(rgba(17,21,26,.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17,21,26,.028) 1px, transparent 1px);
+  background-size: 130px 130px, 130px 130px, 26px 26px, 26px 26px;
+  background-position: -1px -1px;
+  background-attachment: fixed; /* grid stays put while content scrolls over it */
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
