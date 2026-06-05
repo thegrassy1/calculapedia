@@ -1427,6 +1427,76 @@ set('cost',P>0?money(rolls*P):'—');`,
   }
 });
 
+C.push({
+  slug:'potting-soil-calculator', emoji:'🪴', name:'Potting Soil Calculator',
+  tile:'Potting mix for pots & containers',
+  title:'Potting Soil Calculator — How Much Potting Mix Do I Need?',
+  desc:'Free potting soil calculator. Enter your pot size and count for the cubic feet and dry quarts of potting mix needed.',
+  h1:'Potting Soil Calculator', sub:'How much potting mix do you need? Enter your pot size and how many.',
+  buy:'Shop potting mix →',
+  inputs:[
+    {id:'diam',label:'Pot diameter',hint:'(inches)',value:'12',step:'0.5'},
+    {id:'height',label:'Pot height',hint:'(inches)',value:'10',step:'0.5'},
+    {id:'pots',label:'Number of pots',hint:'',value:'3',step:'1'},
+    {id:'price',label:'Price per cubic foot',hint:'(optional, $)',value:'8',step:'0.5'}
+  ],
+  lines:[
+    {id:'perpot',label:'Per pot'},
+    {id:'quarts',label:'Dry quarts needed'},
+    {id:'cost',label:'Estimated cost'}
+  ],
+  body:`var d=num('diam'),h=num('height'),n=intval('pots')||1,P=num('price');
+var perCuFt=(Math.PI*Math.pow(d/2,2)*h)/1728,total=perCuFt*n,quarts=total*25.714;
+set('main',total.toFixed(2)+' cubic feet');
+set('perpot',perCuFt.toFixed(2)+' cu ft');
+set('quarts',Math.ceil(quarts)+' qt');
+set('cost',P>0?money(total*P):'—');`,
+  content:{
+    intro:'It treats each pot as a cylinder (diameter × height), totals the volume across all your pots, and converts it to cubic feet and dry quarts — the two ways potting mix is sold.',
+    example:'<strong>Worked example — three 12&nbsp;in × 10&nbsp;in pots:</strong><br>π × 6² × 10 = 1,131 cu in ÷ 1,728 = 0.65 cu ft each → × 3 = <strong>1.96 cubic feet</strong> (about 50 dry quarts).',
+    h3:'Pots taper, so you&rsquo;ll have a little extra',
+    p:'Most pots are narrower at the base than a true cylinder, so this estimate runs slightly high — which is good, since fresh mix settles and you&rsquo;ll want a little reserve.',
+    faqs:[
+      {q:'How many quarts of soil for a 12-inch pot?',a:'About <strong>16–17 dry quarts</strong> for a standard 12 in × 10 in pot.'},
+      {q:'How do I convert cubic feet to quarts?',a:'Multiply cubic feet by <strong>25.7</strong> to get dry quarts.'}
+    ]
+  }
+});
+
+C.push({
+  slug:'thinset-calculator', emoji:'🛠️', name:'Thinset Mortar Calculator',
+  tile:'Bags of thinset for tiling',
+  title:'Thinset Calculator — How Much Thinset Mortar Do I Need?',
+  desc:'Free thinset mortar calculator. Enter your tile area and trowel size for the number of 50 lb bags of thinset needed and cost.',
+  h1:'Thinset Mortar Calculator', sub:'How much thinset do you need? Enter your area and trowel size.',
+  buy:'Shop thinset mortar →',
+  inputs:[
+    {id:'len',label:'Area length',hint:'(feet)',value:'10',step:'0.1'},
+    {id:'wid',label:'Area width',hint:'(feet)',value:'10',step:'0.1'},
+    {id:'trowel',label:'Trowel size',type:'select',options:[{v:'95',t:'1/4 in V-notch (~95 sq ft)'},{v:'70',t:'1/4 in square (~70 sq ft)',sel:true},{v:'45',t:'1/2 in square (~45 sq ft)'}]},
+    {id:'price',label:'Price per bag',hint:'(optional, $)',value:'15',step:'1'}
+  ],
+  lines:[
+    {id:'area',label:'Area to tile'},
+    {id:'cost',label:'Estimated cost'}
+  ],
+  body:`var L=num('len'),W=num('wid'),cov=parseFloat(val('trowel'))||70,P=num('price');
+var area=L*W,bags=cov>0?Math.ceil(area/cov):0;
+set('main',bags+' bags');
+set('area',area.toFixed(0)+' sq ft');
+set('cost',P>0?money(bags*P):'—');`,
+  content:{
+    intro:'Thinset coverage depends mostly on your trowel size — bigger notches lay a thicker bed and cover less area. The calculator divides your tile area by the coverage for the chosen trowel (per 50 lb bag).',
+    example:'<strong>Worked example — 100 sq ft with a 1/4&nbsp;in square-notch trowel (~70 sq ft/bag):</strong><br>100 ÷ 70 = 1.43 → <strong>2 bags</strong> of thinset.',
+    h3:'Bigger tiles need bigger notches',
+    p:'Large-format tiles and uneven substrates need a deeper notch (1/2 in), which uses more thinset. Match the trowel to your tile size — the manufacturer lists the recommended notch.',
+    faqs:[
+      {q:'How much thinset for 100 square feet?',a:'Roughly <strong>1–2 bags</strong> (50 lb) depending on trowel size.'},
+      {q:'How much area does a bag of thinset cover?',a:'About <strong>45–95 sq ft</strong> per 50 lb bag, depending on the trowel notch.'}
+    ]
+  }
+});
+
 /* ---------- categories ---------- */
 const CATEGORIES = ['Concrete & Masonry','Landscaping','Flooring & Tile','Walls & Paint','Decking','Roofing','Outdoor'];
 const CAT = {
@@ -1469,7 +1539,9 @@ const CAT = {
   'stair-calculator':'Decking',
   'baluster-calculator':'Decking',
   'river-rock-calculator':'Landscaping',
-  'underlayment-calculator':'Flooring & Tile'
+  'underlayment-calculator':'Flooring & Tile',
+  'potting-soil-calculator':'Landscaping',
+  'thinset-calculator':'Flooring & Tile'
 };
 function catOf(slug){ return CAT[slug] || 'Other'; }
 
