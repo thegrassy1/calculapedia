@@ -1501,6 +1501,115 @@ set('cost',P>0?money(bags*P):'—');`,
   }
 });
 
+C.push({
+  slug:'vinyl-siding-calculator', emoji:'🏘️', name:'Vinyl Siding Calculator',
+  tile:'Squares of siding for any exterior wall',
+  title:'Vinyl Siding Calculator — How Much Vinyl Siding Do I Need? (Squares)',
+  desc:'Free vinyl siding calculator. Enter your wall dimensions for the squares of siding needed, with waste allowance and estimated cost.',
+  h1:'Vinyl Siding Calculator', sub:'How much vinyl siding do you need? Enter your wall size for squares and cost.',
+  buy:'Shop vinyl siding →',
+  inputs:[
+    {id:'len',label:'Total wall length',hint:'(feet, all sides)',value:'120',step:'1'},
+    {id:'height',label:'Average wall height',hint:'(feet)',value:'9',step:'0.1'},
+    {id:'doors',label:'Doors',hint:'(subtracted)',value:'3',step:'1'},
+    {id:'windows',label:'Windows',hint:'(subtracted)',value:'8',step:'1'},
+    {id:'price',label:'Price per square',hint:'(optional, $)',value:'120',step:'5'}
+  ],
+  lines:[
+    {id:'area',label:'Gross wall area'},
+    {id:'net',label:'Net area (minus openings)'},
+    {id:'cost',label:'Estimated cost'}
+  ],
+  body:`var L=num('len'),H=num('height'),doors=intval('doors'),win=intval('windows'),P=num('price');
+var gross=L*H,net=Math.max(0,gross-doors*21-win*15),sq=net/100*1.10;
+set('main',(Math.ceil(sq*10)/10).toFixed(1)+' squares (buy '+Math.ceil(sq)+')');
+set('area',gross.toFixed(0)+' sq ft');
+set('net',net.toFixed(0)+' sq ft');
+set('cost',P>0?money(Math.ceil(sq)*P):'—');`,
+  content:{
+    intro:'It multiplies your total wall length by the average height for the gross area, subtracts 21 sq ft per door and 15 sq ft per window, then converts to siding &ldquo;squares&rdquo; (each covering 100 sq ft) and adds 10% for cuts and waste.',
+    example:'<strong>Worked example — a house with 120&nbsp;ft of wall at 9&nbsp;ft height, 3 doors and 8 windows:</strong><br>120 × 9 = 1,080 sq ft &minus; (63 + 120) = 897 sq ft net → ÷ 100 × 1.10 = <strong>9.9 squares</strong> → buy 10.',
+    h3:'How siding is sold',
+    p:'Vinyl siding is sold by the &ldquo;square&rdquo; — a unit covering 100 sq ft. Each carton typically includes several panels and covers one square. Always check the carton label, as coverage can vary by panel style.',
+    faqs:[
+      {q:'How many squares of siding do I need?',a:'Measure total wall area, subtract openings, divide by 100, and add 10% for waste. A typical 1,500 sq ft ranch-style house takes roughly <strong>12–15 squares</strong>.'},
+      {q:'How much does vinyl siding cost per square?',a:'Material cost runs roughly <strong>$80–$150 per square</strong>; installed cost is typically $100–$200 per square.'}
+    ]
+  }
+});
+
+C.push({
+  slug:'landscape-fabric-calculator', emoji:'🌿', name:'Landscape Fabric Calculator',
+  tile:'Rolls of weed barrier for beds & paths',
+  title:'Landscape Fabric Calculator — How Much Weed Barrier Do I Need?',
+  desc:'Free landscape fabric (weed barrier) calculator. Enter your bed or path size and roll coverage for rolls needed and estimated cost.',
+  h1:'Landscape Fabric Calculator', sub:'How much weed barrier do you need? Enter your area and roll size.',
+  buy:'Shop landscape fabric →',
+  inputs:[
+    {id:'len',label:'Length',hint:'(feet)',value:'20',step:'0.1'},
+    {id:'wid',label:'Width',hint:'(feet)',value:'10',step:'0.1'},
+    {id:'cov',label:'Coverage per roll',hint:'(sq ft)',value:'300',step:'10'},
+    {id:'price',label:'Price per roll',hint:'(optional, $)',value:'25',step:'1'}
+  ],
+  lines:[
+    {id:'area',label:'Area to cover'},
+    {id:'areaW',label:'Area with 10% overlap'},
+    {id:'cost',label:'Estimated cost'}
+  ],
+  body:`var L=num('len'),W=num('wid'),cov=num('cov'),P=num('price');
+var area=L*W,areaW=area*1.10,rolls=cov>0?Math.ceil(areaW/cov):0;
+set('main',rolls+' rolls');
+set('area',area.toFixed(0)+' sq ft');
+set('areaW',areaW.toFixed(0)+' sq ft');
+set('cost',P>0?money(rolls*P):'—');`,
+  content:{
+    intro:'It calculates your bed or path area, adds 10% for overlapping seams and tucking edges, then divides by the square footage each roll covers — printed on the label.',
+    example:'<strong>Worked example — a 20&nbsp;ft × 10&nbsp;ft bed, 300 sq ft per roll:</strong><br>200 sq ft × 1.10 = 220 sq ft ÷ 300 = <strong>1 roll</strong>.',
+    h3:'Why overlap matters',
+    p:'Overlap seams by at least 6 inches so weeds can&rsquo;t push through gaps. Pin the fabric every 18–24 inches and tuck edges under edging or stones to hold them down.',
+    faqs:[
+      {q:'How much landscape fabric do I need?',a:'Measure your bed area, add 10% for overlaps, then divide by the roll&rsquo;s square footage.'},
+      {q:'How do I keep landscape fabric from shifting?',a:'Use landscape staples or pins every <strong>18–24 inches</strong>, placed more closely on slopes and around curves.'}
+    ]
+  }
+});
+
+C.push({
+  slug:'post-hole-calculator', emoji:'🪛', name:'Post Hole Calculator',
+  tile:'Concrete bags for fence or deck post holes',
+  title:'Post Hole Calculator — How Many Bags of Concrete for Fence Posts?',
+  desc:'Free post hole concrete calculator. Enter hole count, diameter, and depth for the bags of concrete mix needed and estimated cost.',
+  h1:'Post Hole Calculator', sub:'How much concrete for your fence posts? Enter hole count, size, and depth.',
+  buy:'Shop concrete mix →',
+  inputs:[
+    {id:'holes',label:'Number of post holes',hint:'',value:'10',step:'1'},
+    {id:'diam',label:'Hole diameter',hint:'(inches)',value:'10',step:'1'},
+    {id:'depth',label:'Hole depth',hint:'(inches)',value:'36',step:'1'},
+    {id:'price',label:'Price per bag (50 lb)',hint:'(optional, $)',value:'5',step:'0.5'}
+  ],
+  lines:[
+    {id:'perhole',label:'Cu ft per hole'},
+    {id:'totalcf',label:'Total cubic feet'},
+    {id:'cost',label:'Estimated cost'}
+  ],
+  body:`var n=intval('holes'),d=num('diam'),dep=num('depth'),P=num('price');
+var r=d/2/12,cf=Math.PI*r*r*(dep/12),total=cf*n,bags=Math.ceil(total/0.375);
+set('main',bags+' bags (50 lb)');
+set('perhole',cf.toFixed(2)+' cu ft');
+set('totalcf',total.toFixed(2)+' cu ft');
+set('cost',P>0?money(bags*P):'—');`,
+  content:{
+    intro:'It treats each hole as a cylinder — π × radius² × depth — to find the volume in cubic feet, multiplies by your hole count, and divides by the 0.375 cubic-foot yield of a standard 50&nbsp;lb bag of concrete mix.',
+    example:'<strong>Worked example — 10 holes, 10&nbsp;in diameter, 36&nbsp;in deep:</strong><br>π × (5 ÷ 12)² × 3 = 0.55 cu ft per hole × 10 = 5.5 cu ft → <strong>15 bags</strong>.',
+    h3:'How deep should a post hole be?',
+    p:'A common rule is to bury at least one-third of the post length. For a 6&nbsp;ft fence using 8&nbsp;ft posts, that means going 2.5–3&nbsp;ft deep — deeper in freeze-thaw climates to get below the frost line.',
+    faqs:[
+      {q:'How many bags of concrete per fence post?',a:'About <strong>1–3 bags</strong> (50 lb each) depending on hole size — typically 2 bags for a standard 10-inch diameter, 30-inch deep hole.'},
+      {q:'What diameter should a post hole be?',a:'About <strong>3 times the post width</strong> — so a 4-inch post needs roughly a 12-inch hole.'}
+    ]
+  }
+});
+
 /* ---------- categories ---------- */
 const CATEGORIES = ['Concrete & Masonry','Landscaping','Flooring & Tile','Walls & Paint','Decking','Roofing','Outdoor'];
 const CAT = {
@@ -1545,7 +1654,10 @@ const CAT = {
   'river-rock-calculator':'Landscaping',
   'underlayment-calculator':'Flooring & Tile',
   'potting-soil-calculator':'Landscaping',
-  'thinset-calculator':'Flooring & Tile'
+  'thinset-calculator':'Flooring & Tile',
+  'vinyl-siding-calculator':'Outdoor',
+  'landscape-fabric-calculator':'Landscaping',
+  'post-hole-calculator':'Concrete & Masonry'
 };
 function catOf(slug){ return CAT[slug] || 'Other'; }
 
