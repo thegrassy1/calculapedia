@@ -1610,6 +1610,112 @@ set('cost',P>0?money(bags*P):'—');`,
   }
 });
 
+C.push({
+  slug:'board-foot-calculator', emoji:'🪵', name:'Board Foot Calculator',
+  tile:'Board feet of lumber for any project',
+  title:'Board Foot Calculator — How Many Board Feet of Lumber Do I Need?',
+  desc:'Free board foot calculator. Enter thickness, width, length and quantity to find total board feet and estimated cost of lumber.',
+  h1:'Board Foot Calculator', sub:'How many board feet of lumber do you need? Enter your board dimensions and quantity.',
+  buy:'Shop dimensional lumber →',
+  inputs:[
+    {id:'thick',label:'Thickness',hint:'(inches)',value:'1',step:'0.25'},
+    {id:'wid',label:'Width',hint:'(inches)',value:'6',step:'0.25'},
+    {id:'len',label:'Length',hint:'(feet)',value:'8',step:'0.5'},
+    {id:'qty',label:'Number of boards',hint:'',value:'10',step:'1'},
+    {id:'price',label:'Price per board foot',hint:'(optional, $)',value:'4',step:'0.25'}
+  ],
+  lines:[
+    {id:'perboard',label:'Board feet per board'},
+    {id:'cost',label:'Estimated cost'}
+  ],
+  body:`var T=num('thick'),W=num('wid'),L=num('len'),Q=intval('qty')||1,P=num('price');
+var per=(T*W*L)/12,total=per*Q;
+set('main',total.toFixed(1)+' board feet');
+set('perboard',per.toFixed(2)+' bf per board');
+set('cost',P>0?money(total*P):'—');`,
+  content:{
+    intro:'A board foot is a unit of lumber volume equal to 12 × 12 × 1 inch. The formula is simple: thickness (in) × width (in) × length (ft) ÷ 12 — then multiply by the number of boards.',
+    example:'<strong>Worked example — 10 boards at 1&nbsp;in × 6&nbsp;in × 8&nbsp;ft:</strong><br>(1 × 6 × 8) ÷ 12 = 4 board feet each × 10 = <strong>40 board feet</strong>.',
+    h3:'When board feet matter',
+    p:'Softwood framing lumber is typically priced by the linear foot or per piece, but hardwood (oak, maple, walnut) is almost always priced by the board foot. Knowing your total makes it easy to compare prices at the lumber yard.',
+    faqs:[
+      {q:'What is a board foot of lumber?',a:'One board foot equals <strong>144 cubic inches</strong> — the volume of a piece 1 inch thick, 12 inches wide, and 1 foot long.'},
+      {q:'How do I calculate board feet?',a:'Multiply thickness (inches) × width (inches) × length (feet), then divide by <strong>12</strong>.'}
+    ]
+  }
+});
+
+C.push({
+  slug:'ceiling-tile-calculator', emoji:'🏢', name:'Ceiling Tile Calculator',
+  tile:'Tiles for a drop or acoustic ceiling',
+  title:'Ceiling Tile Calculator — How Many Ceiling Tiles Do I Need?',
+  desc:'Free ceiling tile calculator for drop and acoustic ceilings. Enter room size and tile size for the number of tiles and boxes needed, with waste allowance and cost.',
+  h1:'Ceiling Tile Calculator', sub:'How many ceiling tiles do you need? Enter your room size and tile size.',
+  buy:'Shop acoustic ceiling tiles →',
+  inputs:[
+    {id:'len',label:'Room length',hint:'(feet)',value:'16',step:'0.1'},
+    {id:'wid',label:'Room width',hint:'(feet)',value:'12',step:'0.1'},
+    {id:'tile',label:'Tile size',type:'select',options:[{v:'4',t:'2×2 ft (4 sq ft)',sel:true},{v:'8',t:'2×4 ft (8 sq ft)'}]},
+    {id:'perbox',label:'Tiles per box',hint:'(optional)',value:'12',step:'1'},
+    {id:'price',label:'Price per tile',hint:'(optional, $)',value:'2.5',step:'0.25'}
+  ],
+  lines:[
+    {id:'area',label:'Ceiling area'},
+    {id:'boxes',label:'Boxes needed'},
+    {id:'cost',label:'Estimated cost'}
+  ],
+  body:`var L=num('len'),W=num('wid'),tsf=parseFloat(val('tile'))||4,perbox=intval('perbox'),P=num('price');
+var area=L*W,tiles=tsf>0?Math.ceil(area/tsf*1.10):0;
+set('main',tiles+' tiles');
+set('area',area.toFixed(0)+' sq ft');
+set('boxes',perbox>0?Math.ceil(tiles/perbox)+' boxes':'—');
+set('cost',P>0?money(tiles*P):'—');`,
+  content:{
+    intro:'It divides your ceiling area by the area of one tile, adds 10% for edge cuts and waste, and converts to the number of tiles and boxes to buy.',
+    example:'<strong>Worked example — a 16&nbsp;ft × 12&nbsp;ft room with 2×2 tiles:</strong><br>192 sq ft ÷ 4 = 48 tiles × 1.10 = <strong>53 tiles</strong> (~5 boxes of 12).',
+    h3:'Plan your grid first',
+    p:'Start the grid from the center of the room so edge cuts are equal on opposite sides. Aim for border tiles that are at least half a tile wide for a clean, professional look.',
+    faqs:[
+      {q:'How many ceiling tiles for a 12×12 room?',a:'About <strong>40 tiles</strong> using 2×2 ft tiles (144 sq ft ÷ 4, plus 10% waste).'},
+      {q:'Do I need extra ceiling tiles?',a:'Yes — add about <strong>10%</strong> for edge cuts and the occasional damaged tile, and keep a few spares for future repairs.'}
+    ]
+  }
+});
+
+C.push({
+  slug:'stucco-calculator', emoji:'🏡', name:'Stucco Calculator',
+  tile:'Bags of stucco mix for exterior walls',
+  title:'Stucco Calculator — How Many Bags of Stucco Do I Need?',
+  desc:'Free stucco calculator. Enter your wall area and coat type for the number of 80 lb bags of stucco mix needed and estimated cost.',
+  h1:'Stucco Calculator', sub:'How much stucco do you need? Enter your wall area and coat type.',
+  buy:'Shop stucco mix →',
+  inputs:[
+    {id:'len',label:'Total wall length',hint:'(feet)',value:'60',step:'0.5'},
+    {id:'height',label:'Wall height',hint:'(feet)',value:'9',step:'0.1'},
+    {id:'coat',label:'Application',type:'select',options:[{v:'35',t:'One-coat (3/8 in, ~35 sq ft/bag)',sel:true},{v:'25',t:'Three-coat (full depth, ~25 sq ft/bag)'}]},
+    {id:'price',label:'Price per bag (80 lb)',hint:'(optional, $)',value:'18',step:'1'}
+  ],
+  lines:[
+    {id:'area',label:'Wall area'},
+    {id:'cost',label:'Estimated cost'}
+  ],
+  body:`var L=num('len'),H=num('height'),cov=parseFloat(val('coat'))||35,P=num('price');
+var area=L*H,bags=cov>0?Math.ceil(area*1.10/cov):0;
+set('main',bags+' bags (80 lb)');
+set('area',area.toFixed(0)+' sq ft');
+set('cost',P>0?money(bags*P):'—');`,
+  content:{
+    intro:'One 80&nbsp;lb bag of stucco mix covers about 35&nbsp;sq&nbsp;ft at 3/8&nbsp;inch thick (one-coat application) or 25&nbsp;sq&nbsp;ft for a traditional three-coat system. A 10% waste factor covers corners and edges.',
+    example:'<strong>Worked example — a 60&nbsp;ft × 9&nbsp;ft wall, one-coat application:</strong><br>540 sq ft × 1.10 ÷ 35 = <strong>17 bags</strong>.',
+    h3:'One-coat vs. three-coat',
+    p:'One-coat stucco is a factory-blended mix applied in a single 3/8-inch layer — faster and good for re-stucco work. Traditional three-coat (scratch, brown, finish) is thicker and more durable, and is standard for new construction.',
+    faqs:[
+      {q:'How much does a bag of stucco cover?',a:'An 80&nbsp;lb bag covers roughly <strong>35&nbsp;sq&nbsp;ft</strong> at 3/8&nbsp;inch for a one-coat application, or about <strong>25&nbsp;sq&nbsp;ft</strong> for a thicker three-coat system.'},
+      {q:'How many bags of stucco do I need for a house?',a:'A typical 1,500 sq ft house exterior (minus openings) might need <strong>45–60 bags</strong> for one-coat stucco, depending on wall height and window count.'}
+    ]
+  }
+});
+
 /* ---------- categories ---------- */
 const CATEGORIES = ['Concrete & Masonry','Landscaping','Flooring & Tile','Walls & Paint','Decking','Roofing','Outdoor'];
 const CAT = {
@@ -1657,7 +1763,10 @@ const CAT = {
   'thinset-calculator':'Flooring & Tile',
   'vinyl-siding-calculator':'Outdoor',
   'landscape-fabric-calculator':'Landscaping',
-  'post-hole-calculator':'Concrete & Masonry'
+  'post-hole-calculator':'Concrete & Masonry',
+  'board-foot-calculator':'Walls & Paint',
+  'ceiling-tile-calculator':'Flooring & Tile',
+  'stucco-calculator':'Outdoor'
 };
 function catOf(slug){ return CAT[slug] || 'Other'; }
 
