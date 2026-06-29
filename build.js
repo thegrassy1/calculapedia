@@ -1716,6 +1716,133 @@ set('cost',P>0?money(bags*P):'—');`,
   }
 });
 
+C.push({
+  slug:'grout-calculator', emoji:'🔲', name:'Grout Calculator',
+  tile:'Bags of grout for floor or wall tile',
+  title:'Grout Calculator — How Many Bags of Grout Do I Need?',
+  desc:'Free grout calculator. Enter your tile size, grout joint width, and area for the number of 25 lb bags needed and estimated cost.',
+  h1:'Grout Calculator', sub:'How much grout do you need? Enter your tile size and joint width for bags and cost.',
+  buy:'Shop tile grout →',
+  inputs:[
+    {id:'area',label:'Area to tile',hint:'(square feet)',value:'100',step:'1'},
+    {id:'tile',label:'Tile size',type:'select',options:[
+      {v:'4',t:'4"×4" (mosaic)'},
+      {v:'6',t:'6"×6"'},
+      {v:'12',t:'12"×12"',sel:true},
+      {v:'18',t:'18"×18"'},
+      {v:'24',t:'24"×24"'}
+    ]},
+    {id:'joint',label:'Grout joint width',type:'select',options:[
+      {v:'0.125',t:'1/8" — narrow'},
+      {v:'0.1875',t:'3/16" — standard',sel:true},
+      {v:'0.25',t:'1/4" — wide'},
+      {v:'0.375',t:'3/8" — extra wide'}
+    ]},
+    {id:'price',label:'Price per 25 lb bag',hint:'(optional, $)',value:'18',step:'1'}
+  ],
+  lines:[
+    {id:'lbs',label:'Dry grout needed'},
+    {id:'coverage',label:'Coverage per bag'},
+    {id:'cost',label:'Estimated cost'}
+  ],
+  body:`var A=num('area'),TS=parseFloat(val('tile'))||12,JW=parseFloat(val('joint'))||0.1875,P=num('price');
+var lbs=A*(2*TS)*JW*0.375*38/(TS*TS)*1.10;
+var bags=Math.ceil(lbs/25);
+set('main',bags+' bags (25 lb)');
+set('lbs',lbs.toFixed(1)+' lbs');
+set('coverage',bags>0?(A/bags).toFixed(0)+' sq ft / bag':'—');
+set('cost',P>0?money(bags*P):'—');`,
+  content:{
+    intro:'The calculator uses your tile size and joint width to estimate total grout joint volume, converts it to dry bag weight using an industry-calibrated density factor, and adds a 10% waste allowance for squeeze-out and cleanup.',
+    example:'<strong>Worked example — 100&nbsp;sq&nbsp;ft, 12"×12" tile, 3/16" joint:</strong><br>(2×12)/12² × 0.1875 × 0.375 × 38 × 100 × 1.10 = <strong>≈50&nbsp;lbs → 2 bags</strong>.',
+    h3:'Sanded vs. unsanded grout',
+    p:'Use <strong>sanded grout</strong> for joints 1/8" and wider — the sand prevents cracking as the joint cures. Use <strong>unsanded grout</strong> for joints narrower than 1/8", or for soft natural stone (marble, limestone) where sand would scratch the face.',
+    faqs:[
+      {q:'How much grout do I need for 100 square feet?',a:'For standard 12"×12" tile with a 3/16" joint, expect about <strong>2 bags (25 lb each)</strong> of sanded grout. Smaller tiles or wider joints require significantly more — 4"×4" mosaic with a 3/16" joint uses roughly 6 bags per 100 sq ft.'},
+      {q:'How many square feet does a bag of grout cover?',a:'A 25&nbsp;lb bag of sanded grout covers roughly <strong>50–65 square feet</strong> for 12"×12" tile with a standard 3/16" joint. Coverage drops sharply with smaller tiles or wider joints.'}
+    ]
+  }
+});
+
+C.push({
+  slug:'caulk-calculator', emoji:'🪝', name:'Caulk Calculator',
+  tile:'Tubes of caulk for windows, doors & trim',
+  title:'Caulk Calculator — How Many Tubes of Caulk Do I Need?',
+  desc:'Free caulk calculator. Enter the linear feet to seal and bead size for the number of 10 oz caulk tubes needed and estimated cost.',
+  h1:'Caulk Calculator', sub:'How much caulk do you need? Enter the linear feet and bead size for tubes and cost.',
+  buy:'Shop caulk & sealant →',
+  inputs:[
+    {id:'feet',label:'Linear feet to caulk',hint:'(feet)',value:'40',step:'1'},
+    {id:'bead',label:'Bead diameter',type:'select',options:[
+      {v:'0.1875',t:'3/16" — trim & windows',sel:true},
+      {v:'0.25',t:'1/4" — general purpose'},
+      {v:'0.375',t:'3/8" — gaps & siding'},
+      {v:'0.5',t:'1/2" — large gaps'}
+    ]},
+    {id:'price',label:'Price per tube (10 oz)',hint:'(optional, $)',value:'6',step:'0.5'}
+  ],
+  lines:[
+    {id:'perTube',label:'Coverage per tube'},
+    {id:'cost',label:'Estimated cost'}
+  ],
+  body:`var LF=num('feet'),bead=parseFloat(val('bead'))||0.25,P=num('price');
+var ftPerTube=1.9148/(bead*bead);
+var tubes=Math.ceil(LF*1.10/ftPerTube);
+set('main',tubes+' tubes (10 oz)');
+set('perTube',ftPerTube.toFixed(0)+' ft per tube');
+set('cost',P>0?money(tubes*P):'—');`,
+  content:{
+    intro:'A standard 10&nbsp;oz caulk tube holds about 18 cubic inches of material. Dividing that by the cross-sectional area of a round bead gives the linear feet per tube, and the calculator adds 10% for starts, stops, and tooling waste.',
+    example:'<strong>Worked example — caulking 40&nbsp;ft of window and door trim at 3/16" bead:</strong><br>18 ÷ (π × 0.094²) ÷ 12 = 54&nbsp;ft per tube → ceil(40 × 1.10 / 54) = <strong>1 tube</strong>.',
+    h3:'Match the caulk to the job',
+    p:'Use <strong>paintable latex caulk</strong> for interior trim and baseboards. Use <strong>silicone or siliconized acrylic</strong> for wet areas (tub surrounds, sinks) and exterior joints. Use <strong>polyurethane caulk</strong> for driveways and masonry joints that get heavy movement.',
+    faqs:[
+      {q:'How many linear feet does a tube of caulk cover?',a:'A 10&nbsp;oz tube covers about <strong>54&nbsp;ft at 3/16"</strong>, 30&nbsp;ft at 1/4", 13&nbsp;ft at 3/8", or 7&nbsp;ft at 1/2" — depending on bead size.'},
+      {q:'How much caulk do I need for windows and doors?',a:'A typical exterior window or door perimeter is about 20–25 linear feet. With a 3/16" bead, <strong>one 10&nbsp;oz tube</strong> handles 2–3 windows comfortably.'}
+    ]
+  }
+});
+
+C.push({
+  slug:'epoxy-floor-calculator', emoji:'🏎️', name:'Epoxy Floor Calculator',
+  tile:'Gallons of epoxy coating for a garage or basement floor',
+  title:'Epoxy Floor Calculator — How Much Epoxy Do I Need for My Garage?',
+  desc:'Free epoxy floor coating calculator. Enter your floor size and number of coats for the gallons of epoxy needed and estimated cost.',
+  h1:'Epoxy Floor Calculator', sub:'How much epoxy floor coating do you need? Enter your floor size for gallons and cost.',
+  buy:'Shop garage floor epoxy →',
+  inputs:[
+    {id:'len',label:'Floor length',hint:'(feet)',value:'20',step:'0.5'},
+    {id:'wid',label:'Floor width',hint:'(feet)',value:'20',step:'0.5'},
+    {id:'coats',label:'Number of coats',type:'select',options:[
+      {v:'1',t:'1 coat (touch-up / budget)'},
+      {v:'2',t:'2 coats (standard)',sel:true},
+      {v:'3',t:'3 coats (high-durability)'}
+    ]},
+    {id:'price',label:'Price per gallon',hint:'(optional, $)',value:'60',step:'5'}
+  ],
+  lines:[
+    {id:'area',label:'Floor area'},
+    {id:'coatCount',label:'Coats'},
+    {id:'cost',label:'Estimated cost'}
+  ],
+  body:`var L=num('len'),W=num('wid'),C=parseInt(val('coats'),10)||2,P=num('price');
+var area=L*W,gal=Math.ceil(area*1.10*C/250);
+set('main',gal+' gallon'+(gal!==1?'s':''));
+set('area',area.toFixed(0)+' sq ft');
+set('coatCount',C+' coat'+(C!==1?'s':''));
+set('cost',P>0?money(gal*P):'—');`,
+  content:{
+    intro:'Most water-based epoxy floor paints cover 200–250 square feet per gallon on properly etched concrete. The calculator uses 250 sq ft per gallon as a typical rate, adds 10% for roll-off and edges, and multiplies by your number of coats.',
+    example:'<strong>Worked example — a 20&nbsp;ft × 20&nbsp;ft garage, 2 coats:</strong><br>400 sq ft × 1.10 × 2 ÷ 250 = 3.52 → <strong>4 gallons</strong>.',
+    h3:'Prep is everything',
+    p:'Etching or diamond-grinding the concrete surface is critical — un-prepped concrete causes epoxy to peel. Acid etching opens the pores so the epoxy bonds. Fill cracks and oil stains with an appropriate primer before the first coat.',
+    faqs:[
+      {q:'How many gallons of epoxy do I need for a 2-car garage?',a:'A typical 2-car garage floor is 400–500 sq ft. For 2 coats, plan on <strong>4–5 gallons</strong> (one 2-gallon kit per coat, plus a spare quart for edges).'},
+      {q:'How many square feet does a gallon of floor epoxy cover?',a:'Most products cover <strong>200–250 square feet per gallon</strong> on properly prepared concrete. Rough, porous, or first-coat application consumes more — use the lower end for planning.'}
+    ]
+  }
+});
+
 /* ---------- categories ---------- */
 const CATEGORIES = ['Concrete & Masonry','Landscaping','Flooring & Tile','Walls & Paint','Decking','Roofing','Outdoor'];
 const CAT = {
@@ -1766,7 +1893,10 @@ const CAT = {
   'post-hole-calculator':'Concrete & Masonry',
   'board-foot-calculator':'Walls & Paint',
   'ceiling-tile-calculator':'Flooring & Tile',
-  'stucco-calculator':'Outdoor'
+  'stucco-calculator':'Outdoor',
+  'grout-calculator':'Flooring & Tile',
+  'caulk-calculator':'Walls & Paint',
+  'epoxy-floor-calculator':'Flooring & Tile'
 };
 function catOf(slug){ return CAT[slug] || 'Other'; }
 
