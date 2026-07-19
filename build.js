@@ -1843,6 +1843,236 @@ set('cost',P>0?money(gal*P):'—');`,
   }
 });
 
+C.push({
+  slug:'joint-compound-calculator', emoji:'🪣', name:'Joint Compound Calculator',
+  tile:'Pails of drywall mud for taping & finishing',
+  title:'Joint Compound Calculator — How Much Drywall Mud Do I Need?',
+  desc:'Free joint compound calculator. Enter your drywall area and number of coats for the pails of mud needed and estimated cost.',
+  h1:'Joint Compound Calculator', sub:'How much joint compound do you need? Enter your drywall area for pails and cost.',
+  buy:'Shop joint compound →',
+  inputs:[
+    {id:'area',label:'Drywall area',hint:'(square feet)',value:'500',step:'10'},
+    {id:'level',label:'Finish level',type:'select',options:[
+      {v:'2',t:'2 coats (tape + skim, quick)'},
+      {v:'3',t:'3 coats (tape, fill, finish)',sel:true},
+      {v:'skim',t:'Full skim coat (whole surface)'}
+    ]},
+    {id:'price',label:'Price per pail (4.5 gal)',hint:'(optional, $)',value:'18',step:'1'}
+  ],
+  lines:[
+    {id:'coverage',label:'Coverage per pail'},
+    {id:'cost',label:'Estimated cost'}
+  ],
+  body:`var A=num('area'),lvl=val('level'),P=num('price');
+var cov = lvl==='skim'?150:(lvl==='2'?600:400);
+var pails=Math.ceil(A*1.10/cov);
+set('main',pails+' pails (4.5 gal)');
+set('coverage',cov+' sq ft / pail');
+set('cost',P>0?money(pails*P):'—');`,
+  content:{
+    intro:'The calculator uses standard manufacturer coverage rates for premixed all-purpose joint compound — lighter use for a quick 2-coat job, the typical 400 sq ft per 4.5-gallon pail for a standard 3-coat tape/fill/finish system, or much heavier use for a full skim coat over an entire wall or ceiling — then adds 10% for tooling and touch-ups.',
+    example:'<strong>Worked example — 500&nbsp;sq&nbsp;ft of new drywall, standard 3-coat finish:</strong><br>500 × 1.10 ÷ 400 = 1.375 → <strong>2 pails</strong>.',
+    h3:'Why coverage drops so much for a skim coat',
+    p:'Taping only covers the joints themselves — a narrow strip along each seam. A full skim coat covers <strong>every square foot of the surface</strong> in a thin layer to hide texture or damage, so the same pail covers far less area than it would just taping joints.',
+    faqs:[
+      {q:'How many pails of joint compound do I need for 500 sq ft of drywall?',a:'For a standard 3-coat tape/fill/finish job, plan on about <strong>2 pails</strong> (4.5 gal each). A quick 2-coat job needs less; a full skim coat needs several times more.'},
+      {q:'How much area does a pail of joint compound cover?',a:'A 4.5-gallon pail covers roughly <strong>400 sq ft</strong> through a standard 3-coat finish, up to 600 sq ft for a light 2-coat job, but only about <strong>150 sq ft</strong> if skim-coating the entire surface.'}
+    ]
+  }
+});
+
+C.push({
+  slug:'artificial-turf-calculator', emoji:'🟩', name:'Artificial Turf Calculator',
+  tile:'Square feet of turf & infill for a lawn or patch',
+  title:'Artificial Turf Calculator — How Much Turf Do I Need?',
+  desc:'Free artificial turf calculator. Enter your yard size and infill type for square feet of turf, infill bags, and estimated cost.',
+  h1:'Artificial Turf Calculator', sub:'How much artificial turf do you need? Enter your yard size for turf, infill, and cost.',
+  buy:'Shop artificial turf →',
+  inputs:[
+    {id:'len',label:'Length',hint:'(feet)',value:'20',step:'0.5'},
+    {id:'wid',label:'Width',hint:'(feet)',value:'15',step:'0.5'},
+    {id:'infill',label:'Infill type',type:'select',options:[
+      {v:'sand',t:'Silica sand',sel:true},
+      {v:'rubber',t:'Rubber crumb'},
+      {v:'none',t:'Pre-infilled / none'}
+    ]},
+    {id:'price',label:'Price per sq ft of turf',hint:'(optional, $)',value:'3',step:'0.25'}
+  ],
+  lines:[
+    {id:'actual',label:'Actual yard area'},
+    {id:'infillOut',label:'Infill needed'},
+    {id:'cost',label:'Estimated cost'}
+  ],
+  body:`var L=num('len'),W=num('wid'),type=val('infill'),P=num('price');
+var area=L*W,turf=Math.ceil(area*1.10);
+var rate=type==='rubber'?2:(type==='sand'?1.5:0);
+var lbs=area*rate,bags=Math.ceil(lbs/50);
+set('main',turf+' sq ft of turf');
+set('actual',area.toFixed(0)+' sq ft');
+set('infillOut',rate>0?bags+' bags (50 lb)':'Not needed');
+set('cost',P>0?money(turf*P):'—');`,
+  content:{
+    intro:'The calculator adds a 10% waste allowance on top of your actual yard area — artificial turf has a directional grain, so every piece must run the same way, which costs more material than trimming real sod or gravel. It then estimates infill weight using standard application rates for the infill type you choose.',
+    example:'<strong>Worked example — a 20&nbsp;ft × 15&nbsp;ft yard with silica sand infill:</strong><br>300 sq ft × 1.10 = 330 sq ft of turf. Infill: 300 × 1.5 lb = 450 lbs → <strong>9 bags</strong> (50 lb each).',
+    h3:'Why turf needs more waste than sod',
+    p:'Turf rolls are typically 12–15 ft wide, and every seam must line up with the pile direction (the "grain") so the seams don&rsquo;t show. On odd-shaped or narrow yards this can push waste well above 10% — measure your longest run against the roll width before ordering.',
+    faqs:[
+      {q:'How much artificial turf do I need for a 300 sq ft yard?',a:'Order about <strong>330 sq ft</strong> (10% extra) to allow for seaming and trimming to match the grain direction.'},
+      {q:'How much infill does artificial turf need?',a:'Silica sand infill is typically applied at about <strong>1–2 lbs per sq ft</strong>; rubber crumb infill runs a bit heavier at roughly 2 lbs per sq ft. Some premium turf comes pre-infilled and needs none.'}
+    ]
+  }
+});
+
+C.push({
+  slug:'landscape-edging-calculator', emoji:'〰️', name:'Landscape Edging Calculator',
+  tile:'Linear feet of edging & stakes for a garden bed',
+  title:'Landscape Edging Calculator — How Much Edging Do I Need?',
+  desc:'Free landscape edging calculator. Enter your bed dimensions and edging type for linear feet, stakes, and estimated cost.',
+  h1:'Landscape Edging Calculator', sub:'How much edging do you need? Enter your bed size for linear feet, stakes, and cost.',
+  buy:'Shop landscape edging →',
+  inputs:[
+    {id:'len',label:'Bed length',hint:'(feet)',value:'20',step:'0.5'},
+    {id:'wid',label:'Bed width',hint:'(feet)',value:'10',step:'0.5'},
+    {id:'type',label:'Edging type',type:'select',options:[
+      {v:'roll',t:'Flexible roll (20 ft)',sel:true},
+      {v:'rigid',t:'Rigid sections (4 ft)'}
+    ]},
+    {id:'price',label:'Price per unit',hint:'(optional, $)',value:'25',step:'1'}
+  ],
+  lines:[
+    {id:'perimeter',label:'Perimeter needed'},
+    {id:'stakes',label:'Stakes needed'},
+    {id:'cost',label:'Estimated cost'}
+  ],
+  body:`var L=num('len'),W=num('wid'),type=val('type'),P=num('price');
+var perimeter=2*(L+W)*1.05;
+var unitLen=type==='rigid'?4:20;
+var units=Math.ceil(perimeter/unitLen);
+var stakes=type==='rigid'?units*2:Math.ceil(perimeter/2);
+set('main',units+' '+(type==='rigid'?'sections (4 ft)':'rolls (20 ft)'));
+set('perimeter',perimeter.toFixed(0)+' ft');
+set('stakes',stakes+' stakes');
+set('cost',P>0?money(units*P):'—');`,
+  content:{
+    intro:'The calculator finds the perimeter of your bed and adds 5% for cuts around curves and corners — the same allowance used for sod — then converts it to whichever way your edging is sold: 20 ft flexible rolls or 4 ft rigid sections, each with the stakes needed to anchor it.',
+    example:'<strong>Worked example — a 20&nbsp;ft × 10&nbsp;ft bed with rigid sections:</strong><br>2 × (20 + 10) × 1.05 = 63 ft → 63 ÷ 4 = <strong>16 sections</strong>, with 32 stakes (2 per section).',
+    h3:'Flexible vs. rigid edging',
+    p:'Flexible roll edging bends easily around curves and is cheaper per foot, making it the better fit for organic bed shapes. Rigid sections hold a straighter, cleaner line and resist lawn-mower damage better, which makes them the common choice for straight bed borders next to a lawn.',
+    faqs:[
+      {q:'How much edging do I need for a 20x10 garden bed?',a:'The perimeter is 60 ft; with 5% extra for corners that&rsquo;s about 63 ft — <strong>4 rolls</strong> of 20 ft flexible edging, or <strong>16 sections</strong> of 4 ft rigid edging.'},
+      {q:'How many stakes does landscape edging need?',a:'Flexible edging typically needs a stake about every <strong>2 ft</strong> to hold its shape. Rigid sections usually come with 2 stakes per section built into the connection points.'}
+    ]
+  }
+});
+
+C.push({
+  slug:'firewood-calculator', emoji:'🔥', name:'Firewood Calculator',
+  tile:'Cords of wood for a stack or a heating season',
+  title:'Firewood Calculator — How Much Firewood Do I Need? (Cords)',
+  desc:'Free firewood calculator. Enter your stack length, height and depth for cords, face cords, and estimated cost.',
+  h1:'Firewood Calculator', sub:'How much firewood do you need? Enter your stack size for cords and cost.',
+  buy:'Shop firewood & wood stoves →',
+  inputs:[
+    {id:'len',label:'Stack length',hint:'(feet)',value:'8',step:'0.5'},
+    {id:'height',label:'Stack height',hint:'(feet)',value:'4',step:'0.5'},
+    {id:'depth',label:'Log length / stack depth',hint:'(feet, 16in = 1.33)',value:'1.33',step:'0.01'},
+    {id:'price',label:'Price per full cord',hint:'(optional, $)',value:'300',step:'10'}
+  ],
+  lines:[
+    {id:'cf',label:'Cubic feet stacked'},
+    {id:'faceCords',label:'Face cords (16in logs)'},
+    {id:'cost',label:'Estimated cost'}
+  ],
+  body:`var L=num('len'),H=num('height'),D=num('depth'),P=num('price');
+var cf=L*H*D,cords=cf/128,faceCords=cords*3;
+set('main',(cords?cords.toFixed(2):'0')+' cords');
+set('cf',cf.toFixed(0)+' cu ft');
+set('faceCords',faceCords.toFixed(2)+' face cords');
+set('cost',P>0?money(cords*P):'—');`,
+  content:{
+    intro:'A full cord is a stack measuring 4&nbsp;ft high × 8&nbsp;ft long × 4&nbsp;ft deep — 128 cubic feet of stacked wood. The calculator multiplies your stack&rsquo;s length, height and depth to get cubic feet, then divides by 128 to get cords.',
+    example:'<strong>Worked example — an 8&nbsp;ft long, 4&nbsp;ft high stack of 16-inch logs (1.33&nbsp;ft deep):</strong><br>8 × 4 × 1.33 = 42.6 cubic feet → 42.6 ÷ 128 = <strong>0.33 cords</strong> — exactly <strong>1 face cord</strong>.',
+    h3:'Cord vs. face cord',
+    p:'A full cord is always 128 cubic feet, but a &ldquo;face cord&rdquo; (also called a rick) is a 4×8 stack of shorter logs — commonly 16 inches — and equals about one-third of a full cord. Always confirm which one a seller means before you buy.',
+    faqs:[
+      {q:'How many cords of firewood do I need for winter?',a:'Most homes burning wood as a primary heat source use <strong>3–6 full cords</strong> per heating season, depending on climate, stove efficiency, and how often it&rsquo;s used.'},
+      {q:'What&rsquo;s the difference between a cord and a face cord?',a:'A full cord is 4×4×8&nbsp;ft (128 cubic feet). A face cord is a 4×8&nbsp;ft stack of shorter logs (often 16in) — about <strong>1/3 of a full cord</strong>.'}
+    ]
+  }
+});
+
+C.push({
+  slug:'decomposed-granite-calculator', emoji:'🟤', name:'Decomposed Granite Calculator',
+  tile:'Tons & cubic yards for pathways & patios',
+  title:'Decomposed Granite Calculator — How Much DG Do I Need? (Tons & Yards)',
+  desc:'Free decomposed granite calculator. Enter your area and depth for cubic yards, tons, and estimated cost.',
+  h1:'Decomposed Granite Calculator', sub:'How much decomposed granite do you need? Enter your area and depth for yards, tons, and cost.',
+  buy:'Shop decomposed granite →',
+  inputs:[
+    {id:'len',label:'Length',hint:'(feet)',value:'20',step:'0.1'},
+    {id:'wid',label:'Width',hint:'(feet)',value:'5',step:'0.1'},
+    {id:'depth',label:'Depth',hint:'(inches)',value:'3',step:'0.5'},
+    {id:'price',label:'Price per ton',hint:'(optional, $)',value:'45',step:'1'}
+  ],
+  lines:[
+    {id:'tons',label:'Estimated tons needed'},
+    {id:'cf',label:'Cubic feet'},
+    {id:'cost',label:'Estimated cost'}
+  ],
+  body:`var L=num('len'),W=num('wid'),D=num('depth'),P=num('price');
+var cf=L*W*(D/12),cy=cf/27,tons=cy*1.5;
+set('main',(cy?cy.toFixed(2):'0')+' cubic yards');
+set('tons',tons.toFixed(2)+' tons');
+set('cf',cf.toFixed(1)+' cu ft');
+set('cost',P>0?money(tons*P):'—');`,
+  content:{
+    intro:'It calculates the volume of your path or patio, converts it to cubic yards, then to tons using a typical compacted decomposed granite weight of about 1.5 tons per cubic yard.',
+    example:'<strong>Worked example — a 20&nbsp;ft × 5&nbsp;ft path at 3&nbsp;inches deep:</strong><br>20 × 5 × (3 ÷ 12) = 25 cubic feet → ÷ 27 = <strong>0.93 cubic yards</strong> → × 1.5 = <strong>1.39 tons</strong>.',
+    h3:'Decomposed granite vs. gravel',
+    p:'Decomposed granite (DG) contains fine particles that compact into a firm, sandy-textured surface — unlike loose gravel, which stays loose underfoot. That makes it a popular choice for walking paths and patios where a solid, walkable surface matters more than drainage.',
+    faqs:[
+      {q:'How many tons of decomposed granite do I need per cubic yard?',a:'About <strong>1.5 tons</strong> per cubic yard once compacted, though it varies slightly by moisture and particle size.'},
+      {q:'How deep should decomposed granite be for a path?',a:'<strong>2–3 inches</strong> compacted is standard for a walking path. Driveways or patios that see more weight typically want <strong>3–4 inches</strong> over a compacted base.'}
+    ]
+  }
+});
+
+C.push({
+  slug:'ice-melt-calculator', emoji:'❄️', name:'Ice Melt Calculator',
+  tile:'Bags of rock salt or ice melt for driveways & walkways',
+  title:'Ice Melt Calculator — How Much Rock Salt Do I Need? (Bags & Cost)',
+  desc:'Free ice melt calculator. Enter your area and application rate for pounds needed, 50lb bags, and estimated cost.',
+  h1:'Ice Melt Calculator', sub:'How much rock salt or ice melt do you need? Enter your area for pounds, bags, and cost.',
+  buy:'Shop rock salt & ice melt →',
+  inputs:[
+    {id:'len',label:'Length',hint:'(feet)',value:'50',step:'1'},
+    {id:'wid',label:'Width',hint:'(feet)',value:'12',step:'1'},
+    {id:'rate',label:'Application rate',hint:'(lb per 1,000 sq ft)',value:'4',step:'0.5'},
+    {id:'price',label:'Price per 50 lb bag',hint:'(optional, $)',value:'12',step:'1'}
+  ],
+  lines:[
+    {id:'area',label:'Area to treat'},
+    {id:'lbs',label:'Pounds of salt needed'},
+    {id:'cost',label:'Estimated cost'}
+  ],
+  body:`var L=num('len'),W=num('wid'),R=num('rate'),P=num('price');
+var area=L*W,lbs=area*(R/1000),bags=Math.ceil(lbs/50)||1;
+set('main',bags+' bags (50 lb)');
+set('area',area.toFixed(0)+' sq ft');
+set('lbs',lbs.toFixed(1)+' lb');
+set('cost',P>0?money(bags*P):'—');`,
+  content:{
+    intro:'The calculator finds the area you need to treat, then applies your chosen spread rate (in pounds per 1,000 square feet) to get total pounds needed, rounded up to whole 50&nbsp;lb bags.',
+    example:'<strong>Worked example — a 50&nbsp;ft × 12&nbsp;ft driveway (600 sq ft) at the standard 4&nbsp;lb/1,000&nbsp;sq&nbsp;ft rate:</strong><br>600 × (4 ÷ 1000) = <strong>2.4 lb</strong> per application — well under one 50&nbsp;lb bag, which is why a single bag usually lasts most driveways several applications.',
+    h3:'Picking the right application rate',
+    p:'Use about <strong>4 lb per 1,000 sq ft</strong> for a light, preventative coating on fresh snow. For packed ice or heavy buildup, bump that up to <strong>8–10 lb per 1,000 sq ft</strong>. Applying more than needed wastes product and can harm nearby grass and concrete.',
+    faqs:[
+      {q:'How much rock salt do I need for my driveway?',a:'For an average two-car driveway (~600 sq ft) at a light application rate, about <strong>2–3 lb</strong> per application — a single 50&nbsp;lb bag typically covers most driveways for the whole season.'},
+      {q:'What ice melt application rate should I use?',a:'<strong>4 lb per 1,000 sq ft</strong> for a light coating on fresh snow, up to <strong>8–10 lb per 1,000 sq ft</strong> for packed ice or heavy snow.'}
+    ]
+  }
+});
+
 /* ---------- categories ---------- */
 const CATEGORIES = ['Concrete & Masonry','Landscaping','Flooring & Tile','Walls & Paint','Decking','Roofing','Outdoor'];
 const CAT = {
@@ -1896,7 +2126,13 @@ const CAT = {
   'stucco-calculator':'Outdoor',
   'grout-calculator':'Flooring & Tile',
   'caulk-calculator':'Walls & Paint',
-  'epoxy-floor-calculator':'Flooring & Tile'
+  'epoxy-floor-calculator':'Flooring & Tile',
+  'joint-compound-calculator':'Walls & Paint',
+  'artificial-turf-calculator':'Landscaping',
+  'landscape-edging-calculator':'Landscaping',
+  'firewood-calculator':'Outdoor',
+  'decomposed-granite-calculator':'Landscaping',
+  'ice-melt-calculator':'Outdoor'
 };
 function catOf(slug){ return CAT[slug] || 'Other'; }
 
