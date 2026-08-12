@@ -2073,6 +2073,114 @@ set('cost',P>0?money(bags*P):'—');`,
   }
 });
 
+C.push({
+  slug:'riprap-calculator', emoji:'🪨', name:'Riprap Calculator',
+  tile:'Tons of rock for erosion control & slopes',
+  title:'Riprap Calculator — How Much Rip Rap Do I Need? (Tons & Yards)',
+  desc:'Free riprap calculator. Enter your area and depth for cubic yards, tons, and the estimated cost of erosion-control rock.',
+  h1:'Riprap Calculator', sub:'How much riprap do you need? Enter your area and depth for yards, tons, and cost.',
+  buy:'Shop riprap & erosion control stone →',
+  inputs:[
+    {id:'len',label:'Length',hint:'(feet)',value:'30',step:'0.1'},
+    {id:'wid',label:'Width',hint:'(feet)',value:'6',step:'0.1'},
+    {id:'depth',label:'Depth',hint:'(inches)',value:'12',step:'1'},
+    {id:'price',label:'Price per ton',hint:'(optional, $)',value:'65',step:'1'}
+  ],
+  lines:[
+    {id:'tons',label:'Estimated tons needed'},
+    {id:'cf',label:'Cubic feet'},
+    {id:'cost',label:'Estimated cost'}
+  ],
+  body:`var L=num('len'),W=num('wid'),D=num('depth'),P=num('price');
+var cf=L*W*(D/12),cy=cf/27,tons=cy*1.4;
+set('main',(cy?cy.toFixed(2):'0')+' cubic yards');
+set('tons',tons.toFixed(2)+' tons');
+set('cf',cf.toFixed(1)+' cu ft');
+set('cost',P>0?money(tons*P):'—');`,
+  content:{
+    intro:'It calculates the volume of your slope or drainage area from length, width and depth, converts that to cubic yards, then to tons using a typical riprap weight of about 1.4 tons per cubic yard.',
+    example:'<strong>Worked example — a 30&nbsp;ft × 6&nbsp;ft streambank section at 12&nbsp;inches deep:</strong><br>30 × 6 × (12 ÷ 12) = 180 cubic feet → ÷ 27 = <strong>6.67 cubic yards</strong> → × 1.4 = <strong>9.33 tons</strong>.',
+    h3:'How thick should a riprap layer be?',
+    p:'Layer thickness should run about <strong>1.5–2× the diameter</strong> of the largest stone in the mix, which usually works out to <strong>9–24 inches</strong> depending on the riprap class and how much erosion energy the slope needs to handle.',
+    faqs:[
+      {q:'How many tons of riprap per cubic yard?',a:'About <strong>1.4 tons</strong> per cubic yard, though larger, more angular classes can run slightly heavier or lighter depending on void space.'},
+      {q:'How deep should a riprap layer be?',a:'Typically <strong>1.5–2 times</strong> the largest stone diameter — commonly <strong>9–24 inches</strong> for slope and streambank protection.'}
+    ]
+  }
+});
+
+C.push({
+  slug:'french-drain-calculator', emoji:'🚰', name:'French Drain Calculator',
+  tile:'Gravel & pipe for a French drain trench',
+  title:'French Drain Calculator — How Much Gravel & Pipe Do I Need?',
+  desc:'Free French drain calculator. Enter your trench length, width, and depth for gravel needed in tons, perforated pipe length, and estimated cost.',
+  h1:'French Drain Calculator', sub:'How much gravel and pipe do you need? Enter your trench dimensions for tons, pipe, and cost.',
+  buy:'Shop drain gravel & perforated pipe →',
+  inputs:[
+    {id:'len',label:'Trench length',hint:'(feet)',value:'50',step:'1'},
+    {id:'wid',label:'Trench width',hint:'(inches)',value:'12',step:'1'},
+    {id:'depth',label:'Trench depth',hint:'(inches)',value:'18',step:'1'},
+    {id:'price',label:'Price per ton of gravel',hint:'(optional, $)',value:'45',step:'1'}
+  ],
+  lines:[
+    {id:'cy',label:'Cubic yards of gravel'},
+    {id:'pipe',label:'Perforated pipe needed'},
+    {id:'cost',label:'Estimated gravel cost'}
+  ],
+  body:`var L=num('len'),W=num('wid'),D=num('depth'),P=num('price');
+var cf=L*(W/12)*(D/12),cy=cf/27,tons=cy*1.4,pipe=Math.ceil(L*1.1);
+set('main',(tons?tons.toFixed(2):'0')+' tons of gravel');
+set('cy',cy.toFixed(2)+' cu yd');
+set('pipe',pipe+' ft');
+set('cost',P>0?money(tons*P):'—');`,
+  content:{
+    intro:'It finds the trench volume from its length, width and depth, converts that to cubic yards and tons of drain rock (at about 1.4 tons per cubic yard), and adds 10% to the trench length for the perforated pipe to cover fittings and waste.',
+    example:'<strong>Worked example — a 50&nbsp;ft trench, 12&nbsp;in wide, 18&nbsp;in deep:</strong><br>50 × 1 × 1.5 = 75 cubic feet → ÷ 27 = <strong>2.78 cubic yards</strong> → × 1.4 = <strong>3.89 tons</strong> of gravel, plus <strong>55&nbsp;ft</strong> of perforated pipe.',
+    h3:'How deep and wide should a French drain trench be?',
+    p:'Most residential French drains use a trench <strong>12–18 inches wide</strong> and <strong>18–24 inches deep</strong>, sloped at roughly a 1% grade (about 1 inch of drop per 8 ft) toward the outlet so water keeps moving.',
+    faqs:[
+      {q:'How much gravel do I need for a French drain?',a:'About <strong>1.4 tons per cubic yard</strong> of trench volume — for a typical 12in-wide, 18in-deep trench that&rsquo;s roughly <strong>0.08 tons per linear foot</strong>.'},
+      {q:'What size perforated pipe is used for a French drain?',a:'Most residential drains use <strong>4-inch perforated pipe</strong>, wrapped in fabric sock and surrounded by gravel to filter out sediment.'}
+    ]
+  }
+});
+
+C.push({
+  slug:'chain-link-fence-calculator', emoji:'🔗', name:'Chain Link Fence Calculator',
+  tile:'Posts, rail & mesh for a chain link fence',
+  title:'Chain Link Fence Calculator — How Many Posts & How Much Mesh?',
+  desc:'Free chain link fence calculator. Enter your fence length and post spacing for the number of posts, mesh footage, and estimated cost.',
+  h1:'Chain Link Fence Calculator', sub:'How many posts and how much mesh do you need? Enter your fence length and spacing.',
+  buy:'Shop chain link fencing & posts →',
+  inputs:[
+    {id:'len',label:'Total fence length',hint:'(feet)',value:'100',step:'1'},
+    {id:'spacing',label:'Post spacing',hint:'(feet)',value:'10',step:'0.5'},
+    {id:'meshPrice',label:'Price per foot of mesh',hint:'(optional, $)',value:'8',step:'0.5'},
+    {id:'postPrice',label:'Price per post',hint:'(optional, $)',value:'25',step:'1'}
+  ],
+  lines:[
+    {id:'mesh',label:'Mesh fabric needed'},
+    {id:'rail',label:'Top rail needed'},
+    {id:'cost',label:'Estimated cost'}
+  ],
+  body:`var Ln=num('len'),S=num('spacing'),Mp=num('meshPrice'),Pp=num('postPrice');
+var posts=S>0?Math.ceil(Ln/S)+1:0,mesh=Ln,rail=Ln;
+set('main',posts+' posts needed');
+set('mesh',mesh.toFixed(0)+' ft');
+set('rail',rail.toFixed(0)+' ft');
+set('cost',(Mp>0||Pp>0)?money(Ln*Mp+posts*Pp):'—');`,
+  content:{
+    intro:'It divides your total fence length by the post spacing to get the number of line posts (plus one extra end post), then sets the chain link fabric and top rail footage equal to the total run length.',
+    example:'<strong>Worked example — a 100&nbsp;ft fence line at 10&nbsp;ft post spacing:</strong><br>100 ÷ 10 = 10 sections → <strong>11 posts</strong>, plus 100&nbsp;ft of mesh fabric and 100&nbsp;ft of top rail.',
+    h3:'Don&rsquo;t forget corner, end & gate posts',
+    p:'The spacing above covers line posts only. Corners, ends, and gate openings need heavier terminal posts set in larger concrete footings — add those separately before ordering.',
+    faqs:[
+      {q:'How far apart should chain link fence posts be?',a:'Line posts are typically spaced <strong>8–10 ft</strong> apart, with terminal posts at every corner, end, and gate.'},
+      {q:'How much does chain link fencing cost per foot?',a:'Materials alone usually run <strong>$6–$12 per linear foot</strong> for standard residential-height fabric, before installation labor.'}
+    ]
+  }
+});
+
 /* ---------- categories ---------- */
 const CATEGORIES = ['Concrete & Masonry','Landscaping','Flooring & Tile','Walls & Paint','Decking','Roofing','Outdoor'];
 const CAT = {
@@ -2132,7 +2240,10 @@ const CAT = {
   'landscape-edging-calculator':'Landscaping',
   'firewood-calculator':'Outdoor',
   'decomposed-granite-calculator':'Landscaping',
-  'ice-melt-calculator':'Outdoor'
+  'ice-melt-calculator':'Outdoor',
+  'riprap-calculator':'Landscaping',
+  'french-drain-calculator':'Outdoor',
+  'chain-link-fence-calculator':'Outdoor'
 };
 function catOf(slug){ return CAT[slug] || 'Other'; }
 
