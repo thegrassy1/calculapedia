@@ -2313,7 +2313,7 @@ function relatedCalculators(c){
   return `<section class="content related">
     <h2>Related ${catOf(c.slug)} Calculators</h2>
     <div class="related-grid">
-${related.map(x=>`      <a class="related-link" href="/${x.slug}.html"><strong>${x.name}</strong><span>${x.tile}</span></a>`).join('\n')}
+${related.map(x=>`      <a class="related-link" href="/${x.slug}"><strong>${x.name}</strong><span>${x.tile}</span></a>`).join('\n')}
     </div>
   </section>`;
 }
@@ -2395,7 +2395,7 @@ ${renderInputs(c.inputs)}
 ${renderLines(c.lines)}
       </div>
     </div>
-    <a class="embed-credit" href="${SITE}/${c.slug}.html" target="_blank" rel="noopener">Powered by <b>Calculapedia</b> ↗</a>
+    <a class="embed-credit" href="${SITE}/${c.slug}" target="_blank" rel="noopener">Powered by <b>Calculapedia</b> ↗</a>
   </section>
 </div>
 <script>
@@ -2428,14 +2428,14 @@ const ADSENSE_HEAD = ADSENSE_PUB
 
 const HEADER = `<header class="site">
   <div class="container">
-    <a class="brand" href="/index.html"><span class="wm">Calcula<i>pedia</i></span></a>
-    <nav><a href="/index.html">All calculators</a></nav>
+    <a class="brand" href="/"><span class="wm">Calcula<i>pedia</i></span></a>
+    <nav><a href="/">All calculators</a></nav>
   </div>
 </header>`;
 
 const FOOTER = `<footer class="site">
   <div class="container">
-    <nav class="foot-nav"><a href="/index.html">Calculators</a> · <a href="/methodology.html">Methodology</a> · <a href="/editorial-policy.html">Editorial policy</a> · <a href="/about.html">About</a> · <a href="/privacy.html">Privacy</a> · <a href="/contact.html">Contact</a></nav>
+    <nav class="foot-nav"><a href="/">Calculators</a> · <a href="/methodology">Methodology</a> · <a href="/editorial-policy">Editorial policy</a> · <a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/contact">Contact</a></nav>
     <div>© <span id="yr"></span> Calculapedia — free project calculators.</div>
     <div class="disclaimer">Estimates are for planning only. Always confirm quantities with your supplier or contractor before purchasing. Some links may be affiliate links.</div>
   </div>
@@ -2536,8 +2536,8 @@ function staticPage(p){
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${p.title}</title>
 <meta name="description" content="${p.desc}">
-${socialMeta(p.title, p.desc, `${SITE}/${p.slug}.html`)}
-<link rel="canonical" href="${SITE}/${p.slug}.html">
+${socialMeta(p.title, p.desc, `${SITE}/${p.slug}`)}
+<link rel="canonical" href="${SITE}/${p.slug}">
 ${FONT}${ADSENSE_HEAD}
 <link rel="stylesheet" href="style.css?v=${VERSION}">
 </head>
@@ -2566,8 +2566,8 @@ function page(c){
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${c.title}</title>
 <meta name="description" content="${c.desc}">
-${socialMeta(c.title, c.desc, `${SITE}/${c.slug}.html`)}
-<link rel="canonical" href="${SITE}/${c.slug}.html">
+${socialMeta(c.title, c.desc, `${SITE}/${c.slug}`)}
+<link rel="canonical" href="${SITE}/${c.slug}">
 ${FONT}${ADSENSE_HEAD}
 <link rel="stylesheet" href="style.css?v=${VERSION}">
 <script type="application/ld+json">
@@ -2654,7 +2654,7 @@ function homepage(){
   const tiles = C.map(c=>{
     const cat = catOf(c.slug);
     const search = (c.name+' '+c.tile+' '+cat).toLowerCase().replace(/"/g,'');
-    return `    <a class="tile" href="${c.slug}.html" data-cat="${cat}" data-search="${search}">
+    return `    <a class="tile" href="${c.slug}" data-cat="${cat}" data-search="${search}">
       <div class="emoji">${c.emoji}</div>
       <div class="name">${c.name}</div>
       <div class="desc">${c.tile}</div>
@@ -2704,7 +2704,7 @@ ${tiles}
   <section class="content">
     <h2>Estimate materials the easy way</h2>
     <p>Every Calculapedia tool uses the same simple idea: tell it the size of your project, and it gives you a transparent estimate of how much material to buy. Results are rounded up with a sensible waste allowance, and each page explains the formula and shows a worked example so you can check the result.</p>
-    <p>Use the <a href="/methodology.html">methodology guide</a> to learn how area, volume, coverage, package sizes, waste, and user-entered prices are handled. These are planning estimates, so confirm the final quantity with the product label or supplier.</p>
+    <p>Use the <a href="/methodology">methodology guide</a> to learn how area, volume, coverage, package sizes, waste, and user-entered prices are handled. These are planning estimates, so confirm the final quantity with the product label or supplier.</p>
     <p>Pick a calculator above to get started. They work instantly as you type, on your phone or computer.</p>
   </section>
 </main>
@@ -2746,7 +2746,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
 }
 
 function sitemap(){
-  const urls = ['', ...C.map(c=>c.slug+'.html'), ...STATIC.map(s=>s.slug+'.html')];
+  const urls = ['', ...C.map(c=>c.slug), ...STATIC.map(s=>s.slug)];
   const body = urls.map(u=>`  <url><loc>${SITE}/${u}</loc></url>`).join('\n');
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
 }
