@@ -2318,6 +2318,54 @@ ${related.map(x=>`      <a class="related-link" href="/${x.slug}.html"><strong>$
   </section>`;
 }
 
+const GUIDANCE = {
+  'Concrete & Masonry': {
+    heading:'Planning a concrete or masonry project',
+    body:'Material estimates are only one part of a masonry job. Check the product yield on the bag or supplier quote, allow for the shape of the site, and confirm delivery minimums before ordering. For structural work, follow local building requirements and get advice from a qualified professional.'
+  },
+  'Landscaping': {
+    heading:'Planning a landscaping project',
+    body:'Measure each section separately when a bed or lawn is not a perfect rectangle, then add the sections together. Depth, moisture, compaction, and the way a supplier loads material can change the final quantity, so use the result as a purchasing estimate and confirm the supplier\'s coverage information.'
+  },
+  'Flooring & Tile': {
+    heading:'Planning a flooring or tile project',
+    body:'Buy the material for one room from the same product batch when possible. Layout, pattern direction, damaged pieces, and cuts around doors or cabinets affect waste, so a simple rectangular calculation is a starting point rather than a cutting plan.'
+  },
+  'Walls & Paint': {
+    heading:'Planning a wall or paint project',
+    body:'Surface condition matters as much as area. Rough, porous, repaired, or strongly colored surfaces may need extra primer or paint. Check the coverage printed on the product you plan to use and account for trim, ceilings, openings, and a second coat where applicable.'
+  },
+  'Decking': {
+    heading:'Planning a decking project',
+    body:'Board dimensions are nominal sizes and can vary by product. Include joist layout, picture framing, stairs, fascia, seams, and the direction of the boards in a final takeoff. Structural sizing and ledger details should be checked against local code or reviewed by a qualified builder.'
+  },
+  'Roofing': {
+    heading:'Planning a roofing project',
+    body:'Roofing quantities depend on pitch, valleys, hips, ridges, penetrations, starter strips, and local product packaging. Treat this estimate as an early budget check and confirm the final takeoff with the shingle manufacturer\'s installation instructions or a roofing professional.'
+  },
+  'Outdoor': {
+    heading:'Planning an outdoor project',
+    body:'Outdoor quantities vary with site shape, access, drainage, soil conditions, and local material availability. Break irregular areas into simple sections, confirm the product specification with your supplier, and check permits or utility requirements before starting work.'
+  }
+};
+
+function qualityGuidance(c){
+  const g = GUIDANCE[catOf(c.slug)] || GUIDANCE.Outdoor;
+  return `<section class="content guidance">
+    <h2>${g.heading}</h2>
+    <p>${g.body}</p>
+    <h3>How to use this estimate</h3>
+    <ul>
+      <li>Measure the project in the units shown and recheck your measurements before ordering.</li>
+      <li>Use the waste allowance as a planning buffer, not as a substitute for a detailed material takeoff.</li>
+      <li>Compare the result with the package yield, coverage, or weight listed by your supplier.</li>
+      <li>Prices are user-entered estimates and may change by location, product, delivery, and season.</li>
+    </ul>
+    <h3>Accuracy and limitations</h3>
+    <p>Calculapedia provides educational planning estimates. It does not inspect your site, select products, guarantee quantities, or replace a contractor, engineer, architect, building official, or supplier. Confirm the final quantity and any safety or code requirements before buying or building.</p>
+  </section>`;
+}
+
 // Fixed iframe height per calculator (inputs render 2-up inside the embed).
 function embedHeight(c){ return 70 + Math.ceil(c.inputs.length/2)*90 + 70 + c.lines.length*34 + 60; }
 function embedSnippet(c){
@@ -2387,7 +2435,7 @@ const HEADER = `<header class="site">
 
 const FOOTER = `<footer class="site">
   <div class="container">
-    <nav class="foot-nav"><a href="/index.html">Calculators</a> · <a href="/about.html">About</a> · <a href="/privacy.html">Privacy</a> · <a href="/contact.html">Contact</a></nav>
+    <nav class="foot-nav"><a href="/index.html">Calculators</a> · <a href="/methodology.html">Methodology</a> · <a href="/editorial-policy.html">Editorial policy</a> · <a href="/about.html">About</a> · <a href="/privacy.html">Privacy</a> · <a href="/contact.html">Contact</a></nav>
     <div>© <span id="yr"></span> Calculapedia — free project calculators.</div>
     <div class="disclaimer">Estimates are for planning only. Always confirm quantities with your supplier or contractor before purchasing. Some links may be affiliate links.</div>
   </div>
@@ -2445,6 +2493,38 @@ const STATIC = [
     <p>Reach us at <a href="mailto:hello@calculapedia.com">hello@calculapedia.com</a> and we&rsquo;ll get back to you as soon as we can.</p>
     <h2>Suggest a calculator</h2>
     <p>Is there a material or project calculator you wish existed? Tell us what you&rsquo;d find useful and we&rsquo;ll consider adding it to the site.</p>`
+  },
+  {
+    slug:'methodology',
+    title:'Calculator Methodology — How Calculapedia Estimates Materials',
+    desc:'Learn how Calculapedia calculates material quantities, waste allowances, bag counts, coverage, and estimated project costs.',
+    h1:'How Calculapedia Calculates Estimates',
+    body:`    <p>Calculapedia turns common project measurements into practical purchasing estimates. Each calculator states its inputs, shows a worked example, and explains the assumptions behind the result so you can check the math before buying materials.</p>
+    <h2>Volume and area</h2>
+    <p>For rectangular areas, we multiply length by width. For materials installed by depth, we multiply that area by depth after converting inches to feet. Cubic feet are divided by 27 to convert to cubic yards. Square feet are divided by 9 to convert to square yards.</p>
+    <h2>Waste and rounding</h2>
+    <p>Most calculators round up to whole bags, boxes, sheets, rolls, panels, or pallets because materials are purchased in discrete packages. Waste allowances are estimates for cuts, breakage, trimming, and irregular edges. The appropriate allowance depends on the material and installation pattern.</p>
+    <h2>Coverage and product variation</h2>
+    <p>Bag yields, paint coverage, pallet sizes, stone weight, and package coverage vary by product. We use a common planning assumption where a standard value is needed, but the package label or supplier quote should take priority over any online estimate.</p>
+    <h2>Prices</h2>
+    <p>Cost fields are optional, user-entered budgeting tools. They are not live prices and do not include every possible tax, delivery fee, labor charge, permit, tool, or disposal cost.</p>
+    <h2>Editorial review and corrections</h2>
+    <p>We aim to keep formulas understandable and practical. If you find a calculation error, an outdated assumption, or a product-specific exception, please contact us with the calculator name and details so we can investigate and correct it.</p>`
+  },
+  {
+    slug:'editorial-policy',
+    title:'Editorial Policy — Calculapedia',
+    desc:'How Calculapedia creates, reviews, updates, and corrects material calculator content.',
+    h1:'Editorial Policy',
+    body:`    <p>Calculapedia publishes free educational tools for planning home, landscaping, and building-material purchases. Our goal is to make the underlying calculation visible and understandable, not to replace an on-site estimate or professional advice.</p>
+    <h2>How content is created</h2>
+    <p>Calculator pages are built from documented formulas and include explanations, examples, frequently asked questions, and practical limitations. We avoid presenting estimates as guarantees and identify where product specifications can change the result.</p>
+    <h2>Updates</h2>
+    <p>We update calculators when formulas, package conventions, or common project practices change. Product coverage and local prices can change more often than a web page, so readers should verify those details with the product label or supplier.</p>
+    <h2>Corrections</h2>
+    <p>Readers can report errors or suggest improvements through our contact page. Reports are reviewed against the stated formula and assumptions, and material corrections are incorporated into the calculator generator so they apply consistently.</p>
+    <h2>Commercial relationships</h2>
+    <p>Some shopping links may be affiliate links. They do not change the calculator result or the price shown by a retailer. Any commission helps support the free tools and does not replace independent checking of quantities or product suitability.</p>`
   }
 ];
 
@@ -2515,7 +2595,6 @@ ${renderLines(c.lines)}
         <a class="buy" href="${shopUrl(c)}" target="_blank" rel="sponsored nofollow noopener">${c.buy}</a>
       </section>
 
-      <div class="ad">Ad space (placeholder)</div>
     </div>
 
     <section class="content">
@@ -2529,6 +2608,7 @@ ${renderLines(c.lines)}
 ${renderFaqs(c.content.faqs)}
     </section>
   </div>
+${qualityGuidance(c)}
 ${relatedCalculators(c)}
 
   <section class="embed-box">
@@ -2620,11 +2700,11 @@ ${tiles}
   </div>
   <p class="noresults" id="noresults" hidden>No calculators match &mdash; try another word.</p>
 
-  <div class="ad">Ad space (placeholder)</div>
 
   <section class="content">
     <h2>Estimate materials the easy way</h2>
-    <p>Every Calculapedia tool uses the same simple idea: tell it the size of your project, and it tells you exactly how much material to buy &mdash; rounded up with a sensible waste allowance so you don&rsquo;t make a second trip to the store. Each calculator also shows an estimated cost so you can budget before you start.</p>
+    <p>Every Calculapedia tool uses the same simple idea: tell it the size of your project, and it gives you a transparent estimate of how much material to buy. Results are rounded up with a sensible waste allowance, and each page explains the formula and shows a worked example so you can check the result.</p>
+    <p>Use the <a href="/methodology.html">methodology guide</a> to learn how area, volume, coverage, package sizes, waste, and user-entered prices are handled. These are planning estimates, so confirm the final quantity with the product label or supplier.</p>
     <p>Pick a calculator above to get started. They work instantly as you type, on your phone or computer.</p>
   </section>
 </main>
