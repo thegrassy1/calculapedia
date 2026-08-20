@@ -165,6 +165,12 @@ input[type="number"]:focus, select:focus {
 }
 .content h2 { font-size: 21px; margin: 0 0 12px; letter-spacing: -.4px; font-weight: 800; }
 .content h3 { font-size: 16px; margin: 22px 0 6px; font-weight: 700; }
+.related { margin-top: 0; }
+.related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+.related-link { display: flex; flex-direction: column; gap: 4px; padding: 14px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: #fbfbfc; color: var(--ink); }
+.related-link:hover { border-color: #ffd2c5; background: var(--brand-tint); }
+.related-link strong { font-size: 14px; }
+.related-link span { color: var(--muted); font-size: 12.5px; line-height: 1.4; }
 .content p, .content li { color: var(--ink-soft); font-size: 15.5px; }
 .example {
   background: var(--brand-tint); border: 1px solid #ffe0d6; border-radius: var(--radius-sm);
