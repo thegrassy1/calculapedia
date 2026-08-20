@@ -2287,6 +2287,36 @@ function faqSchema(c){
 }
 function stripTags(s){ return s.replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' ').replace(/&rsquo;/g,"'").replace(/&ldquo;|&rdquo;/g,'"').replace(/&amp;/g,'&'); }
 function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function socialMeta(title, desc, url){
+  return `<meta property="og:type" content="website">
+<meta property="og:site_name" content="Calculapedia">
+<meta property="og:title" content="${title}">
+<meta property="og:description" content="${desc}">
+<meta property="og:url" content="${url}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="${title}">
+<meta name="twitter:description" content="${desc}">`;
+}
+
+// Optional affiliate configuration. Set AMAZON_TAG in the Cloudflare Pages
+// build environment after joining the relevant affiliate program.
+const AMAZON_TAG = process.env.AMAZON_TAG || '';
+function shopUrl(c){
+  const query = encodeURIComponent(stripTags(c.name.replace(/ calculator$/i,'')) + ' supplies');
+  const url = 'https://www.amazon.com/s?k=' + query;
+  return AMAZON_TAG ? url + '&tag=' + encodeURIComponent(AMAZON_TAG) : url;
+}
+
+function relatedCalculators(c){
+  const related = C.filter(x=>x.slug!==c.slug && catOf(x.slug)===catOf(c.slug)).slice(0,4);
+  if (!related.length) return '';
+  return `<section class="content related">
+    <h2>Related ${catOf(c.slug)} Calculators</h2>
+    <div class="related-grid">
+${related.map(x=>`      <a class="related-link" href="/${x.slug}.html"><strong>${x.name}</strong><span>${x.tile}</span></a>`).join('\n')}
+    </div>
+  </section>`;
+}
 
 // Fixed iframe height per calculator (inputs render 2-up inside the embed).
 function embedHeight(c){ return 70 + Math.ceil(c.inputs.length/2)*90 + 70 + c.lines.length*34 + 60; }
@@ -2426,6 +2456,7 @@ function staticPage(p){
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${p.title}</title>
 <meta name="description" content="${p.desc}">
+${socialMeta(p.title, p.desc, `${SITE}/${p.slug}.html`)}
 <link rel="canonical" href="${SITE}/${p.slug}.html">
 ${FONT}${ADSENSE_HEAD}
 <link rel="stylesheet" href="style.css?v=${VERSION}">
@@ -2455,6 +2486,7 @@ function page(c){
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${c.title}</title>
 <meta name="description" content="${c.desc}">
+${socialMeta(c.title, c.desc, `${SITE}/${c.slug}.html`)}
 <link rel="canonical" href="${SITE}/${c.slug}.html">
 ${FONT}${ADSENSE_HEAD}
 <link rel="stylesheet" href="style.css?v=${VERSION}">
@@ -2480,7 +2512,7 @@ ${renderLines(c.lines)}
           </div>
         </div>
 
-        <a class="buy" href="#" rel="sponsored nofollow">${c.buy}</a>
+        <a class="buy" href="${shopUrl(c)}" target="_blank" rel="sponsored nofollow noopener">${c.buy}</a>
       </section>
 
       <div class="ad">Ad space (placeholder)</div>
@@ -2497,6 +2529,7 @@ ${renderLines(c.lines)}
 ${renderFaqs(c.content.faqs)}
     </section>
   </div>
+${relatedCalculators(c)}
 
   <section class="embed-box">
     <h2>Add this calculator to your site &mdash; free</h2>
@@ -2557,6 +2590,7 @@ function homepage(){
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Calculapedia — Free Material &amp; Cost Calculators for DIY and Contractors</title>
 <meta name="description" content="Free, instant material calculators: figure out exactly how much concrete, mulch, gravel, paint, tile, drywall and more you need — and what it will cost. No signup.">
+${socialMeta('Calculapedia — Free Material & Cost Calculators for DIY and Contractors', 'Free, instant material calculators for home and building projects.', `${SITE}/`)}
 <link rel="canonical" href="${SITE}/">
 ${FONT}${ADSENSE_HEAD}
 <link rel="stylesheet" href="style.css?v=${VERSION}">
