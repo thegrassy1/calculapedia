@@ -172,9 +172,9 @@ set('cost',P>0?money(Math.ceil(gal)*P):'—');`,
 C.push({
   slug:'tile-calculator', emoji:'◻️', name:'Tile Calculator',
   tile:'Tiles & boxes for floors & walls',
-  title:'Tile Calculator — How Many Tiles Do I Need? (Tiles & Boxes)',
-  desc:'Free tile calculator for floors and walls. Enter area and tile size for tiles and boxes needed, with waste allowance and cost.',
-  h1:'Tile Calculator', sub:'How many tiles do you need? Enter your area and tile size for tiles, boxes, and cost.',
+  title:'Tile Calculator — How Many Tiles Do I Need? (Square Feet, Overage & Boxes)',
+  desc:'Free tile calculator for floors, walls, bathrooms, and showers. Calculate tiles, square feet, boxes, 10% overage, and estimated cost.',
+  h1:'Tile Calculator: How Many Tiles Do I Need?', sub:'Calculate tile quantity, square footage, waste allowance, boxes, and cost for floors and walls.',
   buy:'Shop floor & wall tile →',
   inputs:[
     {id:'len',label:'Area length',hint:'(feet)',value:'10',step:'0.1'},
@@ -204,7 +204,9 @@ set('cost',P>0?money(tiles*P):'—');`,
     p:'Cut edges, the occasional break, and future repairs all eat into your count. 10% is standard; use 15–20% for diagonal or herringbone layouts.',
     faqs:[
       {q:'How many 12×12 tiles for 100 sq ft?',a:'<strong>110 tiles</strong> — 100 for the area plus 10% waste.'},
-      {q:'How much extra should I buy?',a:'<strong>10%</strong> for simple layouts, <strong>15–20%</strong> for diagonal or busy rooms.'}
+      {q:'How much extra tile should I buy for overage?',a:'Buy <strong>10%</strong> extra for a simple layout, <strong>15%</strong> for rooms with many cuts, and <strong>20%</strong> for diagonal or herringbone patterns.'},
+      {q:'How many tiles do I need for a bathroom or shower?',a:'Measure each wall or floor section separately, add the areas together, then add 10–15% for cuts, niches, corners, and breakage.'},
+      {q:'How do I calculate how many tiles I need?',a:'Multiply the length and width of the area for square feet, divide by the area covered by one tile, then add a waste allowance and round up.'}
     ]
   }
 });
@@ -1230,9 +1232,9 @@ set('cost',P>0?money(bags*P):'—');`,
 C.push({
   slug:'driveway-sealer-calculator', emoji:'🛢️', name:'Driveway Sealer Calculator',
   tile:'Buckets of sealer for a driveway',
-  title:'Driveway Sealer Calculator — How Much Sealer Do I Need?',
-  desc:'Free driveway sealer calculator. Enter your driveway size and coats for the gallons of asphalt sealer needed and cost.',
-  h1:'Driveway Sealer Calculator', sub:'How much sealer do you need? Enter your driveway size and coats.',
+  title:'Driveway Sealer Calculator — Gallons, Coverage & Cost',
+  desc:'Calculate how many gallons of asphalt driveway sealer you need, coverage per coat, buckets, and estimated sealing cost.',
+  h1:'Driveway Sealer Calculator: Gallons & Cost', sub:'Calculate driveway area, gallons of sealer, number of coats, and estimated cost.',
   buy:'Shop driveway sealer →',
   inputs:[
     {id:'len',label:'Driveway length',hint:'(feet)',value:'40',step:'0.1'},
@@ -1256,7 +1258,9 @@ set('cost',P>0?money(Math.ceil(gal)*P):'—');`,
     p:'Sealer lasts longer applied as two thin coats than one heavy one. Most driveways get a fresh seal every 2–3 years.',
     faqs:[
       {q:'How much does a gallon of driveway sealer cover?',a:'About <strong>80 sq ft</strong> per coat on older, porous asphalt; a bit more on smooth surfaces.'},
-      {q:'How often should I seal my driveway?',a:'Every <strong>2–3 years</strong> is typical, once the surface starts to fade or crack.'}
+      {q:'How often should I seal my driveway?',a:'Every <strong>2–3 years</strong> is typical, once the surface starts to fade or crack.'},
+      {q:'How much does it cost to seal a driveway?',a:'Multiply the gallons or buckets needed by the product price, then add preparation, crack repair, delivery, or labor if applicable.'},
+      {q:'How many coats of driveway sealer should I apply?',a:'Many asphalt sealers use <strong>two thin coats</strong>, but follow the product label for coverage, drying time, and application limits.'}
     ]
   }
 });
@@ -1470,9 +1474,9 @@ set('cost',P>0?money(total*P):'—');`,
 C.push({
   slug:'thinset-calculator', emoji:'🛠️', name:'Thinset Mortar Calculator',
   tile:'Bags of thinset for tiling',
-  title:'Thinset Calculator — How Much Thinset Mortar Do I Need?',
-  desc:'Free thinset mortar calculator. Enter your tile area and trowel size for the number of 50 lb bags of thinset needed and cost.',
-  h1:'Thinset Mortar Calculator', sub:'How much thinset do you need? Enter your area and trowel size.',
+  title:'Thinset Calculator — Bags Needed per Square Foot & Cost',
+  desc:'Calculate thinset mortar bags for tile floors, walls, showers, and large-format tile. Choose your trowel size for coverage and cost.',
+  h1:'Thinset Mortar Calculator: Bags & Coverage', sub:'Calculate 50 lb thinset bags from tile area and trowel size, with coverage and cost.',
   buy:'Shop thinset mortar →',
   inputs:[
     {id:'len',label:'Area length',hint:'(feet)',value:'10',step:'0.1'},
@@ -1496,7 +1500,9 @@ set('cost',P>0?money(bags*P):'—');`,
     p:'Large-format tiles and uneven substrates need a deeper notch (1/2 in), which uses more thinset. Match the trowel to your tile size — the manufacturer lists the recommended notch.',
     faqs:[
       {q:'How much thinset for 100 square feet?',a:'Roughly <strong>1–2 bags</strong> (50 lb) depending on trowel size.'},
-      {q:'How much area does a bag of thinset cover?',a:'About <strong>45–95 sq ft</strong> per 50 lb bag, depending on the trowel notch.'}
+      {q:'How much area does a bag of thinset cover?',a:'About <strong>45–95 sq ft</strong> per 50 lb bag, depending on the trowel notch and substrate.'},
+      {q:'How many bags of thinset do I need for 100 square feet?',a:'Usually <strong>2 bags</strong> with a 1/4-inch square-notch trowel, but check the product coverage and add extra for uneven surfaces.'},
+      {q:'How much thinset do I need for a shower?',a:'Calculate the floor and each wall separately, add the areas together, and use the manufacturer coverage for the trowel recommended for your tile.'}
     ]
   }
 });
@@ -1541,9 +1547,9 @@ set('cost',P>0?money(Math.ceil(sq)*P):'—');`,
 C.push({
   slug:'landscape-fabric-calculator', emoji:'🌿', name:'Landscape Fabric Calculator',
   tile:'Rolls of weed barrier for beds & paths',
-  title:'Landscape Fabric Calculator — How Much Weed Barrier Do I Need?',
-  desc:'Free landscape fabric (weed barrier) calculator. Enter your bed or path size and roll coverage for rolls needed and estimated cost.',
-  h1:'Landscape Fabric Calculator', sub:'How much weed barrier do you need? Enter your area and roll size.',
+  title:'Landscape Fabric Calculator — Weed Barrier Rolls & Coverage',
+  desc:'Calculate landscape fabric and weed barrier rolls for garden beds, paths, and gravel areas. Includes overlap, square feet, and cost.',
+  h1:'Landscape Fabric Calculator: Rolls & Square Feet', sub:'Calculate weed barrier coverage, rolls needed, overlap, and estimated cost for beds and paths.',
   buy:'Shop landscape fabric →',
   inputs:[
     {id:'len',label:'Length',hint:'(feet)',value:'20',step:'0.1'},
@@ -1569,7 +1575,9 @@ set('cost',P>0?money(rolls*P):'—');`,
     p:'Overlap seams by at least 6 inches so weeds can&rsquo;t push through gaps. Pin the fabric every 18–24 inches and tuck edges under edging or stones to hold them down.',
     faqs:[
       {q:'How much landscape fabric do I need?',a:'Measure your bed area, add 10% for overlaps, then divide by the roll&rsquo;s square footage.'},
-      {q:'How do I keep landscape fabric from shifting?',a:'Use landscape staples or pins every <strong>18–24 inches</strong>, placed more closely on slopes and around curves.'}
+      {q:'How do I keep landscape fabric from shifting?',a:'Use landscape staples or pins every <strong>18–24 inches</strong>, placed more closely on slopes and around curves.'},
+      {q:'How much landscape fabric do I need for a 4x8 bed?',a:'A 4 × 8 ft bed is 32 square feet. Add overlap and edge allowance, then choose a roll that covers at least the adjusted area.'},
+      {q:'How much should landscape fabric overlap?',a:'Overlap adjoining pieces by at least <strong>6 inches</strong>; use more on slopes or where the material may shift.'}
     ]
   }
 });
@@ -1685,9 +1693,9 @@ set('cost',P>0?money(tiles*P):'—');`,
 C.push({
   slug:'stucco-calculator', emoji:'🏡', name:'Stucco Calculator',
   tile:'Bags of stucco mix for exterior walls',
-  title:'Stucco Calculator — How Many Bags of Stucco Do I Need?',
-  desc:'Free stucco calculator. Enter your wall area and coat type for the number of 80 lb bags of stucco mix needed and estimated cost.',
-  h1:'Stucco Calculator', sub:'How much stucco do you need? Enter your wall area and coat type.',
+  title:'Stucco Calculator — Bags, Material Coverage & Cost per Square Foot',
+  desc:'Calculate stucco mix bags, wall coverage, material quantity, and estimated cost per square foot for one-coat or three-coat stucco.',
+  h1:'Stucco Calculator: Bags, Coverage & Cost', sub:'Calculate stucco material from wall area, coat type, coverage, and price per bag.',
   buy:'Shop stucco mix →',
   inputs:[
     {id:'len',label:'Total wall length',hint:'(feet)',value:'60',step:'0.5'},
@@ -1711,7 +1719,9 @@ set('cost',P>0?money(bags*P):'—');`,
     p:'One-coat stucco is a factory-blended mix applied in a single 3/8-inch layer — faster and good for re-stucco work. Traditional three-coat (scratch, brown, finish) is thicker and more durable, and is standard for new construction.',
     faqs:[
       {q:'How much does a bag of stucco cover?',a:'An 80&nbsp;lb bag covers roughly <strong>35&nbsp;sq&nbsp;ft</strong> at 3/8&nbsp;inch for a one-coat application, or about <strong>25&nbsp;sq&nbsp;ft</strong> for a thicker three-coat system.'},
-      {q:'How many bags of stucco do I need for a house?',a:'A typical 1,500 sq ft house exterior (minus openings) might need <strong>45–60 bags</strong> for one-coat stucco, depending on wall height and window count.'}
+      {q:'How many bags of stucco do I need for a house?',a:'A typical 1,500 sq ft house exterior (minus openings) might need <strong>45–60 bags</strong> for one-coat stucco, depending on wall height and window count.'},
+      {q:'How much does stucco cost per square foot?',a:'Multiply the bags required by the price per bag, then divide by the wall square footage. Installed labor, scaffolding, repairs, and finish coats can change the final project cost.'},
+      {q:'How do I calculate stucco material?',a:'Multiply wall length by height, choose the coverage for your coat system, add a waste allowance, and round up to whole bags.'}
     ]
   }
 });
