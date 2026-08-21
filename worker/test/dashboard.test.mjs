@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {JSDOM} from 'jsdom';
 import worker from '../src/index.js';
 
-test('admin dashboard renders Search Console, revenue, and owner tasks', async () => {
+test('admin dashboard renders search, revenue, tasks, and a plain-language work log', async () => {
   const gsc = {
     metric_date: '2026-08-18T00:00:00.000Z',
     clicks: 1,
@@ -36,4 +36,6 @@ test('admin dashboard renders Search Console, revenue, and owner tasks', async (
   assert.match(rendered, /\$0\.00/);
   assert.match(rendered, /Your to-do list/);
   assert.match(rendered, /affiliate program/);
+  assert.match(rendered, /What Hermes did/);
+  assert.match(rendered, /Connected Search Console/);
 });
