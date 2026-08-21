@@ -1,0 +1,5 @@
+{
+  "name": "calculapedia-control-plane",
+  "private": true,
+  "type": "module"
+}
