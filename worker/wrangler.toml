@@ -1,0 +1,16 @@
+name = "calculapedia-control-plane"
+main = "src/index.js"
+compatibility_date = "2026-08-20"
+workers_dev = true
+
+[triggers]
+crons = ["15 6 * * *"]
+
+[vars]
+SITE_URL = "https://calculapedia.com"
+
+# Replace database_id after creating the D1 database:
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "calculapedia-metrics"
+# database_id = "..."
