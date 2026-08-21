@@ -1,5 +1,13 @@
 dist/
 node_modules/
+.env
+.env.*
+!.env.example
+.secrets/
+worker/.dev.vars
+worker/.dev.vars.*
+!worker/.dev.vars.example
+worker/.wrangler/
 .DS_Store
 *.log
 marketing-playbook.md

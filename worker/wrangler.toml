@@ -9,8 +9,7 @@ crons = ["15 6 * * *"]
 [vars]
 SITE_URL = "https://calculapedia.com"
 
-# Replace database_id after creating the D1 database:
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "calculapedia-metrics"
-# database_id = "..."
+[[d1_databases]]
+binding = "DB"
+database_name = "calculapedia-metrics"
+database_id = "cbf48662-fb7e-4da5-a76b-aef4e64c7ae8"
