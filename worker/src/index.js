@@ -29,11 +29,15 @@ function render(data){
  const searchCard=search?'<div class="card"><h2>Search performance</h2><p class="muted">'+search.period_start+' to '+search.period_end+'</p><div class="grid">'+card('Clicks',search.clicks||0)+card('Impressions',search.impressions||0)+card('Click-through rate',((search.ctr||0)*100).toFixed(1)+'%')+card('Average position',(search.position||0).toFixed(1))+'</div></div>':'<div class="card"><h2>Search performance</h2><p class="muted">Search Console data will appear after the first collection.</p></div>';
  const revenue=data.sources?.revenue||{period_start:'Current period',period_end:'',affiliate:0,ads:0,total:0};
  const revenueCard='<div class="card"><h2>Revenue</h2><p class="muted">'+revenue.period_start+(revenue.period_end?' to '+revenue.period_end:'')+'</p><div class="grid">'+card('Total revenue','$'+Number(revenue.total||0).toFixed(2))+card('Affiliate revenue','$'+Number(revenue.affiliate||0).toFixed(2))+card('Ad revenue','$'+Number(revenue.ads||0).toFixed(2))+'</div><p class="muted">Revenue stays at $0.00 until an affiliate or ad account is connected.</p></div>';
- const tasksCard='<div class="card"><h2>Your to-do list</h2><table><tr><th>Status</th><th>What you need to do</th><th>Why</th></tr><tr><td class="ok">Done</td><td>Search Console access</td><td>Search demand and rankings are now tracked.</td></tr><tr><td class="bad">Needed</td><td>Add <code>Zone Settings: Edit</code> to the Cloudflare token</td><td>Lets Hermes force HTTPS for every visitor.</td></tr><tr><td class="bad">Needed</td><td>Join an affiliate program</td><td>Required before we can use paid retailer links and record affiliate revenue.</td></tr><tr><td class="bad">Needed</td><td>Create a GA4 property</td><td>Lets us measure visitors and calculator usage, not just Google impressions.</td></tr></table></div>';
- const workCard='<div class="card"><h2>What Hermes did</h2><table><tr><th>Completed work</th><th>Why it matters</th></tr><tr><td>Built this private dashboard</td><td>One place to see site health, search data, revenue, and your next actions.</td></tr><tr><td>Connected Search Console</td><td>We can now measure what people search for and which pages Google shows.</td></tr><tr><td>Set up daily site checks</td><td>We will know if important calculator pages or search files go down.</td></tr><tr><td>Created revenue tracking</td><td>Affiliate and ad income will appear here once those accounts are connected.</td></tr><tr><td>Reviewed the starting data</td><td>The site has 1 click from 493 Google impressions, so growing traffic is the first priority.</td></tr></table></div>';
+ const taskButton=task=>'<button data-task="'+encodeURIComponent(task)+'" onclick="copyTask(this.dataset.task,this)">Copy request for Hermes</button>';
+ const tasksCard='<div class="card"><h2>Your to-do list</h2><p class="muted">Click the button beside a task, then paste the copied request into this Hermes chat.</p><table><tr><th>Status</th><th>What you need to do</th><th>Why</th><th>Get help</th></tr><tr><td class="ok">Done</td><td>Search Console access</td><td>Search demand and rankings are now tracked.</td><td>—</td></tr><tr><td class="bad">Needed</td><td>Add <code>Zone Settings: Edit</code> to the Cloudflare token</td><td>Lets Hermes force HTTPS for every visitor.</td><td>'+taskButton('Complete dashboard task: Add Zone Settings Edit to the Cloudflare token')+'</td></tr><tr><td class="bad">Needed</td><td>Join an affiliate program</td><td>Required before we can use paid retailer links and record affiliate revenue.</td><td>'+taskButton('Complete dashboard task: Join an affiliate program')+'</td></tr><tr><td class="bad">Needed</td><td>Create a GA4 property</td><td>Lets us measure visitors and calculator usage, not just Google impressions.</td><td>'+taskButton('Complete dashboard task: Create a GA4 property')+'</td></tr></table></div>';
+ const activities=data.activities||[];
+ const workRows=activities.length?activities.map(a=>'<tr><td>'+a.completed_at+' UTC</td><td>'+a.action+'</td><td>'+a.detail+'</td></tr>').join(''):'<tr><td colspan="3" class="muted">No completed work has been logged yet.</td></tr>';
+ const workCard='<div class="card"><h2>What Hermes did</h2><table><tr><th>When</th><th>Completed work</th><th>Why it matters</th></tr>'+workRows+'</table></div>';
  document.getElementById('app').innerHTML='<div class="grid">'+card('Health checks',good+'/'+checks.length)+card('Last check',data.health?.metric_date||'—')+card('Data sources',Object.keys(data.sources||{}).length)+'</div>'+searchCard+revenueCard+tasksCard+workCard+'<div class="card"><h2>Site health</h2><table><tr><th>Path</th><th>Status</th><th>Response time</th></tr>'+checks.map(x=>'<tr><td><code>'+x.path+'</code></td><td class="'+(x.ok?'ok':'bad')+'">'+x.status+'</td><td>'+x.ms+' ms</td></tr>').join('')+'</table></div><div class="card"><h2>Connected data sources</h2><p class="muted">'+(Object.keys(data.sources||{}).length?'Metrics received: '+Object.keys(data.sources).join(', '):'No private analytics sources connected yet. The next step is connecting Search Console, Analytics, AdSense, and affiliate reporting APIs.')+'</p></div>';
 }
 function card(label,value){return '<div class="card"><div class="label">'+label+'</div><div class="metric">'+value+'</div></div>'}
+function copyTask(encoded,button){navigator.clipboard.writeText(decodeURIComponent(encoded)).then(()=>{button.textContent='Copied — paste into Hermes chat';}).catch(()=>{button.textContent='Copy failed — tell Hermes this task name';});}
 </script></body></html>`;
 
 function authorized(request, env) {
@@ -69,13 +73,16 @@ async function collectHealth(env) {
 }
 
 async function latestMetrics(env) {
-  if (!env.DB) return {health:null, sources:{}};
+  if (!env.DB) return {health:null, sources:{}, activities:[]};
   const rows = await env.DB.prepare(
     'SELECT source, metric_date, payload FROM metrics ORDER BY metric_date DESC LIMIT 100'
   ).all();
+  const activityRows = await env.DB.prepare(
+    'SELECT action, detail, completed_at FROM activity ORDER BY completed_at DESC, id DESC LIMIT 50'
+  ).all();
   const latest = {};
   for (const row of rows.results || []) if (!latest[row.source]) latest[row.source] = JSON.parse(row.payload);
-  return {health:latest.health || null, sources:latest};
+  return {health:latest.health || null, sources:latest, activities:activityRows.results || []};
 }
 
 export default {
