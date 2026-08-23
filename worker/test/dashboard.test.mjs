@@ -21,7 +21,7 @@ test('admin dashboard renders timestamped work log and copyable owner tasks', as
   assert.match(rendered, /Revenue/);
   assert.match(rendered, /\$0\.00/);
   assert.match(rendered, /Your to-do list/);
-  assert.match(rendered, /Copy request for Hermes/);
+  assert.match(rendered, /DoneAdd Zone Settings/);
   assert.match(rendered, /What Hermes did/);
   assert.match(rendered, /Connected Search Console/);
   assert.match(rendered, /12:30 PM/);
