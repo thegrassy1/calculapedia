@@ -1621,8 +1621,8 @@ set('cost',P>0?money(bags*P):'—');`,
 C.push({
   slug:'board-foot-calculator', emoji:'🪵', name:'Board Foot Calculator',
   tile:'Board feet of lumber for any project',
-  title:'Board Foot Calculator — How Many Board Feet of Lumber Do I Need?',
-  desc:'Free board foot calculator. Enter thickness, width, length and quantity to find total board feet and estimated cost of lumber.',
+  title:'Board Foot Calculator (Lumber Cost & Hardwood Formula)',
+  desc:'Calculate board feet for hardwood lumber: use actual thickness, width, length, and quantity to estimate material and cost.',
   h1:'Board Foot Calculator', sub:'How many board feet of lumber do you need? Enter your board dimensions and quantity.',
   buy:'Shop dimensional lumber →',
   inputs:[
@@ -1642,13 +1642,15 @@ set('main',total.toFixed(1)+' board feet');
 set('perboard',per.toFixed(2)+' bf per board');
 set('cost',P>0?money(total*P):'—');`,
   content:{
-    intro:'A board foot is a unit of lumber volume equal to 12 × 12 × 1 inch. The formula is simple: thickness (in) × width (in) × length (ft) ÷ 12 — then multiply by the number of boards.',
-    example:'<strong>Worked example — 10 boards at 1&nbsp;in × 6&nbsp;in × 8&nbsp;ft:</strong><br>(1 × 6 × 8) ÷ 12 = 4 board feet each × 10 = <strong>40 board feet</strong>.',
-    h3:'When board feet matter',
-    p:'Softwood framing lumber is typically priced by the linear foot or per piece, but hardwood (oak, maple, walnut) is almost always priced by the board foot. Knowing your total makes it easy to compare prices at the lumber yard.',
+    intro:'A board foot is a unit of lumber volume equal to 12 × 12 × 1 inch. Multiply thickness (in) × width (in) × length (ft), divide by 12, then multiply by the number of boards. Use the lumberyard\'s actual surfaced dimensions, not a nominal label like 1×6.',
+    example:'<strong>Worked example — 10 boards at 1&nbsp;in × 6&nbsp;in × 8&nbsp;ft:</strong><br>(1 × 6 × 8) ÷ 12 = 4 board feet each × 10 = <strong>40 board feet</strong>. At $4 per board foot, the lumber estimate is <strong>$160</strong> before tax and delivery.',
+    h3:'Plan the lumber order from a cut list',
+    p:'Hardwood (oak, maple, walnut) is commonly priced by the board foot; softwood framing lumber is often sold by the piece or linear foot. Add 10–15% when your cut list has defects, matching grain, or short offcuts, and buy longer boards only after checking the usable cuts. For decking measured by coverage rather than volume, use the <a href="/deck-board-calculator">deck board calculator</a>.',
     faqs:[
       {q:'What is a board foot of lumber?',a:'One board foot equals <strong>144 cubic inches</strong> — the volume of a piece 1 inch thick, 12 inches wide, and 1 foot long.'},
-      {q:'How do I calculate board feet?',a:'Multiply thickness (inches) × width (inches) × length (feet), then divide by <strong>12</strong>.'}
+      {q:'How do I calculate board feet?',a:'Multiply thickness (inches) × width (inches) × length (feet), then divide by <strong>12</strong>.'},
+      {q:'Should I use nominal or actual lumber dimensions?',a:'Use the lumberyard\'s <strong>actual surfaced thickness and width</strong> for board-foot pricing. Nominal labels such as 1×6 can describe a different finished size.'},
+      {q:'How much extra hardwood should I order?',a:'A <strong>10–15% allowance</strong> is a practical starting point for defects, grain matching, and offcuts. Complex parts or short stock can require more.'}
     ]
   }
 });
