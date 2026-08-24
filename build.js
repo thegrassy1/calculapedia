@@ -1656,8 +1656,8 @@ set('cost',P>0?money(total*P):'—');`,
 C.push({
   slug:'ceiling-tile-calculator', emoji:'🏢', name:'Ceiling Tile Calculator',
   tile:'Tiles for a drop or acoustic ceiling',
-  title:'Ceiling Tile Calculator — How Many Ceiling Tiles Do I Need?',
-  desc:'Free ceiling tile calculator for drop and acoustic ceilings. Enter room size and tile size for the number of tiles and boxes needed, with waste allowance and cost.',
+  title:'Drop Ceiling Tile Calculator — How Many 2×2 or 2×4 Tiles Do I Need?',
+  desc:'Free drop ceiling tile calculator for 2×2 and 2×4 acoustic tiles. Enter room size for tiles, boxes, a 10% waste allowance, and an estimated cost.',
   h1:'Ceiling Tile Calculator', sub:'How many ceiling tiles do you need? Enter your room size and tile size.',
   buy:'Shop acoustic ceiling tiles →',
   inputs:[
@@ -1681,8 +1681,8 @@ set('cost',P>0?money(tiles*P):'—');`,
   content:{
     intro:'It divides your ceiling area by the area of one tile, adds 10% for edge cuts and waste, and converts to the number of tiles and boxes to buy.',
     example:'<strong>Worked example — a 16&nbsp;ft × 12&nbsp;ft room with 2×2 tiles:</strong><br>192 sq ft ÷ 4 = 48 tiles × 1.10 = <strong>53 tiles</strong> (~5 boxes of 12).',
-    h3:'Plan your grid first',
-    p:'Start the grid from the center of the room so edge cuts are equal on opposite sides. Aim for border tiles that are at least half a tile wide for a clean, professional look.',
+    h3:'Confirm tile, grid, and box coverage',
+    p:'Check that the tile edge detail matches your existing grid and that you are ordering the same 2×2 or 2×4 module. Box counts and coverage vary by product, so use the package quantity in the calculator and keep a few matching tiles for future replacements.',
     faqs:[
       {q:'How many ceiling tiles for a 12×12 room?',a:'About <strong>40 tiles</strong> using 2×2 ft tiles (144 sq ft ÷ 4, plus 10% waste).'},
       {q:'Do I need extra ceiling tiles?',a:'Yes — add about <strong>10%</strong> for edge cuts and the occasional damaged tile, and keep a few spares for future repairs.'}
