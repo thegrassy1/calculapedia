@@ -1547,8 +1547,8 @@ set('cost',P>0?money(Math.ceil(sq)*P):'—');`,
 C.push({
   slug:'landscape-fabric-calculator', emoji:'🌿', name:'Landscape Fabric Calculator',
   tile:'Rolls of weed barrier for beds & paths',
-  title:'Landscape Fabric Calculator — Weed Barrier Rolls & Coverage',
-  desc:'Calculate landscape fabric and weed barrier rolls for garden beds, paths, and gravel areas. Includes overlap, square feet, and cost.',
+  title:'Landscape Fabric Calculator — Weed Barrier Roll Coverage & Overlap',
+  desc:'Calculate landscape fabric and weed barrier roll coverage for garden beds and gravel paths. Plan overlap, square feet, rolls, and an estimated cost.',
   h1:'Landscape Fabric Calculator: Rolls & Square Feet', sub:'Calculate weed barrier coverage, rolls needed, overlap, and estimated cost for beds and paths.',
   buy:'Shop landscape fabric →',
   inputs:[
@@ -1569,10 +1569,10 @@ set('area',area.toFixed(0)+' sq ft');
 set('areaW',areaW.toFixed(0)+' sq ft');
 set('cost',P>0?money(rolls*P):'—');`,
   content:{
-    intro:'It calculates your bed or path area, adds 10% for overlapping seams and tucking edges, then divides by the square footage each roll covers — printed on the label.',
+    intro:'Measure each bed or path separately; add those areas before entering the total. The calculator adds 10% for overlapping seams and tucking edges, then divides by the square footage each roll covers — printed on the label.',
     example:'<strong>Worked example — a 20&nbsp;ft × 10&nbsp;ft bed, 300 sq ft per roll:</strong><br>200 sq ft × 1.10 = 220 sq ft ÷ 300 = <strong>1 roll</strong>.',
-    h3:'Why overlap matters',
-    p:'Overlap seams by at least 6 inches so weeds can&rsquo;t push through gaps. Pin the fabric every 18–24 inches and tuck edges under edging or stones to hold them down.',
+    h3:'Plan overlap from the roll width',
+    p:'Overlap seams by at least 6 inches so weeds can&rsquo;t push through gaps. A 4 ft-wide roll needs 6 inches of overlap at each seam, so its effective coverage width is closer to 3.5 ft. Pin the fabric every 18–24 inches and tuck edges under <a href="/landscape-edging-calculator">edging</a> or stones to hold it down. For a gravel path, install and compact the base first; then cut the fabric to follow the finished footprint. Estimate that base with the <a href="/gravel-calculator">gravel calculator</a>.',
     faqs:[
       {q:'How much landscape fabric do I need?',a:'Measure your bed area, add 10% for overlaps, then divide by the roll&rsquo;s square footage.'},
       {q:'How do I keep landscape fabric from shifting?',a:'Use landscape staples or pins every <strong>18–24 inches</strong>, placed more closely on slopes and around curves.'},
