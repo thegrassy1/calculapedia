@@ -1695,8 +1695,8 @@ set('cost',P>0?money(tiles*P):'—');`,
 C.push({
   slug:'stucco-calculator', emoji:'🏡', name:'Stucco Calculator',
   tile:'Bags of stucco mix for exterior walls',
-  title:'Stucco Calculator — Bags, Material Coverage & Cost per Square Foot',
-  desc:'Calculate stucco mix bags, wall coverage, material quantity, and estimated cost per square foot for one-coat or three-coat stucco.',
+  title:'Stucco Calculator — Bags, Coverage & Waste Allowance',
+  desc:'Estimate 80 lb stucco mix bags from net wall area, coat coverage, and a 10% waste allowance. Includes an openings example and planning guidance.',
   h1:'Stucco Calculator: Bags, Coverage & Cost', sub:'Calculate stucco material from wall area, coat type, coverage, and price per bag.',
   buy:'Shop stucco mix →',
   inputs:[
@@ -1715,13 +1715,13 @@ set('main',bags+' bags (80 lb)');
 set('area',area.toFixed(0)+' sq ft');
 set('cost',P>0?money(bags*P):'—');`,
   content:{
-    intro:'One 80&nbsp;lb bag of stucco mix covers about 35&nbsp;sq&nbsp;ft at 3/8&nbsp;inch thick (one-coat application) or 25&nbsp;sq&nbsp;ft for a traditional three-coat system. A 10% waste factor covers corners and edges.',
-    example:'<strong>Worked example — a 60&nbsp;ft × 9&nbsp;ft wall, one-coat application:</strong><br>540 sq ft × 1.10 ÷ 35 = <strong>17 bags</strong>.',
-    h3:'One-coat vs. three-coat',
-    p:'One-coat stucco is a factory-blended mix applied in a single 3/8-inch layer — faster and good for re-stucco work. Traditional three-coat (scratch, brown, finish) is thicker and more durable, and is standard for new construction.',
+    intro:'The calculator multiplies total wall length by height, applies the selected planning coverage, adds 10% for cuts and handling, and rounds up to whole 80 lb bags. Measure each wall section separately and subtract doors, windows, and other openings before entering the total wall area.',
+    example:'<strong>Worked example — net wall area before waste:</strong><br>A 60 ft × 9 ft wall is 540 sq ft; subtracting a 3 × 7 ft door and two 3 × 5 ft windows leaves 489 sq ft. For the one-coat planning coverage: 489 × 1.10 ÷ 35 = <strong>16 bags</strong>.',
+    h3:'Match coverage to the system and surface',
+    p:'One-coat and traditional multi-coat systems use different thicknesses, mixes, reinforcement, and substrates. Use the bag manufacturer&rsquo;s coverage for your exact mix, coat thickness, and substrate rather than treating the calculator&rsquo;s coverage figures as a product specification. For adjacent finish planning, compare your wall-area measurement with the <a href="/paint-calculator">paint calculator</a>; for an alternative exterior cladding estimate, use the <a href="/vinyl-siding-calculator">vinyl siding calculator</a>.',
     faqs:[
       {q:'How much does a bag of stucco cover?',a:'An 80&nbsp;lb bag covers roughly <strong>35&nbsp;sq&nbsp;ft</strong> at 3/8&nbsp;inch for a one-coat application, or about <strong>25&nbsp;sq&nbsp;ft</strong> for a thicker three-coat system.'},
-      {q:'How many bags of stucco do I need for a house?',a:'A typical 1,500 sq ft house exterior (minus openings) might need <strong>45–60 bags</strong> for one-coat stucco, depending on wall height and window count.'},
+      {q:'Should I subtract windows and doors when estimating stucco?',a:'Yes. Calculate gross wall area first, then subtract the area of doors, windows, and other openings. Keep the calculator&rsquo;s 10% allowance for cuts, corners, and small measurement differences.'},
       {q:'How much does stucco cost per square foot?',a:'Multiply the bags required by the price per bag, then divide by the wall square footage. Installed labor, scaffolding, repairs, and finish coats can change the final project cost.'},
       {q:'How do I calculate stucco material?',a:'Multiply wall length by height, choose the coverage for your coat system, add a waste allowance, and round up to whole bags.'}
     ]
