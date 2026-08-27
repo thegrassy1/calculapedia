@@ -1496,8 +1496,8 @@ set('cost',P>0?money(bags*P):'—');`,
   content:{
     intro:'Thinset coverage depends mostly on your trowel size — bigger notches lay a thicker bed and cover less area. The calculator divides your tile area by the coverage for the chosen trowel (per 50 lb bag).',
     example:'<strong>Worked example — 100 sq ft with a 1/4&nbsp;in square-notch trowel (~70 sq ft/bag):</strong><br>100 ÷ 70 = 1.43 → <strong>2 bags</strong> of thinset.',
-    h3:'Bigger tiles need bigger notches',
-    p:'Large-format tiles and uneven substrates need a deeper notch (1/2 in), which uses more thinset. Match the trowel to your tile size — the manufacturer lists the recommended notch.',
+    h3:'Order enough thinset without overmixing',
+    p:'Round up to a whole bag after dividing your measured area by the bag&rsquo;s stated coverage. Large-format tiles and uneven substrates need a deeper notch (1/2 in), which uses more thinset. Match the trowel to your tile size — the manufacturer lists the recommended notch. Mix only what you can spread and tile within the product&rsquo;s pot life. Before ordering, confirm tile quantity with the <a href="/tile-calculator">tile calculator</a> and plan joints with the <a href="/grout-calculator">grout calculator</a>.',
     faqs:[
       {q:'How much thinset for 100 square feet?',a:'Roughly <strong>1–2 bags</strong> (50 lb) depending on trowel size.'},
       {q:'How much area does a bag of thinset cover?',a:'About <strong>45–95 sq ft</strong> per 50 lb bag, depending on the trowel notch and substrate.'},
