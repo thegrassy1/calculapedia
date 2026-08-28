@@ -8,11 +8,13 @@ test('admin dashboard renders timestamped work log and copyable owner tasks', as
   const revenue = {period_start: '2026-05-21', period_end: '2026-08-18', affiliate: 0, ads: 0, total: 0};
   const activity = [{action: 'Connected Search Console', detail: 'Search performance is now available in the dashboard.', completed_at: '2026-08-21 17:30:00'}];
   const env = {
-    ADMIN_TOKEN: 'test-token',
+    ADMIN_PASSWORD: 'test-password',
+    SESSION_SECRET: 'test-session-secret',
     DB: {prepare: sql => ({all: async () => ({results: sql.includes('FROM activity') ? activity : [{source: 'search_console', metric_date: gsc.metric_date, payload: JSON.stringify(gsc)}]})})}
   };
-  const response = await worker.fetch(new Request('https://control.example/admin?token=test-token'), env);
-  const dom = new JSDOM(await response.text(), {runScripts: 'outside-only', url: 'https://control.example/admin?token=test-token'});
+  const signIn = await worker.fetch(new Request('https://control.example/login', {method:'POST', headers:{'content-type':'application/x-www-form-urlencoded'}, body:'password=test-password'}), env);
+  const response = await worker.fetch(new Request('https://control.example/admin', {headers:{cookie:signIn.headers.get('set-cookie')}}), env);
+  const dom = new JSDOM(await response.text(), {runScripts: 'outside-only', url: 'https://control.example/admin'});
   dom.window.fetch = async () => ({ok: true, json: async () => ({health: null, sources: {search_console: gsc, revenue}, activities: activity})});
   dom.window.eval(dom.window.document.querySelector('script').textContent);
   await new Promise(resolve => setTimeout(resolve, 0));

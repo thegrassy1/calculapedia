@@ -18,10 +18,9 @@ const DASHBOARD_HTML = `<!doctype html>
 </style></head><body><h1>Calculapedia Control Plane</h1><p class="muted">Daily site health and revenue monitoring for Hermes.</p>
 <div id="app"><div class="card">Loading metrics…</div></div>
 <script>
-const token=new URLSearchParams(location.search).get('token')||'';
-fetch('/api/metrics'+(token?'?token='+encodeURIComponent(token):''),{headers:token?{'Authorization':'Bearer '+token}:{}})
+fetch('/api/metrics')
 .then(r=>r.ok?r.json():Promise.reject(new Error('Dashboard access denied')))
-.then(render).catch(e=>{document.getElementById('app').innerHTML='<div class="card bad">'+e.message+'. Use the private dashboard URL supplied by the administrator.</div>'});
+.then(render).catch(e=>{document.getElementById('app').innerHTML='<div class="card bad">'+e.message+'. Please sign in again.</div>'});
 function render(data){
  const checks=data.health?.checks||[];
  const good=checks.filter(x=>x.ok).length;
@@ -41,12 +40,41 @@ function chicagoTime(value){const iso=value.includes('T')?value:value.replace(' 
 function copyTask(encoded,button){navigator.clipboard.writeText(decodeURIComponent(encoded)).then(()=>{button.textContent='Copied — paste into Hermes chat';}).catch(()=>{button.textContent='Copy failed — tell Hermes this task name';});}
 </script></body></html>`;
 
-function authorized(request, env) {
-  const expected = env.ADMIN_TOKEN;
-  if (!expected) return false;
-  const url = new URL(request.url);
-  const supplied = request.headers.get('Authorization')?.replace(/^Bearer\s+/i, '') || url.searchParams.get('token');
-  return supplied === expected;
+const LOGIN_HTML = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sign in — Calculapedia</title><style>:root{font-family:system-ui,sans-serif;color:#17202a;background:#f4f6f8}body{max-width:420px;margin:12vh auto;padding:24px}.card{background:#fff;border:1px solid #e4e7ec;border-radius:12px;padding:24px;box-shadow:0 1px 2px #0000000d}label,input,button{display:block;width:100%;box-sizing:border-box}label{font-weight:650;margin:16px 0 6px}input{padding:11px;border:1px solid #98a2b3;border-radius:7px;font-size:16px}button{margin-top:18px;background:#ff5c35;color:#fff;border:0;border-radius:7px;padding:11px;font-weight:700;font-size:16px;cursor:pointer}.error{color:#b42318}</style></head><body><main class="card"><h1>Sign in to Calculapedia</h1><p>Enter your dashboard password.</p><form method="post" action="/login"><label for="password">Password</label><input id="password" name="password" type="password" autocomplete="current-password" required autofocus><button type="submit">Sign in</button></form></main></body></html>`;
+
+const encoder = new TextEncoder();
+const sessionDurationSeconds = 60 * 60 * 24 * 7;
+
+function cookieValue(request, name) {
+  const entry = (request.headers.get('cookie') || '').split(';').map(part => part.trim()).find(part => part.startsWith(name + '='));
+  return entry ? entry.slice(name.length + 1) : '';
+}
+
+function base64url(bytes) {
+  return btoa(String.fromCharCode(...bytes)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+async function signature(value, secret) {
+  const key = await crypto.subtle.importKey('raw', encoder.encode(secret), {name:'HMAC', hash:'SHA-256'}, false, ['sign']);
+  return base64url(new Uint8Array(await crypto.subtle.sign('HMAC', key, encoder.encode(value))));
+}
+
+async function createSession(env) {
+  const issuedAt = Math.floor(Date.now() / 1000).toString();
+  return issuedAt + '.' + await signature(issuedAt, env.SESSION_SECRET);
+}
+
+async function authorized(request, env) {
+  if (!env.SESSION_SECRET) return false;
+  const session = cookieValue(request, 'admin_session');
+  const [issuedAt, suppliedSignature] = session.split('.');
+  const issued = Number(issuedAt);
+  if (!issuedAt || !suppliedSignature || !Number.isSafeInteger(issued) || issued + sessionDurationSeconds < Math.floor(Date.now() / 1000)) return false;
+  return suppliedSignature === await signature(issuedAt, env.SESSION_SECRET);
+}
+
+function sessionCookie(value) {
+  return `admin_session=${value}; Path=/; Max-Age=${sessionDurationSeconds}; HttpOnly; Secure; SameSite=Strict`;
 }
 
 function json(data, status = 200) {
@@ -89,16 +117,26 @@ async function latestMetrics(env) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (url.pathname === '/login' && request.method === 'GET') {
+      return new Response(LOGIN_HTML, {headers:{'content-type':'text/html; charset=utf-8','cache-control':'no-store'}});
+    }
+    if (url.pathname === '/login' && request.method === 'POST') {
+      const fields = new URLSearchParams(await request.text());
+      if (!env.ADMIN_PASSWORD || fields.get('password') !== env.ADMIN_PASSWORD) {
+        return new Response('Invalid password', {status:401, headers:{'content-type':'text/plain; charset=utf-8','cache-control':'no-store'}});
+      }
+      return new Response(null, {status:302, headers:{location:'/admin', 'set-cookie':sessionCookie(await createSession(env)), 'cache-control':'no-store'}});
+    }
     if (url.pathname === '/admin') {
-      if (!authorized(request, env)) return new Response('Unauthorized', {status:401});
+      if (!await authorized(request, env)) return new Response('Unauthorized', {status:401});
       return new Response(DASHBOARD_HTML, {headers:{'content-type':'text/html; charset=utf-8','cache-control':'no-store'}});
     }
     if (url.pathname === '/api/metrics') {
-      if (!authorized(request, env)) return json({error:'Unauthorized'}, 401);
+      if (!await authorized(request, env)) return json({error:'Unauthorized'}, 401);
       return json(await latestMetrics(env));
     }
     if (url.pathname === '/api/collect' && request.method === 'POST') {
-      if (!authorized(request, env)) return json({error:'Unauthorized'}, 401);
+      if (!await authorized(request, env)) return json({error:'Unauthorized'}, 401);
       return json({health:await collectHealth(env)});
     }
     return new Response('Not found', {status:404});
