@@ -11,6 +11,7 @@ assert.match(html, /<title>Board Foot Calculator \(Lumber Cost & Hardwood Formul
 assert.match(html, /<meta name="description" content="Calculate board feet for hardwood lumber: use actual thickness, width, length, and quantity to estimate material and cost\.">/);
 assert.match(html, /Use the lumberyard's actual surfaced dimensions, not a nominal label like 1×6/);
 assert.match(html, /Add 10–15% when your cut list has defects, matching grain, or short offcuts/);
+assert.match(html, /calculate each stock size as its own line and add the board-foot totals before applying the waste allowance/);
 assert.match(html, /href="\/deck-board-calculator"/);
 assert.match(html, /<link rel="canonical" href="https:\/\/calculapedia\.com\/board-foot-calculator">/);
 const schema = JSON.parse(html.match(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/)[1]);
