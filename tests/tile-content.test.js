@@ -9,6 +9,7 @@ const html = fs.readFileSync(path.join(root, 'dist', 'tile-calculator.html'), 'u
 
 assert.match(html, /<title>Tile Calculator — How Many Tiles Do I Need\? \(Square Feet, Overage & Boxes\)<\/title>/);
 assert.match(html, /Compare the calculator's tile count with the coverage printed on the box/);
+assert.match(html, /If the package coverage differs from the nominal tile size, use the package coverage to make the purchase decision/);
 assert.match(html, /Buy all visible-field tile from the same dye lot when possible/);
 assert.match(html, /href="\/thinset-calculator"/);
 assert.match(html, /href="\/grout-calculator"/);
