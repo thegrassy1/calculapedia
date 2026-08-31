@@ -2312,7 +2312,7 @@ function socialMeta(title, desc, url){
 
 // Optional affiliate configuration. Set AMAZON_TAG in the Cloudflare Pages
 // build environment after joining the relevant affiliate program.
-const AMAZON_TAG = process.env.AMAZON_TAG || '';
+const AMAZON_TAG = process.env.AMAZON_TAG || 'calculapedia-20';
 function shopUrl(c){
   const query = encodeURIComponent(stripTags(c.name.replace(/ calculator$/i,'')) + ' supplies');
   const url = 'https://www.amazon.com/s?k=' + query;
