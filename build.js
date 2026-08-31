@@ -917,9 +917,9 @@ set('cost',P>0?money(rolls*P):'—');`,
 C.push({
   slug:'insulation-calculator', emoji:'🧊', name:'Insulation Calculator',
   tile:'Bags or batts to cover an area',
-  title:'Insulation Calculator — How Much Insulation Do I Need?',
-  desc:'Free insulation calculator. Enter the area to insulate and the coverage per bag or batt pack for the number of packages and cost.',
-  h1:'Insulation Calculator', sub:'How much insulation do you need? Enter the area and coverage per package.',
+  title:'Insulation Calculator — Bags &amp; Batts by R-Value Coverage',
+  desc:'Calculate insulation bags or batt packs by square footage and R-value coverage. Plan attic and wall insulation quantities, rounding, and cost.',
+  h1:'Insulation Calculator', sub:'Calculate bags or batt packs from your net area and the package coverage for the R-value you plan to install.',
   buy:'Shop insulation →',
   inputs:[
     {id:'len',label:'Length',hint:'(feet)',value:'30',step:'0.1'},
@@ -937,13 +937,15 @@ set('main',packs+' bags / packs');
 set('area',area.toFixed(0)+' sq ft');
 set('cost',P>0?money(packs*P):'—');`,
   content:{
-    intro:'It divides the area you&rsquo;re insulating by the square footage each bag of blown-in or pack of batts covers — printed on the package for your chosen R-value.',
-    example:'<strong>Worked example — a 30&nbsp;ft × 25&nbsp;ft attic, 40 sq ft per bag:</strong><br>750 sq ft ÷ 40 = <strong>19 bags</strong>.',
-    h3:'Coverage drops with R-value',
-    p:'Higher R-values mean a thicker layer, so each bag covers less area. Always read the coverage chart on the bag for the R-value you want and enter that figure.',
+    intro:'The calculator divides the net area you&rsquo;re insulating by the square footage that one bag of blown-in insulation or one batt pack covers at your selected R-value. Choose the package coverage that matches both the insulation type and the installed R-value; the same package can cover a different area at a different thickness.',
+    example:'<strong>Worked example — a 30&nbsp;ft × 25&nbsp;ft attic, 40 sq ft per bag:</strong><br>30 × 25 = 750 sq ft. 750 ÷ 40 = 18.75, so round up to <strong>19 bags</strong>.',
+    h3:'Measure the net area, then round the order up',
+    p:'Measure each attic floor or wall section separately, subtract areas you will not insulate, then add the net square footage. Round up to whole bags or packs and allow a small cushion for cut batts, irregular bays, and settling. For batts, verify the product width matches your stud or joist spacing. For an unfinished wall project, estimate covering material with the <a href="/drywall-calculator">drywall calculator</a>.',
     faqs:[
-      {q:'How do I know how many bags of insulation I need?',a:'Divide the area by the coverage-per-bag for your target R-value, which is listed on the bag.'},
-      {q:'What R-value do I need for an attic?',a:'Most regions call for <strong>R-38 to R-60</strong> in attics — check your local code.'}
+      {q:'How do I know how many bags of insulation I need?',a:'Multiply length by width for each section, subtract exclusions, then divide the net area by the package coverage for your target R-value and round up.'},
+      {q:'Does insulation coverage change with R-value?',a:'Yes. Higher R-values require more thickness, so a bag of blown-in insulation can cover fewer square feet. Use the manufacturer&rsquo;s coverage chart for the exact R-value and product.'},
+      {q:'Should I add extra insulation for waste?',a:'Round up to full packages. A small cushion can help with irregular bays, cut batts, and settling, but confirm the product instructions and local requirements before purchasing.'},
+      {q:'What R-value do I need for an attic?',a:'Requirements vary by climate zone and local code. Check the applicable code and the manufacturer&rsquo;s installation instructions before selecting a target R-value.'}
     ]
   }
 });
