@@ -2301,6 +2301,31 @@ function faqSchema(c){
   const items = c.content.faqs.map(f=>({"@type":"Question","name":stripTags(f.q),"acceptedAnswer":{"@type":"Answer","text":stripTags(f.a)}}));
   return JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":items});
 }
+function pageSchema(c){
+  const faqs = c.content.faqs.map(f=>({"@type":"Question","name":stripTags(f.q),"acceptedAnswer":{"@type":"Answer","text":stripTags(f.a)}}));
+  return JSON.stringify({
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"WebApplication",
+        "name":stripTags(c.name),
+        "url":SITE+"/"+c.slug,
+        "description":stripTags(c.desc),
+        "applicationCategory":"BrowserApplication",
+        "operatingSystem":"Any",
+        "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+      },
+      {"@type":"FAQPage","mainEntity":faqs},
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Calculapedia","item":SITE+"/"},
+          {"@type":"ListItem","position":2,"name":stripTags(c.name),"item":SITE+"/"+c.slug}
+        ]
+      }
+    ]
+  });
+}
 function stripTags(s){ return s.replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' ').replace(/&rsquo;/g,"'").replace(/&ldquo;|&rdquo;/g,'"').replace(/&amp;/g,'&'); }
 function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function socialMeta(title, desc, url){
@@ -2555,7 +2580,7 @@ function staticPage(p){
 ${socialMeta(p.title, p.desc, `${SITE}/${p.slug}`)}
 <link rel="canonical" href="${SITE}/${p.slug}">
 ${FONT}${ADSENSE_HEAD}
-<link rel="stylesheet" href="style.css?v=${VERSION}">
+<link rel="stylesheet" href="/style.css?v=${VERSION}">
 </head>
 <body>
 ${HEADER}
@@ -2585,9 +2610,9 @@ function page(c){
 ${socialMeta(c.title, c.desc, `${SITE}/${c.slug}`)}
 <link rel="canonical" href="${SITE}/${c.slug}">
 ${FONT}${ADSENSE_HEAD}
-<link rel="stylesheet" href="style.css?v=${VERSION}">
+<link rel="stylesheet" href="/style.css?v=${VERSION}">
 <script type="application/ld+json">
-${faqSchema(c)}
+${pageSchema(c)}
 </script>
 </head>
 <body>
@@ -2670,7 +2695,7 @@ function homepage(){
   const tiles = C.map(c=>{
     const cat = catOf(c.slug);
     const search = (c.name+' '+c.tile+' '+cat).toLowerCase().replace(/"/g,'');
-    return `    <a class="tile" href="${c.slug}" data-cat="${cat}" data-search="${search}">
+    return `    <a class="tile" href="/${c.slug}" data-cat="${cat}" data-search="${search}">
       <div class="emoji">${c.emoji}</div>
       <div class="name">${c.name}</div>
       <div class="desc">${c.tile}</div>
@@ -2685,13 +2710,16 @@ function homepage(){
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Calculapedia — Free Material &amp; Cost Calculators for DIY and Contractors</title>
-<meta name="description" content="Free, instant material calculators: figure out exactly how much concrete, mulch, gravel, paint, tile, drywall and more you need — and what it will cost. No signup.">
+<meta name="description" content="Browse free Calculapedia tools for home and building projects. Open a calculator to estimate materials, waste, and cost. No signup.">
 ${socialMeta('Calculapedia — Free Material & Cost Calculators for DIY and Contractors', 'Free, instant material calculators for home and building projects.', `${SITE}/`)}
 <link rel="canonical" href="${SITE}/">
 ${FONT}${ADSENSE_HEAD}
-<link rel="stylesheet" href="style.css?v=${VERSION}">
+<link rel="stylesheet" href="/style.css?v=${VERSION}">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"Calculapedia","url":"${SITE}/","description":"Free material and cost calculators for home projects."}
+</script>
+<script type="application/ld+json">
+${JSON.stringify({"@context":"https://schema.org","@type":"ItemList","name":"Calculapedia calculators","itemListElement":C.map((c,i)=>({"@type":"ListItem","position":i+1,"url":SITE+"/"+c.slug,"name":c.name}))})}
 </script>
 </head>
 <body>
