@@ -16,5 +16,5 @@ assert.match(html, /href="\/deck-board-calculator"/);
 assert.match(html, /<link rel="canonical" href="https:\/\/calculapedia\.com\/board-foot-calculator">/);
 const schema = JSON.parse(html.match(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/)[1]);
 assert.equal(schema['@context'], 'https://schema.org');
-assert.equal(schema['@type'], 'FAQPage');
+assert.ok(schema['@graph'].some(item => item['@type'] === 'FAQPage'));
 console.log('board-foot content, metadata, canonical, and FAQ schema verified');

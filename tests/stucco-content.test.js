@@ -16,5 +16,5 @@ assert.match(html, /href="\/vinyl-siding-calculator"/);
 assert.match(html, /<link rel="canonical" href="https:\/\/calculapedia\.com\/stucco-calculator">/);
 const schema = JSON.parse(html.match(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/)[1]);
 assert.equal(schema['@context'], 'https://schema.org');
-assert.equal(schema['@type'], 'FAQPage');
+assert.ok(schema['@graph'].some(item => item['@type'] === 'FAQPage'));
 console.log('stucco content, metadata, canonical, internal links, and FAQ schema verified');

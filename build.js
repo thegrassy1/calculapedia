@@ -1688,9 +1688,10 @@ set('cost',P>0?money(tiles*P):'—');`,
     intro:'It divides your ceiling area by the area of one tile, adds 10% for edge cuts and waste, and converts to the number of tiles and boxes to buy.',
     example:'<strong>Worked example — a 16&nbsp;ft × 12&nbsp;ft room with 2×2 tiles:</strong><br>192 sq ft ÷ 4 = 48 tiles × 1.10 = <strong>53 tiles</strong> (~5 boxes of 12).',
     h3:'Confirm tile, grid, and box coverage',
-    p:'Check that the tile edge detail matches your existing grid and that you are ordering the same 2×2 or 2×4 module. Box counts and coverage vary by product, so use the package quantity in the calculator and keep a few matching tiles for future replacements.',
+    p:'Check that the tile edge detail matches your existing grid and that you are ordering the same 2×2 or 2×4 module. Box counts and coverage vary by product, so enter the package quantity in the calculator before ordering. Perimeter tiles usually need cuts, so keep a few matching tiles for future replacements.',
     faqs:[
       {q:'How many ceiling tiles for a 12×12 room?',a:'About <strong>40 tiles</strong> using 2×2 ft tiles (144 sq ft ÷ 4, plus 10% waste).'},
+      {q:'How many ceiling tiles come in a box?',a:'There is no universal box count. Check the package label for the number of tiles and total coverage, then enter that quantity in the calculator to round your result up to whole boxes.'},
       {q:'Do I need extra ceiling tiles?',a:'Yes — add about <strong>10%</strong> for edge cuts and the occasional damaged tile, and keep a few spares for future repairs.'}
     ]
   }

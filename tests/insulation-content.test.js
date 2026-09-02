@@ -15,5 +15,5 @@ assert.match(html, /href="\/drywall-calculator"/);
 assert.match(html, /<link rel="canonical" href="https:\/\/calculapedia\.com\/insulation-calculator">/);
 const schema = JSON.parse(html.match(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/)[1]);
 assert.equal(schema['@context'], 'https://schema.org');
-assert.equal(schema['@type'], 'FAQPage');
+assert.ok(schema['@graph'].some(item => item['@type'] === 'FAQPage'));
 console.log('insulation content, metadata, canonical, and FAQ schema verified');
