@@ -49,7 +49,7 @@ set('cost',P>0?money(cy*1.10*P):'—');`,
     intro:'The calculator multiplies your slab&rsquo;s length, width and thickness to get the volume, converts it to cubic yards (the unit concrete is sold in), then works out how many bags that equals.',
     example:'<strong>Worked example — a 10&nbsp;ft × 10&nbsp;ft patio at 4&nbsp;inches:</strong><br>10 × 10 × (4 ÷ 12) = 33.3 cubic feet → 33.3 ÷ 27 = <strong>1.23 cubic yards</strong>. Add 10% and you&rsquo;d order about <strong>1.35 cubic yards</strong>.',
     h3:'Bags vs. ready-mix',
-    p:'For small jobs under about 1 cubic yard, bagged concrete is easiest. Above that, ready-mix delivered by truck is normally cheaper and far less work than mixing dozens of bags.',
+    p:'For small jobs under about 1 cubic yard, bagged concrete is easiest. Above that, ready-mix delivered by truck is normally cheaper and far less work than mixing dozens of bags. Order ready-mix by the calculator\'s “With 10% waste allowance” result, then ask the supplier about its minimum-load charge and delivery timing before scheduling the pour. For a reinforced slab, estimate the grid separately with the <a href="/rebar-calculator">rebar calculator</a>.',
     faqs:[
       {q:'How much concrete do I need for a 10×10 slab?',a:'At 4 inches thick, about <strong>1.23 cubic yards</strong> (≈74 of the 60lb bags). Order ~1.35 cubic yards to cover waste.'},
       {q:'How many 80 lb bags are in a cubic yard?',a:'About <strong>45 bags</strong> — each 80lb bag yields roughly 0.6 cubic feet and a cubic yard is 27 cubic feet.'}
