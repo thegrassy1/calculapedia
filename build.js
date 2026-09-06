@@ -1246,18 +1246,20 @@ C.push({
   ],
   lines:[
     {id:'area',label:'Driveway area'},
+    {id:'pails',label:'5-gallon pails to buy'},
     {id:'cost',label:'Estimated cost'}
   ],
   body:`var L=num('len'),W=num('wid'),coats=parseInt(val('coats'),10)||1,P=num('price');
 var area=L*W,gal=area*coats/80;
 set('main',(Math.ceil(gal*10)/10).toFixed(1)+' gallons (buy '+Math.ceil(gal)+')');
 set('area',area.toFixed(0)+' sq ft');
+set('pails',Math.ceil(gal/5)+' 5-gallon pails');
 set('cost',P>0?money(Math.ceil(gal)*P):'—');`,
   content:{
     intro:'Asphalt sealer covers roughly 80 sq ft per gallon per coat. The calculator multiplies your driveway area by the number of coats and divides by that coverage.',
-    example:'<strong>Worked example — a 40&nbsp;ft × 12&nbsp;ft driveway, 1 coat:</strong><br>480 sq ft ÷ 80 = <strong>6 gallons</strong>.',
-    h3:'Two thin coats beat one thick',
-    p:'Sealer lasts longer applied as two thin coats than one heavy one. Most driveways get a fresh seal every 2–3 years. Older, porous asphalt soaks up more than the label\'s coverage, so round gallons up to whole 5-gallon pails — that is the usual buy unit. Fill cracks and sweep the surface before sealing. If the pavement is failing rather than just faded, estimate a replacement with the <a href="/asphalt-calculator">asphalt calculator</a> instead of resealing.',
+    example:'<strong>Worked example — a 40&nbsp;ft × 12&nbsp;ft driveway, 1 coat:</strong><br>480 sq ft ÷ 80 = <strong>6 gallons</strong> → <strong>2 five-gallon pails</strong>.',
+    h3:'Use the label to plan the purchase',
+    p:'Coverage is a planning estimate: use the coverage and coat count on your exact product label, because porous asphalt, rough texture, and repairs can change yield. Round the estimate up to the container size you are buying — often 5-gallon pails. Fill cracks with a compatible crack filler and let repairs cure as the label directs before sealing; sweep and clean the surface first. If the pavement is failing rather than just faded, estimate a replacement with the <a href="/asphalt-calculator">asphalt calculator</a> instead of resealing.',
     faqs:[
       {q:'How many gallons of sealer for a two-car driveway?',a:'A typical 40&times;20&nbsp;ft two-car pad is 800 sq ft. At 80 sq ft per gallon that is about <strong>10 gallons for one coat</strong> or <strong>20 gallons for two coats</strong>.'},
       {q:'How many 5-gallon buckets do I need?',a:'Divide the gallons by 5 and round up. Twenty gallons is four 5-gallon pails; 6 gallons is two pails.'},
