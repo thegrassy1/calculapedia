@@ -8,7 +8,10 @@ execFileSync(process.execPath, ['build.js'], { cwd: root, stdio: 'pipe' });
 const html = fs.readFileSync(path.join(root, 'dist', 'board-foot-calculator.html'), 'utf8');
 
 assert.match(html, /<title>Board Foot Calculator \(Lumber Cost & Hardwood Formula\)<\/title>/);
-assert.match(html, /<meta name="description" content="Calculate board feet for hardwood lumber: use actual thickness, width, length, and quantity to estimate material and cost\.">/);
+assert.match(html, /<meta name="description" content="Calculate board feet for hardwood lumber: use actual thickness, width, length, quantity, and a cut-list waste allowance to estimate material and cost\.">/);
+assert.match(html, /id="waste"/);
+assert.match(html, /Waste allowance/);
+assert.match(html, /With waste allowance/);
 assert.match(html, /Use the lumberyard's actual surfaced dimensions, not a nominal label like 1×6/);
 assert.match(html, /Add 10–15% when your cut list has defects, matching grain, or short offcuts/);
 assert.match(html, /calculate each stock size as its own line and add the board-foot totals before applying the waste allowance/);

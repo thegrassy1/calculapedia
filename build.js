@@ -1628,24 +1628,27 @@ C.push({
   slug:'board-foot-calculator', emoji:'🪵', name:'Board Foot Calculator',
   tile:'Board feet of lumber for any project',
   title:'Board Foot Calculator (Lumber Cost & Hardwood Formula)',
-  desc:'Calculate board feet for hardwood lumber: use actual thickness, width, length, and quantity to estimate material and cost.',
-  h1:'Board Foot Calculator', sub:'How many board feet of lumber do you need? Enter your board dimensions and quantity.',
+  desc:'Calculate board feet for hardwood lumber: use actual thickness, width, length, quantity, and a cut-list waste allowance to estimate material and cost.',
+  h1:'Board Foot Calculator', sub:'How many board feet of lumber do you need? Enter board dimensions, quantity, and a waste allowance.',
   buy:'Shop dimensional lumber →',
   inputs:[
     {id:'thick',label:'Thickness',hint:'(inches)',value:'1',step:'0.25'},
     {id:'wid',label:'Width',hint:'(inches)',value:'6',step:'0.25'},
     {id:'len',label:'Length',hint:'(feet)',value:'8',step:'0.5'},
     {id:'qty',label:'Number of boards',hint:'',value:'10',step:'1'},
+    {id:'waste',label:'Waste allowance',hint:'(%)',value:'10',step:'1'},
     {id:'price',label:'Price per board foot',hint:'(optional, $)',value:'4',step:'0.25'}
   ],
   lines:[
     {id:'perboard',label:'Board feet per board'},
-    {id:'cost',label:'Estimated cost'}
+    {id:'withwaste',label:'With waste allowance'},
+    {id:'cost',label:'Estimated cost (with waste)'}
   ],
-  body:`var T=num('thick'),W=num('wid'),L=num('len'),Q=intval('qty')||1,P=num('price');
-var per=(T*W*L)/12,total=per*Q;
-set('main',total.toFixed(1)+' board feet');
+  body:`var T=num('thick'),W=num('wid'),L=num('len'),Q=intval('qty')||1,waste=Math.max(0,num('waste')),P=num('price');
+var per=(T*W*L)/12,rawTotal=per*Q,total=rawTotal*(1+waste/100);
+set('main',rawTotal.toFixed(1)+' board feet');
 set('perboard',per.toFixed(2)+' bf per board');
+set('withwaste',total.toFixed(1)+' board feet');
 set('cost',P>0?money(total*P):'—');`,
   content:{
     intro:'A board foot is a unit of lumber volume equal to 12 × 12 × 1 inch. Multiply thickness (in) × width (in) × length (ft), divide by 12, then multiply by the number of boards. Use the lumberyard\'s actual surfaced dimensions, not a nominal label like 1×6.',
