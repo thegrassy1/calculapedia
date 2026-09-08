@@ -1128,9 +1128,9 @@ set('cost',P>0?money(total*P):'—');`,
 C.push({
   slug:'compost-calculator', emoji:'♻️', name:'Compost Calculator',
   tile:'Cubic yards & bags of compost',
-  title:'Compost Calculator — How Much Compost Do I Need?',
-  desc:'Free compost calculator. Enter your area and depth for cubic yards, bags, and estimated cost of compost.',
-  h1:'Compost Calculator', sub:'How much compost do you need? Enter your area and depth.',
+  title:'Compost Calculator — Cubic Yards, Bags & Top-Dressing Depth',
+  desc:'Calculate compost in cubic yards and 1.5-cu-ft bags for garden beds. Use a chosen top-dressing depth, compare bulk versus bag volume, and estimate cost.',
+  h1:'Compost Calculator: Cubic Yards & Bags', sub:'Calculate compost volume for a bed, then compare bulk cubic yards with bagged coverage.',
   buy:'Shop compost →',
   inputs:[
     {id:'len',label:'Length',hint:'(feet)',value:'20',step:'0.1'},
@@ -1150,13 +1150,14 @@ set('cf',cf.toFixed(1)+' cu ft');
 set('bags',bags+' bags');
 set('cost',P>0?money(bags*P):'—');`,
   content:{
-    intro:'It multiplies your area by the spread depth for the volume, then shows it as cubic yards (bulk) and 1.5 cubic-foot bags.',
-    example:'<strong>Worked example — a 20&nbsp;ft × 10&nbsp;ft bed at 2&nbsp;inches:</strong><br>200 × (2 ÷ 12) = 33.3 cubic feet → ÷ 27 = <strong>1.23 cubic yards</strong>, or about 23 bags.',
-    h3:'How thick to spread compost?',
-    p:'A 1–2 inch top dressing is plenty for established beds; mix 2–3 inches into new beds before planting.',
+    intro:'The calculator multiplies bed area by spread depth to find volume, then converts that volume to cubic yards for bulk compost and 1.5 cubic-foot bags. It rounds bag purchases up to whole bags; the optional price is your own planning estimate.',
+    example:'<strong>Worked example — a 20&nbsp;ft × 10&nbsp;ft bed at 2&nbsp;inches:</strong><br>For a 20 ft × 10 ft bed at 2 inches, the calculator uses 200 × (2 ÷ 12) = 33.3 cubic feet. Divide by 27 for <strong>1.23 cubic yards</strong>, or round 33.3 ÷ 1.5 up to <strong>23 bags</strong>.',
+    h3:'Choose depth, then buy by volume',
+    p:'A 1–2 inch top dressing is a common planning range for established beds; work a deeper amendment into a new bed only when it fits the planting plan. Bulk compost is commonly sold by the cubic yard, while bags list a cubic-foot volume. Use the bag\'s printed volume—not its weight—to compare it with this calculator, because bag weights vary with moisture and product. Measure separate beds individually, add the volumes, and round bulk orders according to the supplier\'s delivery increment. For a new <a href="/raised-bed-soil-calculator">raised bed</a>, calculate its fill separately; for a surface cover, use the <a href="/mulch-calculator">mulch calculator</a>.',
     faqs:[
-      {q:'How many bags of compost in a yard?',a:'About <strong>18 bags</strong> of the 1.5 cubic foot size make one cubic yard.'},
-      {q:'How deep should compost be?',a:'<strong>1–2 inches</strong> as a top dressing, more when amending new soil.'}
+      {q:'How many bags of compost are in a cubic yard?',a:'A cubic yard is 27 cubic feet, so it takes <strong>18 bags</strong> at 1.5 cubic feet each. Always check the volume printed on your chosen bag.'},
+      {q:'How deep should I spread compost?',a:'For an established bed, a <strong>1–2 inch</strong> top dressing is a practical planning range. Select the depth that fits your soil and planting plan.'},
+      {q:'Should I buy compost by the bag or cubic yard?',a:'Compare both options by volume. Divide the bulk price by 27 for a cost per cubic foot, then compare it with the bag\'s listed cubic-foot volume, including any delivery charge.'}
     ]
   }
 });
