@@ -15,6 +15,7 @@ assert.match(html, /With waste allowance/);
 assert.match(html, /Use the lumberyard's actual surfaced dimensions, not a nominal label like 1×6/);
 assert.match(html, /Add 10–15% when your cut list has defects, matching grain, or short offcuts/);
 assert.match(html, /calculate each stock size as its own line and add the board-foot totals before applying the waste allowance/);
+assert.match(html, /For example, four 1 × 6 × 8 ft boards equal 16 board feet; with 10% waste, plan to buy at least 17\.6 board feet, then choose available board lengths that cover the cut list/);
 assert.match(html, /href="\/deck-board-calculator"/);
 assert.match(html, /<link rel="canonical" href="https:\/\/calculapedia\.com\/board-foot-calculator">/);
 const schema = JSON.parse(html.match(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/)[1]);
