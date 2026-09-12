@@ -1713,20 +1713,22 @@ C.push({
   inputs:[
     {id:'len',label:'Total wall length',hint:'(feet)',value:'60',step:'0.5'},
     {id:'height',label:'Wall height',hint:'(feet)',value:'9',step:'0.1'},
+    {id:'doors',label:'Doors',hint:'(subtracted)',value:'0',step:'1'},
+    {id:'windows',label:'Windows',hint:'(subtracted)',value:'0',step:'1'},
     {id:'coat',label:'Application',type:'select',options:[{v:'35',t:'One-coat (3/8 in, ~35 sq ft/bag)',sel:true},{v:'25',t:'Three-coat (full depth, ~25 sq ft/bag)'}]},
     {id:'price',label:'Price per bag (80 lb)',hint:'(optional, $)',value:'18',step:'1'}
   ],
   lines:[
-    {id:'area',label:'Wall area'},
+    {id:'area',label:'Net wall area'},
     {id:'cost',label:'Estimated cost'}
   ],
-  body:`var L=num('len'),H=num('height'),cov=parseFloat(val('coat'))||35,P=num('price');
-var area=L*H,bags=cov>0?Math.ceil(area*1.10/cov):0;
+  body:`var L=num('len'),H=num('height'),doors=intval('doors'),win=intval('windows'),cov=parseFloat(val('coat'))||35,P=num('price');
+var area=Math.max(0,L*H-doors*21-win*15),bags=cov>0?Math.ceil(area*1.10/cov):0;
 set('main',bags+' bags (80 lb)');
 set('area',area.toFixed(0)+' sq ft');
 set('cost',P>0?money(bags*P):'—');`,
   content:{
-    intro:'The calculator multiplies total wall length by height, applies the selected planning coverage, adds 10% for cuts and handling, and rounds up to whole 80 lb bags. Measure each wall section separately and subtract doors, windows, and other openings before entering the total wall area.',
+    intro:'The calculator multiplies total wall length by height, subtracts standard door and window allowances, applies the selected planning coverage, adds 10% for cuts and handling, and rounds up to whole 80 lb bags. Measure each wall section separately; enter the total length and average height, then enter the number of standard doors and windows to exclude them.',
     example:'<strong>Worked example — net wall area before waste:</strong><br>A 60 ft × 9 ft wall is 540 sq ft; subtracting a 3 × 7 ft door and two 3 × 5 ft windows leaves 489 sq ft. For the one-coat planning coverage: 489 × 1.10 ÷ 35 = <strong>16 bags</strong>.',
     h3:'Match coverage to the system and surface',
     p:'One-coat and traditional multi-coat systems use different thicknesses, mixes, reinforcement, and substrates. Use the bag manufacturer&rsquo;s coverage for your exact mix, coat thickness, and substrate rather than treating the calculator&rsquo;s coverage figures as a product specification. Before ordering, separate base-coat material from finish-coat material and confirm whether your system calls for lath, trim, reinforcement, or a bonding agent. For adjacent finish planning, compare your wall-area measurement with the <a href="/paint-calculator">paint calculator</a>; for an alternative exterior cladding estimate, use the <a href="/vinyl-siding-calculator">vinyl siding calculator</a>.',
