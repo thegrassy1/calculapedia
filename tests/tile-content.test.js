@@ -8,6 +8,10 @@ execFileSync(process.execPath, ['build.js'], { cwd: root, stdio: 'pipe' });
 const html = fs.readFileSync(path.join(root, 'dist', 'tile-calculator.html'), 'utf8');
 
 assert.match(html, /<title>Tile Calculator — How Many Tiles Do I Need\? \(Square Feet, Overage & Boxes\)<\/title>/);
+assert.match(html, /id="coverage"/);
+assert.match(html, /Box coverage/);
+assert.match(html, /Math\.ceil\(area\*\(1\+waste\/100\)\/coverage\)/);
+assert.match(html, /Enter the square-foot coverage printed on the box/);
 assert.match(html, /Compare the calculator's tile count with the coverage printed on the box/);
 assert.match(html, /If the package coverage differs from the nominal tile size, use the package coverage to make the purchase decision/);
 assert.match(html, /Buy all visible-field tile from the same dye lot when possible/);
