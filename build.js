@@ -1128,9 +1128,9 @@ set('cost',P>0?money(total*P):'—');`,
 C.push({
   slug:'compost-calculator', emoji:'♻️', name:'Compost Calculator',
   tile:'Cubic yards & bags of compost',
-  title:'Compost Calculator — Cubic Yards, Bags & Top-Dressing Depth',
-  desc:'Calculate compost in cubic yards and 1.5-cu-ft bags for garden beds. Use a chosen top-dressing depth, compare bulk versus bag volume, and estimate cost.',
-  h1:'Compost Calculator: Cubic Yards & Bags', sub:'Calculate compost volume for a bed, then compare bulk cubic yards with bagged coverage.',
+  title:'How Much Compost Do I Need? Compost Calculator for Yards & Bags',
+  desc:'Find how much compost you need for a garden bed in cubic yards or 1.5-cu-ft bags. Enter bed size and depth, then compare bulk and bagged volume.',
+  h1:'How Much Compost Do I Need? Calculator', sub:'Calculate compost volume for a bed, then compare bulk cubic yards with bagged coverage.',
   buy:'Shop compost →',
   inputs:[
     {id:'len',label:'Length',hint:'(feet)',value:'20',step:'0.1'},
