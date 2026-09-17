@@ -7,7 +7,8 @@ const root = path.join(__dirname, '..');
 execFileSync(process.execPath, ['build.js'], { cwd: root, stdio: 'pipe' });
 const html = fs.readFileSync(path.join(root, 'dist', 'stucco-calculator.html'), 'utf8');
 
-assert.match(html, /<title>Stucco Calculator — How Many 80 lb Bags Do I Need\?<\/title>/);
+assert.match(html, /<title>Stucco Material Calculator — How Many 80 lb Bags & Cost\?<\/title>/);
+assert.match(html, /<meta name="description" content="Calculate stucco material: estimate 80 lb bags and material cost from net wall area, coat coverage, and a 10% waste allowance\. Includes openings and project-planning guidance\.">/);
 assert.match(html, /Measure each wall section separately; enter the total length and average height, then enter the number of standard doors and windows to exclude them/);
 assert.match(html, /Before ordering, separate base-coat material from finish-coat material and confirm whether your system calls for lath, trim, reinforcement, or a bonding agent/);
 assert.match(html, /A 60 ft × 9 ft wall is 540 sq ft; subtracting a 3 × 7 ft door and two 3 × 5 ft windows leaves 489 sq ft/);

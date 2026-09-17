@@ -1706,8 +1706,8 @@ set('cost',P>0?money(tiles*P):'—');`,
 C.push({
   slug:'stucco-calculator', emoji:'🏡', name:'Stucco Calculator',
   tile:'Bags of stucco mix for exterior walls',
-  title:'Stucco Calculator — How Many 80 lb Bags Do I Need?',
-  desc:'Estimate 80 lb stucco mix bags from net wall area, coat coverage, and a 10% waste allowance. Includes an openings example and planning guidance.',
+  title:'Stucco Material Calculator — How Many 80 lb Bags & Cost?',
+  desc:'Calculate stucco material: estimate 80 lb bags and material cost from net wall area, coat coverage, and a 10% waste allowance. Includes openings and project-planning guidance.',
   h1:'Stucco Calculator: Bags, Coverage & Cost', sub:'Calculate stucco material from wall area, coat type, coverage, and price per bag.',
   buy:'Shop stucco mix →',
   inputs:[
