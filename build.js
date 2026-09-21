@@ -1593,13 +1593,13 @@ C.push({
   slug:'post-hole-calculator', emoji:'🪛', name:'Post Hole Calculator',
   tile:'Concrete bags for fence or deck post holes',
   title:'Post Hole Calculator — How Many Bags of Concrete for Fence Posts?',
-  desc:'Free post hole concrete calculator. Enter hole count, diameter, and depth for the bags of concrete mix needed and estimated cost.',
-  h1:'Post Hole Calculator', sub:'How much concrete for your fence posts? Enter hole count, size, and depth.',
+  desc:'Calculate 50 lb concrete bags for fence and deck post holes. Enter hole count, diameter, and concrete-fill depth for a practical material estimate.',
+  h1:'Post Hole Calculator', sub:'How much concrete for your fence posts? Enter hole count, size, and concrete-fill depth.',
   buy:'Shop concrete mix →',
   inputs:[
     {id:'holes',label:'Number of post holes',hint:'',value:'10',step:'1'},
     {id:'diam',label:'Hole diameter',hint:'(inches)',value:'10',step:'1'},
-    {id:'depth',label:'Hole depth',hint:'(inches)',value:'36',step:'1'},
+    {id:'depth',label:'Concrete-fill depth',hint:'(inches)',value:'36',step:'1'},
     {id:'price',label:'Price per bag (50 lb)',hint:'(optional, $)',value:'5',step:'0.5'}
   ],
   lines:[
@@ -1616,8 +1616,8 @@ set('cost',P>0?money(bags*P):'—');`,
   content:{
     intro:'It treats each hole as a cylinder — π × radius² × depth — to find the volume in cubic feet, multiplies by your hole count, and divides by the 0.375 cubic-foot yield of a standard 50&nbsp;lb bag of concrete mix.',
     example:'<strong>Worked example — 10 holes, 10&nbsp;in diameter, 36&nbsp;in deep:</strong><br>π × (5 ÷ 12)² × 3 = 0.55 cu ft per hole × 10 = 5.5 cu ft → <strong>15 bags</strong>.',
-    h3:'How deep should a post hole be?',
-    p:'A common rule is to bury at least one-third of the post length. For a 6&nbsp;ft fence using 8&nbsp;ft posts, that means going 2.5–3&nbsp;ft deep — deeper in freeze-thaw climates to get below the frost line.',
+    h3:'Separate hole depth from concrete-fill depth',
+    p:'A common rule is to bury at least one-third of the post length. For a 6&nbsp;ft fence using 8&nbsp;ft posts, that means going 2.5–3&nbsp;ft deep — deeper in freeze-thaw climates to get below the frost line. Enter only the depth you plan to fill with concrete, not necessarily the entire hole depth. For a 36-inch-deep hole with a 6-inch gravel base, enter 30 inches; estimate that drainage layer with the <a href="/gravel-calculator">gravel calculator</a>. Confirm the post, footing, drainage, and frost-depth requirements for your site before digging.',
     faqs:[
       {q:'How many bags of concrete per fence post?',a:'About <strong>1–3 bags</strong> (50 lb each) depending on hole size — typically 2 bags for a standard 10-inch diameter, 30-inch deep hole.'},
       {q:'What diameter should a post hole be?',a:'About <strong>3 times the post width</strong> — so a 4-inch post needs roughly a 12-inch hole.'}
