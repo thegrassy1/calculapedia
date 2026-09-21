@@ -2206,6 +2206,122 @@ set('cost',(Mp>0||Pp>0)?money(Ln*Mp+posts*Pp):'—');`,
   }
 });
 
+C.push({
+  slug:'shiplap-calculator', emoji:'🪵', name:'Shiplap Calculator',
+  tile:'Boards & linear feet for a shiplap wall',
+  title:'Shiplap Calculator — How Much Shiplap Do I Need?',
+  desc:'Free shiplap calculator. Enter your wall width, height, and board face width for total linear feet, number of boards, and estimated cost including waste.',
+  h1:'Shiplap Calculator', sub:'How much shiplap do you need? Enter your wall size and board width for boards, linear feet, and cost.',
+  buy:'Shop shiplap boards →',
+  inputs:[
+    {id:'wid',label:'Wall width',hint:'(feet)',value:'12',step:'0.1'},
+    {id:'ht',label:'Wall height',hint:'(feet)',value:'8',step:'0.1'},
+    {id:'face',label:'Board face width',hint:'(inches, exposed)',value:'5.25',step:'0.05'},
+    {id:'blen',label:'Board length',hint:'(feet)',value:'8',step:'1'},
+    {id:'waste',label:'Waste allowance',hint:'(%)',value:'10',step:'1'},
+    {id:'price',label:'Price per linear foot',hint:'(optional, $)',value:'1.5',step:'0.05'}
+  ],
+  lines:[
+    {id:'lf',label:'Total linear feet'},
+    {id:'sf',label:'Wall area covered'},
+    {id:'cost',label:'Estimated cost'}
+  ],
+  body:`var W=num('wid'),H=num('ht'),F=num('face'),B=num('blen'),X=num('waste'),P=num('price');
+var courses=F>0?Math.ceil(H*12/F):0,lf=Math.ceil(courses*W*(1+X/100)),boards=B>0?Math.ceil(lf/B):0;
+set('main',boards+' boards ('+B+' ft)');
+set('lf',lf+' linear ft');
+set('sf',(W*H).toFixed(0)+' sq ft');
+set('cost',P>0?money(lf*P):'—');`,
+  content:{
+    intro:'It divides the wall height by the exposed face width of one board to get the number of rows (rounded up), multiplies by the wall width for total linear feet, adds your waste allowance, and divides by board length to get the number of boards.',
+    example:'<strong>Worked example — a 12&nbsp;ft wide × 8&nbsp;ft tall wall with 5.25&nbsp;in exposed-face boards:</strong><br>96 in ÷ 5.25 in = 18.3 → <strong>19 rows</strong> × 12 ft = 228 linear feet → + 10% waste = <strong>251 linear feet</strong> → ÷ 8 ft boards = <strong>32 boards</strong>.',
+    h3:'Nominal vs. actual (exposed) board width',
+    p:'A &ldquo;1×6&rdquo; shiplap board is about 5.5&nbsp;in wide, but the <strong>overlap (rabbet) hides roughly ¼–½ inch</strong>, so the visible face is closer to <strong>5–5.25 inches</strong>. Always use the exposed face width, not the nominal size, or you will come up short.',
+    faqs:[
+      {q:'How much extra shiplap should I buy for waste?',a:'Plan on <strong>10%</strong> for a straight wall, and <strong>15%</strong> if you have many outlets, windows, or angled cuts.'},
+      {q:'How do I calculate how many shiplap boards I need?',a:'Divide wall height by the exposed board width to get rows, multiply by wall width for linear feet, add waste, then divide by the board length and round up.'}
+    ]
+  }
+});
+
+C.push({
+  slug:'flagstone-calculator', emoji:'🪨', name:'Flagstone Calculator',
+  tile:'Tons of flagstone for a patio or walkway',
+  title:'Flagstone Calculator — How Much Flagstone Do I Need?',
+  desc:'Free flagstone calculator. Enter your patio or walkway size and stone thickness for tons of flagstone needed, square feet to order, and estimated cost.',
+  h1:'Flagstone Calculator', sub:'How much flagstone do you need? Enter your area and stone thickness for tons and cost.',
+  buy:'Shop flagstone →',
+  inputs:[
+    {id:'len',label:'Area length',hint:'(feet)',value:'20',step:'0.5'},
+    {id:'wid',label:'Area width',hint:'(feet)',value:'10',step:'0.5'},
+    {id:'thick',label:'Stone thickness',hint:'(inches)',value:'1.5',step:'0.25'},
+    {id:'waste',label:'Waste allowance',hint:'(%)',value:'10',step:'1'},
+    {id:'price',label:'Price per ton',hint:'(optional, $)',value:'300',step:'5'}
+  ],
+  lines:[
+    {id:'sf',label:'Square feet to order'},
+    {id:'lb',label:'Total weight'},
+    {id:'cost',label:'Estimated cost'}
+  ],
+  body:`var L=num('len'),W=num('wid'),T=num('thick'),X=num('waste'),P=num('price');
+var area=L*W,sf=area*(1+X/100),lb=sf*T*13,tons=lb/2000;
+set('main',tons.toFixed(2)+' tons of flagstone');
+set('sf',sf.toFixed(0)+' sq ft');
+set('lb',Math.round(lb).toLocaleString()+' lb');
+set('cost',P>0?money(tons*P):'—');`,
+  content:{
+    intro:'It multiplies your area by a waste allowance to get the square feet to order, then estimates weight at about 13 pounds per square foot for every inch of stone thickness (roughly 155 lb per cubic foot), and converts pounds to tons.',
+    example:'<strong>Worked example — a 20&nbsp;ft × 10&nbsp;ft patio with 1.5&nbsp;in thick flagstone and 10% waste:</strong><br>200 sq ft × 1.10 = <strong>220 sq ft</strong> → 220 × 1.5 × 13 = 4,290 lb → ÷ 2,000 = <strong>2.15 tons</strong>.',
+    h3:'Why flagstone is sold by the ton',
+    p:'Irregular flagstone varies in thickness and shape, so suppliers sell it by weight. Most yards quote roughly <strong>100–150 square feet per ton</strong> at 1–1.5 inches thick, and irregular pieces need <strong>10–15% extra</strong> for cutting and fitting.',
+    faqs:[
+      {q:'How many square feet does a ton of flagstone cover?',a:'About <strong>150 square feet</strong> at 1 inch thick, <strong>100 square feet</strong> at 1.5 inches, and <strong>75 square feet</strong> at 2 inches.'},
+      {q:'How much waste should I allow for a flagstone patio?',a:'Allow <strong>10–15%</strong>. Irregular shapes need more cutting and fitting than uniform pavers, so a little extra makes for a better-looking layout.'}
+    ]
+  }
+});
+
+C.push({
+  slug:'pond-liner-calculator', emoji:'💧', name:'Pond Liner Calculator',
+  tile:'Liner size & volume for a backyard pond',
+  title:'Pond Liner Calculator — What Size Pond Liner Do I Need?',
+  desc:'Free pond liner calculator. Enter your pond length, width, depth, and overlap for the liner size to buy, pond volume in gallons, and estimated cost.',
+  h1:'Pond Liner Calculator', sub:'What size liner do you need? Enter your pond dimensions for liner size, gallons, and cost.',
+  buy:'Shop pond liners →',
+  inputs:[
+    {id:'len',label:'Pond length',hint:'(feet)',value:'10',step:'0.5'},
+    {id:'wid',label:'Pond width',hint:'(feet)',value:'8',step:'0.5'},
+    {id:'depth',label:'Maximum depth',hint:'(feet)',value:'2',step:'0.5'},
+    {id:'over',label:'Overlap on each side',hint:'(feet)',value:'1',step:'0.5'},
+    {id:'price',label:'Price per sq ft of liner',hint:'(optional, $)',value:'1',step:'0.05'}
+  ],
+  lines:[
+    {id:'area',label:'Liner area'},
+    {id:'order',label:'Standard size to order'},
+    {id:'gal',label:'Approx. pond volume'},
+    {id:'cost',label:'Estimated liner cost'}
+  ],
+  body:`var L=num('len'),W=num('wid'),D=num('depth'),O=num('over'),P=num('price');
+var ll=L+2*D+2*O,lw=W+2*D+2*O,area=ll*lw;
+var ol=Math.ceil(ll/5)*5,ow=Math.ceil(lw/5)*5;
+var gal=L*W*D*0.7*7.48;
+set('main',ll.toFixed(0)+' × '+lw.toFixed(0)+' ft liner');
+set('area',area.toFixed(0)+' sq ft');
+set('order',ol+' × '+ow+' ft');
+set('gal',Math.round(gal).toLocaleString()+' gallons');
+set('cost',P>0?money(ol*ow*P):'—');`,
+  content:{
+    intro:'It adds twice the maximum depth (so the liner can run down one side and up the other) plus an overlap allowance on every edge to the pond&rsquo;s length and width. Pond volume uses length × width × depth × 0.7 (a shape factor for sloped sides) × 7.48 gallons per cubic foot.',
+    example:'<strong>Worked example — a 10&nbsp;ft × 8&nbsp;ft pond, 2&nbsp;ft deep, with a 1&nbsp;ft overlap on each side:</strong><br>Length: 10 + (2 × 2) + (2 × 1) = <strong>16 ft</strong>; width: 8 + 4 + 2 = <strong>14 ft</strong> → 224 sq ft. Round up to the standard <strong>20 × 15 ft</strong> liner. Volume: 10 × 8 × 2 × 0.7 × 7.48 ≈ <strong>838 gallons</strong>.',
+    h3:'Measure the maximum depth, not the average',
+    p:'Use the <strong>deepest point</strong> of the pond, including any shelves you dig, and the <strong>longest and widest</strong> dimensions. Liners are sold in standard sizes (usually 5&nbsp;ft increments), so round up rather than down.',
+    faqs:[
+      {q:'How much overlap should a pond liner have?',a:'Plan on <strong>1–2 feet</strong> of overlap on every side so the edge can be tucked under rocks or coping and sit above the waterline.'},
+      {q:'How do I figure out how many gallons my pond holds?',a:'Multiply length × width × average depth in feet, then by <strong>7.48</strong>. For irregular ponds with sloped sides, multiply by about <strong>0.7</strong> first for a realistic estimate.'}
+    ]
+  }
+});
+
 /* ---------- categories ---------- */
 const CATEGORIES = ['Concrete & Masonry','Landscaping','Flooring & Tile','Walls & Paint','Decking','Roofing','Outdoor'];
 const CAT = {
@@ -2268,7 +2384,10 @@ const CAT = {
   'ice-melt-calculator':'Outdoor',
   'riprap-calculator':'Landscaping',
   'french-drain-calculator':'Outdoor',
-  'chain-link-fence-calculator':'Outdoor'
+  'chain-link-fence-calculator':'Outdoor',
+  'shiplap-calculator':'Walls & Paint',
+  'flagstone-calculator':'Concrete & Masonry',
+  'pond-liner-calculator':'Outdoor'
 };
 function catOf(slug){ return CAT[slug] || 'Other'; }
 
