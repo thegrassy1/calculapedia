@@ -1562,18 +1562,21 @@ C.push({
     {id:'len',label:'Length',hint:'(feet)',value:'20',step:'0.1'},
     {id:'wid',label:'Width',hint:'(feet)',value:'10',step:'0.1'},
     {id:'cov',label:'Coverage per roll',hint:'(sq ft)',value:'300',step:'10'},
+    {id:'rollwid',label:'Roll width',hint:'(feet)',value:'4',step:'0.5'},
     {id:'price',label:'Price per roll',hint:'(optional, $)',value:'25',step:'1'}
   ],
   lines:[
     {id:'area',label:'Area to cover'},
     {id:'areaW',label:'Area with 10% overlap'},
+    {id:'strips',label:'Parallel strips needed'},
     {id:'cost',label:'Estimated cost'}
   ],
-  body:`var L=num('len'),W=num('wid'),cov=num('cov'),P=num('price');
-var area=L*W,areaW=area*1.10,rolls=cov>0?Math.ceil(areaW/cov):0;
+  body:`var L=num('len'),W=num('wid'),cov=num('cov'),RW=num('rollwid'),P=num('price');
+var area=L*W,areaW=area*1.10,rolls=cov>0?Math.ceil(areaW/cov):0,effectiveWidth=RW-0.5,strips=effectiveWidth>0?Math.ceil(W/effectiveWidth):0;
 set('main',rolls+' rolls');
 set('area',area.toFixed(0)+' sq ft');
 set('areaW',areaW.toFixed(0)+' sq ft');
+set('strips',strips+' strips');
 set('cost',P>0?money(rolls*P):'—');`,
   content:{
     intro:'Measure each bed or path separately; add those areas before entering the total. The calculator adds 10% for overlapping seams and tucking edges, then divides by the square footage each roll covers — printed on the label.',

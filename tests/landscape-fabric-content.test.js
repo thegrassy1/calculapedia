@@ -10,6 +10,9 @@ const html = fs.readFileSync(path.join(root, 'dist', 'landscape-fabric-calculato
 assert.match(html, /<title>Landscape Fabric Calculator — Weed Barrier Roll Coverage & Overlap<\/title>/);
 assert.match(html, /Measure each bed or path separately; add those areas before entering the total/);
 assert.match(html, /A 4 ft-wide roll needs 6 inches of overlap at each seam, so its effective coverage width is closer to 3\.5 ft/);
+assert.match(html, /id="rollwid"/);
+assert.match(html, /Parallel strips needed/);
+assert.match(html, /set\('strips',strips\+' strips'\);/);
 assert.match(html, /For a gravel path, install and compact the base first; then cut the fabric to follow the finished footprint/);
 assert.match(html, /href="\/gravel-calculator"/);
 assert.match(html, /href="\/landscape-edging-calculator"/);
