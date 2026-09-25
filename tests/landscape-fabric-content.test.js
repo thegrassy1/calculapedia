@@ -7,8 +7,9 @@ const root = path.join(__dirname, '..');
 execFileSync(process.execPath, ['build.js'], { cwd: root, stdio: 'pipe' });
 const html = fs.readFileSync(path.join(root, 'dist', 'landscape-fabric-calculator.html'), 'utf8');
 
-assert.match(html, /<title>Landscape Fabric Calculator — Weed Barrier Roll Coverage & Overlap<\/title>/);
+assert.match(html, /<title>Landscape Fabric Calculator: How Much Weed Barrier Do I Need\?<\/title>/);
 assert.match(html, /Measure each bed or path separately; add those areas before entering the total/);
+assert.match(html, /A 4 ft × 100 ft roll starts with 400 sq ft of material, but its usable coverage is lower once you overlap seams and trim ends/);
 assert.match(html, /A 4 ft-wide roll needs 6 inches of overlap at each seam, so its effective coverage width is closer to 3\.5 ft/);
 assert.match(html, /id="rollwid"/);
 assert.match(html, /Parallel strips needed/);
