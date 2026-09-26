@@ -355,8 +355,8 @@ set('cost',P>0?money(Ln*P):'—');`,
 C.push({
   slug:'deck-board-calculator', emoji:'🪵', name:'Deck Board Calculator',
   tile:'Boards needed for any deck size',
-  title:'Deck Board Calculator — How Many Deck Boards Do I Need?',
-  desc:'Free deck board calculator. Enter deck size and board dimensions for the number of boards, linear feet, and cost.',
+  title:'Deck Board Calculator — How Many Deck Boards Do I Need? (With Spacing & Waste)',
+  desc:'Calculate how many deck boards you need from deck size, actual board width, board length, spacing, and a 10% waste allowance. Includes linear feet and a purchase-planning example.',
   h1:'Deck Board Calculator', sub:'How many deck boards do you need? Enter your deck and board size.',
   buy:'Shop decking boards →',
   inputs:[
@@ -378,13 +378,13 @@ set('area',area.toFixed(0)+' sq ft');
 set('linft',Math.round(linft)+' ft');
 set('cost',P>0?money(boards*P):'—');`,
   content:{
-    intro:'It works out how much deck surface each board covers (its width plus a small gap), divides your deck area by that, adds 10% for waste, and converts the total linear footage into whole boards.',
-    example:'<strong>Worked example — a 16&nbsp;ft × 12&nbsp;ft deck, 5.5&nbsp;in boards, 16&nbsp;ft lengths:</strong><br>192 sq ft of decking → about 422 linear feet with waste → <strong>27 boards</strong>.',
-    h3:'Board gap matters',
-    p:'A 1/8-inch gap between boards lets the deck drain and the wood breathe. The calculator includes that gap so you don&rsquo;t come up short.',
+    intro:'The formula is deck area ÷ covered board width, then × 1.10 for waste. Covered width is the board&rsquo;s actual face width plus the 1/8-inch drainage gap; the result is converted to linear feet and rounded up to whole boards.',
+    example:'<strong>Worked example — a 16&nbsp;ft × 12&nbsp;ft deck, 5.5&nbsp;in boards, 16&nbsp;ft lengths:</strong><br>For a 16 ft × 12 ft deck with 5.5-inch boards and 1/8-inch gaps, the covered width is 5.625 inches. 192 sq ft ÷ (5.625 ÷ 12) × 1.10 = about 451 linear feet → <strong>29 boards</strong>.',
+    h3:'Plan board lengths, seams, and your purchase',
+    p:'Use the board&rsquo;s actual face width—not the nominal label—and confirm the manufacturer&rsquo;s required spacing. Choose board lengths from a layout or cut list, then round each length up separately instead of treating the linear-foot result as interchangeable boards. That helps account for butt seams, picture framing, and offcuts. The optional price is your local per-board estimate; it does not include fasteners, framing, delivery, tax, or labor. For non-deck lumber quantities, use the <a href="/board-foot-calculator">board foot calculator</a>.',
     faqs:[
-      {q:'What is a standard deck board width?',a:'Most decking boards are <strong>5.5 inches</strong> wide (a nominal 6-inch board).'},
-      {q:'How much extra decking should I buy?',a:'Add about <strong>10%</strong> for cuts, waste, and the occasional bad board.'}
+      {q:'What is a standard deck board width?',a:'Most nominal 6-inch decking boards have an actual face width near <strong>5.5 inches</strong>; use the product specification for the board you are buying.'},
+      {q:'How much extra decking should I buy?',a:'This calculator adds <strong>10%</strong> for cuts, waste, and the occasional bad board. Complex layouts, diagonal boards, and many seams can require a separate cut-list allowance.'}
     ]
   }
 });
