@@ -1489,14 +1489,15 @@ C.push({
     {id:'len',label:'Area length',hint:'(feet)',value:'10',step:'0.1'},
     {id:'wid',label:'Area width',hint:'(feet)',value:'10',step:'0.1'},
     {id:'trowel',label:'Trowel size',type:'select',options:[{v:'95',t:'1/4 in V-notch (~95 sq ft)'},{v:'70',t:'1/4 in square (~70 sq ft)',sel:true},{v:'45',t:'1/2 in square (~45 sq ft)'}]},
+    {id:'waste',label:'Waste allowance',hint:'(optional)',type:'select',options:[{v:'0',t:'None',sel:true},{v:'10',t:'10% (uneven surface / back-buttering)'}]},
     {id:'price',label:'Price per bag',hint:'(optional, $)',value:'15',step:'1'}
   ],
   lines:[
     {id:'area',label:'Area to tile'},
     {id:'cost',label:'Estimated cost'}
   ],
-  body:`var L=num('len'),W=num('wid'),cov=parseFloat(val('trowel'))||70,P=num('price');
-var area=L*W,bags=cov>0?Math.ceil(area/cov):0;
+  body:`var L=num('len'),W=num('wid'),cov=parseFloat(val('trowel'))||70,waste=parseFloat(val('waste'))||0,P=num('price');
+var area=L*W,orderArea=area*(1+waste/100),bags=cov>0?Math.ceil(orderArea/cov):0;
 set('main',bags+' bags');
 set('area',area.toFixed(0)+' sq ft');
 set('cost',P>0?money(bags*P):'—');`,
