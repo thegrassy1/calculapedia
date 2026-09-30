@@ -1664,6 +1664,7 @@ set('cost',P>0?money(total*P):'—');`,
       {q:'What is a board foot of lumber?',a:'One board foot equals <strong>144 cubic inches</strong> — the volume of a piece 1 inch thick, 12 inches wide, and 1 foot long.'},
       {q:'How do I calculate board feet?',a:'Multiply thickness (inches) × width (inches) × length (feet), then divide by <strong>12</strong>.'},
       {q:'Should I use nominal or actual lumber dimensions?',a:'Use the lumberyard\'s <strong>actual surfaced thickness and width</strong> for board-foot pricing. Nominal labels such as 1×6 can describe a different finished size.'},
+      {q:'What do 4/4 and 5/4 mean when buying hardwood?',a:'<strong>4/4 means four quarters of an inch, or 1 inch rough thickness before surfacing;</strong> 5/4 means 1.25 inches rough. Use the supplier\'s listed rough thickness in the board-foot formula and confirm the finished size you need after milling.'},
       {q:'How much extra hardwood should I order?',a:'A <strong>10–15% allowance</strong> is a practical starting point for defects, grain matching, and offcuts. Complex parts or short stock can require more.'}
     ]
   }
