@@ -1129,28 +1129,29 @@ C.push({
   slug:'compost-calculator', emoji:'♻️', name:'Compost Calculator',
   tile:'Cubic yards & bags of compost',
   title:'How Much Compost Do I Need? Compost Calculator for Yards & Bags',
-  desc:'Find how much compost you need for a garden bed in cubic yards or 1.5-cu-ft bags. Enter bed size and depth, then compare bulk and bagged volume.',
+  desc:'Find how much compost you need for a garden bed in cubic yards or bags. Choose your bag\'s volume, enter bed size and depth, then compare bulk and bagged volume.',
   h1:'How Much Compost Do I Need? Calculator', sub:'Calculate compost volume for a bed, then compare bulk cubic yards with bagged coverage.',
   buy:'Shop compost →',
   inputs:[
     {id:'len',label:'Length',hint:'(feet)',value:'20',step:'0.1'},
     {id:'wid',label:'Width',hint:'(feet)',value:'10',step:'0.1'},
     {id:'depth',label:'Depth',hint:'(inches)',value:'2',step:'0.5'},
+    {id:'bagsize',label:'Bag volume',type:'select',options:[{v:'1.5',t:'1.5 cu ft bag',sel:true},{v:'2',t:'2 cu ft bag'}]},
     {id:'price',label:'Price per bag',hint:'(optional, $)',value:'5',step:'0.5'}
   ],
   lines:[
     {id:'cf',label:'Cubic feet needed'},
-    {id:'bags',label:'Bags (1.5 cu ft each)'},
+    {id:'bags',label:'Bags needed'},
     {id:'cost',label:'Estimated cost (bags)'}
   ],
-  body:`var L=num('len'),W=num('wid'),D=num('depth'),P=num('price');
-var cf=L*W*(D/12),cy=cf/27,bags=Math.ceil(cf/1.5);
+  body:`var L=num('len'),W=num('wid'),D=num('depth'),B=parseFloat(val('bagsize'))||1.5,P=num('price');
+var cf=L*W*(D/12),cy=cf/27,bags=Math.ceil(cf/B);
 set('main',(cy?cy.toFixed(2):'0')+' cubic yards');
 set('cf',cf.toFixed(1)+' cu ft');
 set('bags',bags+' bags');
 set('cost',P>0?money(bags*P):'—');`,
   content:{
-    intro:'The calculator multiplies bed area by spread depth to find volume, then converts that volume to cubic yards for bulk compost and 1.5 cubic-foot bags. It rounds bag purchases up to whole bags; the optional price is your own planning estimate.',
+    intro:'The calculator multiplies bed area by spread depth to find volume, then converts that volume to cubic yards for bulk compost and the bag volume you select. It rounds bag purchases up to whole bags; the optional price is your own planning estimate.',
     example:'<strong>Worked example — a 20&nbsp;ft × 10&nbsp;ft bed at 2&nbsp;inches:</strong><br>For a 20 ft × 10 ft bed at 2 inches, the calculator uses 200 × (2 ÷ 12) = 33.3 cubic feet. Divide by 27 for <strong>1.23 cubic yards</strong>, or round 33.3 ÷ 1.5 up to <strong>23 bags</strong>.',
     h3:'Choose depth, then buy by volume',
     p:'A 1–2 inch top dressing is a common planning range for established beds; work a deeper amendment into a new bed only when it fits the planting plan. Bulk compost is commonly sold by the cubic yard, while bags list a cubic-foot volume. Use the bag\'s printed volume—not its weight—to compare it with this calculator, because bag weights vary with moisture and product. Measure separate beds individually, add the volumes, and round bulk orders according to the supplier\'s delivery increment. For a new <a href="/raised-bed-soil-calculator">raised bed</a>, calculate its fill separately; for a surface cover, use the <a href="/mulch-calculator">mulch calculator</a>.',

@@ -9,7 +9,10 @@ const html = fs.readFileSync(path.join(root, 'dist', 'compost-calculator.html'),
 
 assert.match(html, /<title>How Much Compost Do I Need\? Compost Calculator for Yards & Bags<\/title>/);
 assert.match(html, /<h1>How Much Compost Do I Need\? Calculator<\/h1>/);
-assert.match(html, /<meta name="description" content="Find how much compost you need for a garden bed in cubic yards or 1\.5-cu-ft bags\. Enter bed size and depth, then compare bulk and bagged volume\.">/);
+assert.match(html, /<meta name="description" content="Find how much compost you need for a garden bed in cubic yards or bags\. Choose your bag's volume, enter bed size and depth, then compare bulk and bagged volume\.">/);
+assert.match(html, /id="bagsize"/);
+assert.match(html, /1\.5 cu ft bag/);
+assert.match(html, /2 cu ft bag/);
 assert.match(html, /Use the bag's printed volume—not its weight—to compare it with this calculator/);
 assert.match(html, /For a 20 ft × 10 ft bed at 2 inches, the calculator uses 200 × \(2 ÷ 12\) = 33\.3 cubic feet/);
 assert.match(html, /Bulk compost is commonly sold by the cubic yard, while bags list a cubic-foot volume/);
