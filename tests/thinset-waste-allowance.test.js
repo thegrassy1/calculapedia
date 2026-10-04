@@ -10,4 +10,6 @@ const html = fs.readFileSync(path.join(root, 'dist', 'thinset-calculator.html'),
 assert.match(html, /<label for="waste">Waste allowance <span class="hint">\(optional\)<\/span><\/label>/);
 assert.match(html, /id="waste"/);
 assert.match(html, /var area=L\*W,orderArea=area\*\(1\+waste\/100\),bags=cov>0\?Math\.ceil\(orderArea\/cov\):0;/);
-console.log('thinset waste allowance input and calculation verified');
+assert.match(html, /Order area \(including waste\)/);
+assert.match(html, /set\('orderArea',orderArea\.toFixed\(0\)\+' sq ft'\);/);
+console.log('thinset waste allowance input, order area, and calculation verified');

@@ -1495,12 +1495,14 @@ C.push({
   ],
   lines:[
     {id:'area',label:'Area to tile'},
+    {id:'orderArea',label:'Order area (including waste)'},
     {id:'cost',label:'Estimated cost'}
   ],
   body:`var L=num('len'),W=num('wid'),cov=parseFloat(val('trowel'))||70,waste=parseFloat(val('waste'))||0,P=num('price');
 var area=L*W,orderArea=area*(1+waste/100),bags=cov>0?Math.ceil(orderArea/cov):0;
 set('main',bags+' bags');
 set('area',area.toFixed(0)+' sq ft');
+set('orderArea',orderArea.toFixed(0)+' sq ft');
 set('cost',P>0?money(bags*P):'—');`,
   content:{
     intro:'Thinset coverage depends mostly on your trowel size — bigger notches lay a thicker bed and cover less area. The calculator divides your tile area by the coverage for the chosen trowel (per 50 lb bag).',
