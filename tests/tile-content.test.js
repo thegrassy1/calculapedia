@@ -19,6 +19,8 @@ assert.match(html, /Buy all visible-field tile from the same dye lot when possib
 assert.match(html, /Measure doorways, floor vents, and built-in cabinets separately before subtracting them from the field area/);
 assert.match(html, /Buy each product as a separate order because floor, wall, trim, and mosaic boxes can have different coverage and dye lots/);
 assert.match(html, /Dry-lay a few rows and plan the cuts at opposite walls before opening every box/);
+assert.match(html, /How much extra tile should I keep for future repairs\?/);
+assert.match(html, /Keep at least one unopened box when the budget and storage allow/);
 assert.match(html, /href="\/thinset-calculator"/);
 assert.match(html, /href="\/grout-calculator"/);
 assert.match(html, /<link rel="canonical" href="https:\/\/calculapedia\.com\/tile-calculator">/);

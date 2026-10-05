@@ -205,6 +205,7 @@ set('cost',P>0?money(tiles*P):'—');`,
     faqs:[
       {q:'How many 12×12 tiles for 100 sq ft?',a:'<strong>110 tiles</strong> — 100 for the area plus 10% waste.'},
       {q:'How much extra tile should I buy for overage?',a:'Buy <strong>10%</strong> extra for a simple layout, <strong>15%</strong> for rooms with many cuts, and <strong>20%</strong> for diagonal or herringbone patterns.'},
+      {q:'How much extra tile should I keep for future repairs?',a:'Keep at least one unopened box when the budget and storage allow. It gives you matching replacements if a tile cracks later, because the same product can change shade or be discontinued.'},
       {q:'How many tiles do I need for a bathroom or shower?',a:'Measure each wall or floor section separately, add the areas together, then add 10–15% for cuts, niches, corners, and breakage.'},
       {q:'How do I calculate how many tiles I need?',a:'Multiply the length and width of the area for square feet, divide by the area covered by one tile, then add a waste allowance and round up.'}
     ]
