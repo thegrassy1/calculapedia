@@ -21,6 +21,7 @@ assert.match(html, /Buy each product as a separate order because floor, wall, tr
 assert.match(html, /Dry-lay a few rows and plan the cuts at opposite walls before opening every box/);
 assert.match(html, /How much extra tile should I keep for future repairs\?/);
 assert.match(html, /Keep at least one unopened box when the budget and storage allow/);
+assert.match(html, /A 120 sq ft bathroom at 15% needs 138 sq ft of tile before box rounding/);
 assert.match(html, /href="\/thinset-calculator"/);
 assert.match(html, /href="\/grout-calculator"/);
 assert.match(html, /<link rel="canonical" href="https:\/\/calculapedia\.com\/tile-calculator">/);
