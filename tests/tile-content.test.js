@@ -24,6 +24,8 @@ assert.match(html, /Keep at least one unopened box when the budget and storage a
 assert.match(html, /How much tile overage do I need\?/);
 assert.match(html, /Use 10% for a rectangular field with a straight layout, 15% when the room has many cuts or the layout is offset, and 20% for diagonal or herringbone patterns/);
 assert.match(html, /A 120 sq ft bathroom at 15% needs 138 sq ft of tile before box rounding/);
+assert.match(html, /Does tile overage include box rounding\?/);
+assert.match(html, /If a 100 sq ft floor needs 110 sq ft after a 10% allowance and each box covers 12\.5 sq ft, round 8\.8 boxes up to 9/);
 assert.match(html, /href="\/thinset-calculator"/);
 assert.match(html, /href="\/grout-calculator"/);
 assert.match(html, /<link rel="canonical" href="https:\/\/calculapedia\.com\/tile-calculator">/);
