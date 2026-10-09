@@ -1642,8 +1642,8 @@ C.push({
   h1:'Board Foot Calculator', sub:'How many board feet of lumber do you need? Enter board dimensions, quantity, and a waste allowance.',
   buy:'Shop dimensional lumber →',
   inputs:[
-    {id:'thick',label:'Thickness',hint:'(inches)',value:'1',step:'0.25'},
-    {id:'wid',label:'Width',hint:'(inches)',value:'6',step:'0.25'},
+    {id:'thick',label:'Thickness (actual)',hint:'(inches)',value:'1',step:'0.25'},
+    {id:'wid',label:'Width (actual)',hint:'(inches)',value:'6',step:'0.25'},
     {id:'len',label:'Length',hint:'(feet)',value:'8',step:'0.5'},
     {id:'qty',label:'Number of boards',hint:'',value:'10',step:'1'},
     {id:'waste',label:'Waste allowance',hint:'(%)',value:'10',step:'1'},
