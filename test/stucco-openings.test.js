@@ -11,6 +11,6 @@ test('stucco calculator subtracts standard door and window openings before addin
 
   assert.match(html, /id="doors"/);
   assert.match(html, /id="windows"/);
-  assert.match(html, /Math\.max\(0,L\*H-doors\*21-win\*15\)/);
+  assert.match(html, /Math\.max\(0,L\*H-doors\*21-win\*15-custom\)/);
   assert.match(html, /Net wall area/);
 });
