@@ -23,7 +23,7 @@ C.push({
   slug:'concrete-calculator', emoji:'🧱', name:'Concrete Calculator',
   tile:'Cubic yards & bags for slabs, footings & patios',
   title:'Concrete Calculator — How Much Concrete Do I Need? (Yards & Bags)',
-  desc:'Free concrete calculator. Enter your slab or footing size for cubic yards, 60lb & 80lb bags, and estimated cost. Includes a 10% waste allowance.',
+  desc:'Concrete slab calculator for patios, sheds, and footings. Estimate cubic yards, 60 lb and 80 lb bags, and planning cost with a 10% waste allowance.',
   h1:'Concrete Calculator', sub:'How much concrete do you need? Enter your dimensions for cubic yards, bags, and cost.',
   buy:'Shop concrete mix & bags →',
   inputs:[
