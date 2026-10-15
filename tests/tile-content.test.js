@@ -7,8 +7,8 @@ const root = path.join(__dirname, '..');
 execFileSync(process.execPath, ['build.js'], { cwd: root, stdio: 'pipe' });
 const html = fs.readFileSync(path.join(root, 'dist', 'tile-calculator.html'), 'utf8');
 
-assert.match(html, /<title>Tile Overage Calculator — How Many Tiles Do I Need\? \(Boxes & Square Feet\)<\/title>/);
-assert.match(html, /<meta name="description" content="How much tile overage do you need\? Calculate tiles, square feet, whole boxes, and 10%, 15%, or 20% extra for cuts and breakage on floors, walls, bathrooms, and showers\.">/);
+assert.match(html, /<title>Tile Overage Calculator — How Much Extra Tile Do I Need\? \(Boxes\)<\/title>/);
+assert.match(html, /<meta name="description" content="How much overage for tile do you need\? Calculate whole boxes and use 10%, 15%, or 20% extra for cuts and breakage on floors, walls, bathrooms, and showers\.">/);
 assert.match(html, /id="coverage"/);
 assert.match(html, /Box coverage/);
 assert.match(html, /Math\.ceil\(area\*\(1\+waste\/100\)\/coverage\)/);
