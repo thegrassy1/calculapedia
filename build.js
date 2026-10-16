@@ -1708,7 +1708,8 @@ set('cost',P>0?money(tiles*P):'—');`,
     faqs:[
       {q:'How many ceiling tiles for a 12×12 room?',a:'About <strong>40 tiles</strong> using 2×2 ft tiles (144 sq ft ÷ 4, plus 10% waste).'},
       {q:'How many ceiling tiles come in a box?',a:'There is no universal box count. Check the package label for the number of tiles and total coverage, then enter that quantity in the calculator to round your result up to whole boxes.'},
-      {q:'Do I need extra ceiling tiles?',a:'Yes — add about <strong>10%</strong> for edge cuts and the occasional damaged tile, and keep a few spares for future repairs.'}
+      {q:'Do I need extra ceiling tiles?',a:'Yes — add about <strong>10%</strong> for edge cuts and the occasional damaged tile, and keep a few spares for future repairs.'},
+      {q:'Should I measure the room or the grid opening for replacement ceiling tiles?',a:'For replacement tiles, measure the exposed grid opening and match the edge detail, rather than relying on the room dimensions. A 2×2 or 2×4 tile that fits the opening can still be incompatible if its edge profile does not fit the existing grid.'}
     ]
   }
 });
