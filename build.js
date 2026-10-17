@@ -1593,7 +1593,8 @@ set('cost',P>0?money(rolls*P):'—');`,
       {q:'How much landscape fabric do I need?',a:'Measure your bed area, add 10% for overlaps, then divide by the roll&rsquo;s square footage.'},
       {q:'How do I keep landscape fabric from shifting?',a:'Use landscape staples or pins every <strong>18–24 inches</strong>, placed more closely on slopes and around curves.'},
       {q:'How much landscape fabric do I need for a 4x8 bed?',a:'A 4 × 8 ft bed is 32 square feet. Add overlap and edge allowance, then choose a roll that covers at least the adjusted area.'},
-      {q:'How much should landscape fabric overlap?',a:'Overlap adjoining pieces by at least <strong>6 inches</strong>; use more on slopes or where the material may shift.'}
+      {q:'How much should landscape fabric overlap?',a:'Overlap adjoining pieces by at least <strong>6 inches</strong>; use more on slopes or where the material may shift.'},
+      {q:'Should I put landscape fabric under mulch?',a:'Landscape fabric is most useful under inorganic stone or gravel, where it separates materials and limits weed growth. For planting beds with organic mulch, use a 2–3 inch mulch layer and refresh it as it breaks down instead of relying on fabric directly around plants. Estimate that mulch with the <a href="/mulch-calculator">mulch calculator</a>.'}
     ]
   }
 });
