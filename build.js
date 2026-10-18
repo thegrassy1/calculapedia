@@ -187,6 +187,7 @@ C.push({
   ],
   lines:[
     {id:'area',label:'Area to cover'},
+    {id:'purchaseCoverage',label:'Tile coverage including waste'},
     {id:'boxes',label:'Boxes needed'},
     {id:'cost',label:'Estimated cost'}
   ],
@@ -195,6 +196,7 @@ var waste=parseFloat(val('waste'))||0,coverage=num('coverage'),P=num('price');
 var area=L*W,tsf=(TL*TW)/144,tiles=tsf>0?Math.ceil(area/tsf*(1+waste/100)):0;
 set('main',tiles+' tiles');
 set('area',area.toFixed(0)+' sq ft');
+set('purchaseCoverage',(area*(1+waste/100)).toFixed(1)+' sq ft');
 set('boxes',coverage>0?Math.ceil(area*(1+waste/100)/coverage)+' boxes':'—');
 set('cost',P>0?money(tiles*P):'—');`,
   content:{
