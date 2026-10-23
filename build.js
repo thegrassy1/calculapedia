@@ -175,7 +175,7 @@ C.push({
   tile:'Tiles & boxes for floors & walls',
   title:'Tile Overage Calculator — How Much Extra Tile Do I Need? (Boxes)',
   desc:'How much overage for tile do you need? Calculate whole boxes and use 10%, 15%, or 20% extra for cuts and breakage on floors, walls, bathrooms, and showers.',
-  h1:'Tile Calculator: How Many Tiles Do I Need?', sub:'Calculate tile quantity, square footage, waste allowance, boxes, and cost for floors and walls.',
+  h1:'Tile Overage Calculator: How Much Extra Tile Do I Need?', sub:'Calculate tile quantity, square footage, waste allowance, boxes, and cost for floors and walls.',
   buy:'Shop floor & wall tile →',
   inputs:[
     {id:'len',label:'Area length',hint:'(feet)',value:'10',step:'0.1'},
