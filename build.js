@@ -1756,7 +1756,8 @@ set('cost',P>0?money(bags*P):'—');`,
       {q:'How much does a bag of stucco cover?',a:'An 80&nbsp;lb bag covers roughly <strong>35&nbsp;sq&nbsp;ft</strong> at 3/8&nbsp;inch for a one-coat application, or about <strong>25&nbsp;sq&nbsp;ft</strong> for a thicker three-coat system.'},
       {q:'Should I subtract windows and doors when estimating stucco?',a:'Yes. Calculate gross wall area first, then subtract the area of doors, windows, and other openings. Keep the calculator&rsquo;s 10% allowance for cuts, corners, and small measurement differences.'},
       {q:'How much does stucco cost per square foot?',a:'Multiply the bags required by the price per bag, then divide by the wall square footage. Installed labor, scaffolding, repairs, and finish coats can change the final project cost.'},
-      {q:'How do I calculate stucco material?',a:'Multiply wall length by height, choose the coverage for your coat system, add a waste allowance, and round up to whole bags.'}
+      {q:'How do I calculate stucco material?',a:'Multiply wall length by height, choose the coverage for your coat system, add a waste allowance, and round up to whole bags.'},
+      {q:'How do I estimate stucco for a gable end?',a:'Treat the rectangular wall and the triangular gable as separate areas. For a wall that is 20 ft wide with an 8 ft eave height and a 4 ft rise to the peak, calculate 20 × 8 = 160 sq ft for the rectangle, then 20 × 4 ÷ 2 = 40 sq ft for the triangle: 200 sq ft total before openings. To use this calculator for that wall, divide the total gross area by the wall width to get an average height (200 ÷ 20 = 10 ft), then subtract openings as usual.'}
     ]
   }
 });

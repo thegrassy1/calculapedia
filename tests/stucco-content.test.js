@@ -13,6 +13,8 @@ assert.match(html, /Measure each wall section separately; enter the total length
 assert.match(html, /Before ordering, separate base-coat material from finish-coat material and confirm whether your system calls for lath, trim, reinforcement, or a bonding agent/);
 assert.match(html, /A 60 ft × 9 ft wall is 540 sq ft; subtracting a 3 × 7 ft door and two 3 × 5 ft windows leaves 489 sq ft/);
 assert.match(html, /Use the bag manufacturer&rsquo;s coverage for your exact mix, coat thickness, and substrate rather than treating the calculator&rsquo;s coverage figures as a product specification/);
+assert.match(html, /How do I estimate stucco for a gable end\?/);
+assert.match(html, /Treat the rectangular wall and the triangular gable as separate areas/);
 assert.match(html, /href="\/paint-calculator"/);
 assert.match(html, /href="\/vinyl-siding-calculator"/);
 assert.match(html, /<link rel="canonical" href="https:\/\/calculapedia\.com\/stucco-calculator">/);
