@@ -27,6 +27,8 @@ assert.match(html, /How much extra tile should I keep for future repairs\?/);
 assert.match(html, /Keep at least one unopened box when the budget and storage allow/);
 assert.match(html, /How much tile overage do I need\?/);
 assert.match(html, /Use 10% for a rectangular field with a straight layout, 15% when the room has many cuts or the layout is offset, and 20% for diagonal or herringbone patterns/);
+assert.match(html, /Should I use 10% or 15% extra tile for a shower\?/);
+assert.match(html, /Start with 15% for a shower because niches, plumbing penetrations, corners, and small wall sections create more cuts than an open rectangular floor/);
 assert.match(html, /A 120 sq ft bathroom at 15% needs 138 sq ft of tile before box rounding/);
 assert.match(html, /How do I calculate tile overage for an L-shaped room\?/);
 assert.match(html, /Split the room into simple rectangles, calculate each area, and add them before applying your waste allowance/);
