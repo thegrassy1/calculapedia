@@ -1814,8 +1814,8 @@ set('cost',P>0?money(bags*P):'—');`,
 C.push({
   slug:'caulk-calculator', emoji:'🪝', name:'Caulk Calculator',
   tile:'Tubes of caulk for windows, doors & trim',
-  title:'Caulk Calculator — How Many Tubes of Caulk Do I Need?',
-  desc:'Free caulk calculator. Enter the linear feet to seal and bead size for the number of 10 oz caulk tubes needed and estimated cost.',
+  title:'Caulk Calculator — Estimate 10 oz Tubes by Linear Feet & Bead Size',
+  desc:'Caulk estimator for windows, doors, trim, and siding. Enter linear feet and bead size to estimate 10 oz tubes, coverage, and project cost. Includes backer-rod planning guidance.',
   h1:'Caulk Calculator', sub:'How much caulk do you need? Enter the linear feet and bead size for tubes and cost.',
   buy:'Shop caulk & sealant →',
   inputs:[
@@ -1841,11 +1841,12 @@ set('cost',P>0?money(tubes*P):'—');`,
   content:{
     intro:'A standard 10&nbsp;oz caulk tube holds about 18 cubic inches of material. Dividing that by the cross-sectional area of a round bead gives the linear feet per tube, and the calculator adds 10% for starts, stops, and tooling waste.',
     example:'<strong>Worked example — caulking 40&nbsp;ft of window and door trim at 3/16" bead:</strong><br>18 ÷ (π × 0.094²) ÷ 12 = 54&nbsp;ft per tube → ceil(40 × 1.10 / 54) = <strong>1 tube</strong>.',
-    h3:'Match the caulk to the job',
-    p:'Use <strong>paintable latex caulk</strong> for interior trim and baseboards. Use <strong>silicone or siliconized acrylic</strong> for wet areas (tub surrounds, sinks) and exterior joints. Use <strong>polyurethane caulk</strong> for driveways and masonry joints that get heavy movement.',
+    h3:'Match the caulk and joint to the job',
+    p:'Use <strong>paintable latex caulk</strong> for interior trim and baseboards. Use <strong>silicone or siliconized acrylic</strong> for wet areas (tub surrounds, sinks) and exterior joints. Use <strong>polyurethane caulk</strong> for driveways and masonry joints that get heavy movement. If you are sealing trim before painting, use the <a href="/paint-calculator">paint calculator</a> to plan the coating separately; caulk coverage and paint coverage are different measurements.',
     faqs:[
       {q:'How many linear feet does a tube of caulk cover?',a:'A 10&nbsp;oz tube covers about <strong>54&nbsp;ft at 3/16"</strong>, 30&nbsp;ft at 1/4", 13&nbsp;ft at 3/8", or 7&nbsp;ft at 1/2" — depending on bead size.'},
-      {q:'How much caulk do I need for windows and doors?',a:'A typical exterior window or door perimeter is about 20–25 linear feet. With a 3/16" bead, <strong>one 10&nbsp;oz tube</strong> handles 2–3 windows comfortably.'}
+      {q:'How much caulk do I need for windows and doors?',a:'A typical exterior window or door perimeter is about 20–25 linear feet. With a 3/16" bead, <strong>one 10&nbsp;oz tube</strong> handles 2–3 windows comfortably.'},
+      {q:'When should I use backer rod before caulking?',a:'Use foam backer rod in a joint that is too wide or deep for the bead you need; it supports the sealant, sets the depth, and helps prevent three-sided adhesion. Choose a rod slightly wider than the joint so it stays in place, then follow the sealant manufacturer&rsquo;s stated joint-size and depth limits.'}
     ]
   }
 });
