@@ -470,8 +470,8 @@ set('cost',P>0?money(sqyd*P):'—');`,
 C.push({
   slug:'paver-calculator', emoji:'🧱', name:'Paver Calculator',
   tile:'Pavers needed for patios & walkways',
-  title:'Paver Calculator — How Many Pavers Do I Need?',
-  desc:'Free paver calculator for patios and walkways. Enter area and paver size for the number of pavers needed, with waste and cost.',
+  title:'Paver Calculator — How Many Pavers Do I Need? (Patios and Walkways)',
+  desc:'Paver calculator for patios and walkways. Enter area and paver size to estimate pavers with a 5% cut allowance, then plan a compacted gravel base and 1-inch bedding layer.',
   h1:'Paver Calculator', sub:'How many pavers do you need? Enter your area and paver size.',
   buy:'Shop pavers & edging →',
   inputs:[
@@ -494,7 +494,7 @@ set('cost',P>0?money(pavers*P):'—');`,
     intro:'It calculates your patio area and the surface area of one paver, divides to get the count, and adds 5% for cuts and breakage.',
     example:'<strong>Worked example — a 12&nbsp;ft × 10&nbsp;ft patio with 8&nbsp;×&nbsp;4 in pavers:</strong><br>120 sq ft ÷ 0.22 sq ft per paver × 1.05 = <strong>540 pavers</strong>.',
     h3:'Don&rsquo;t forget the base',
-    p:'A solid paver patio needs a 4–6 inch base of gravel plus an inch of sand underneath. Use the gravel and sand calculators for those layers.',
+    p:'Start with the finished patio footprint, then calculate the pavers, base, and bedding as separate layers. For a simple rectangular layout, the calculator includes a 5% cut allowance; use 10% as a planning allowance for diagonal patterns, curves, or several small sections. A 12&nbsp;ft × 10&nbsp;ft patio needs 120 sq ft of pavers; at 5%, that is 126 sq ft of coverage before package rounding. Order the pavers by the manufacturer&rsquo;s stated square-foot coverage per pallet or bundle and round up to whole packages. A typical paver patio also needs a compacted 4–6 inch gravel base plus a 1-inch bedding layer; estimate those layers with the <a href="/gravel-calculator">gravel calculator</a> and <a href="/sand-calculator">sand calculator</a>. Check the paver manufacturer&rsquo;s base-depth and edge-restraint requirements for the intended use, and measure curved borders separately before buying.',
     faqs:[
       {q:'How many pavers do I need per square foot?',a:'It depends on paver size — an 8×4 in paver covers about 0.22 sq ft, so roughly <strong>4.5 per square foot</strong>.'},
       {q:'How much extra for waste?',a:'Add about <strong>5%</strong>, or up to 10% for curved or diagonal patterns.'}
