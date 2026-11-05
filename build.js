@@ -1522,7 +1522,7 @@ set('cost',P>0?money(bags*P):'—');`,
       {q:'Does thinset coverage include back-buttering?',a:'The coverage on the bag is a planning guide for the stated trowel, so confirm the manufacturer guidance and allow more material when the installation calls for back-buttering.'},
       {q:'How much area does a bag of thinset cover?',a:'About <strong>45–95 sq ft</strong> per 50 lb bag, depending on the trowel notch and substrate.'},
       {q:'How many bags of thinset do I need for 100 square feet?',a:'Usually <strong>2 bags</strong> with a 1/4-inch square-notch trowel, but check the product coverage and add extra for uneven surfaces.'},
-      {q:'How much thinset do I need for a shower?',a:'Calculate the floor and each wall separately, add the areas together, and use the manufacturer coverage for the trowel recommended for your tile.'}
+      {q:'How much thinset do I need for a shower?',a:'For shower walls, measure each wall, niche, bench, and curb as separate surfaces before totaling them. Do not subtract a small plumbing opening when the surrounding cuts will still use most of a tile. Use a mortar that the tile and waterproofing-system manufacturers approve for the installation, then use the coverage for the recommended trowel to plan whole bags.'}
     ]
   }
 });
