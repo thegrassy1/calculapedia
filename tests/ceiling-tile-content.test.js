@@ -15,6 +15,8 @@ assert.match(html, /For a few stained or damaged tiles, count the openings you w
 assert.match(html, /This calculator estimates ceiling tiles only; a new suspended ceiling also needs grid components sized from the room layout/);
 assert.match(html, /Should I measure the room or the grid opening for replacement ceiling tiles\?/);
 assert.match(html, /For replacement tiles, measure the exposed grid opening and match the edge detail, rather than relying on the room dimensions/);
+assert.match(html, /How many 2×4 ceiling tiles do I need for a 12×12 room\?/);
+assert.match(html, /A 12 × 12 ft room is 144 sq ft\. At 8 sq ft per 2×4 tile, that is 18 tiles before waste; with the calculator’s 10% allowance, round up to <strong>20 tiles<\/strong>\./);
 assert.match(html, /href="\/tile-calculator"/);
 assert.match(html, /<link rel="canonical" href="https:\/\/calculapedia\.com\/ceiling-tile-calculator">/);
 const schema = JSON.parse(html.match(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/)[1]);
