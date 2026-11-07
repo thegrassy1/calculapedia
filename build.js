@@ -1165,6 +1165,7 @@ set('cost',P>0?money(bags*P):'—');`,
     faqs:[
       {q:'How many bags of compost are in a cubic yard?',a:'A cubic yard is 27 cubic feet, so it takes <strong>18 bags</strong> at 1.5 cubic feet each. Always check the volume printed on your chosen bag.'},
       {q:'How deep should I spread compost?',a:'For an established bed, a <strong>1–2 inch</strong> top dressing is a practical planning range. Select the depth that fits your soil and planting plan.'},
+      {q:'How much compost do I need for 100 square feet?',a:'At 2 inches, 100 × (2 ÷ 12) = 16.7 cubic feet, or 0.62 cubic yards. That is 12 bags at 1.5 cubic feet each after rounding up. For a 1-inch layer, use half that volume.'},
       {q:'Do I need to order extra compost for settling?',a:'For a surface application, calculate the depth you plan to spread and buy in the supplier\'s practical increment. If you are filling a low spot or building up a new bed, measure the finished depth you need rather than adding an arbitrary extra percentage.'},
       {q:'Should I buy compost by the bag or cubic yard?',a:'Compare both options by volume. Divide the bulk price by 27 for a cost per cubic foot, then compare it with the bag\'s listed cubic-foot volume, including any delivery charge.'}
     ]

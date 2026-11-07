@@ -19,6 +19,8 @@ assert.match(html, /Bulk compost is commonly sold by the cubic yard, while bags 
 assert.match(html, /a 1-inch layer over 100 square feet uses 8\.3 cubic feet, or about 0\.31 cubic yards/);
 assert.match(html, /Do I need to order extra compost for settling\?/);
 assert.match(html, /If you are filling a low spot or building up a new bed, measure the finished depth you need rather than adding an arbitrary extra percentage/);
+assert.match(html, /How much compost do I need for 100 square feet\?/);
+assert.match(html, /At 2 inches, 100 × \(2 ÷ 12\) = 16\.7 cubic feet, or 0\.62 cubic yards/);
 assert.match(html, /href="\/raised-bed-soil-calculator"/);
 assert.match(html, /href="\/mulch-calculator"/);
 assert.match(html, /<link rel="canonical" href="https:\/\/calculapedia\.com\/compost-calculator">/);
