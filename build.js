@@ -1252,6 +1252,7 @@ C.push({
   inputs:[
     {id:'len',label:'Driveway length',hint:'(feet)',value:'40',step:'0.1'},
     {id:'wid',label:'Driveway width',hint:'(feet)',value:'12',step:'0.1'},
+    {id:'coverage',label:'Label coverage per gallon',hint:'(sq ft per coat)',value:'80',step:'1'},
     {id:'coats',label:'Coats',type:'select',options:[{v:'1',t:'1 coat',sel:true},{v:'2',t:'2 coats'}]},
     {id:'price',label:'Price per gallon',hint:'(optional, $)',value:'18',step:'1'}
   ],
@@ -1261,14 +1262,14 @@ C.push({
     {id:'cost',label:'Estimated cost'}
   ],
   body:`var L=num('len'),W=num('wid'),coats=parseInt(val('coats'),10)||1,P=num('price');
-var area=L*W,gal=area*coats/80;
+var area=L*W,coverage=num('coverage'),gal=coverage>0?area*coats/coverage:0;
 set('main',(Math.ceil(gal*10)/10).toFixed(1)+' gallons (buy '+Math.ceil(gal)+')');
 set('area',area.toFixed(0)+' sq ft');
 set('pails',Math.ceil(gal/5)+' 5-gallon pails');
 set('cost',P>0?money(Math.ceil(gal)*P):'—');`,
   content:{
-    intro:'Asphalt sealer covers roughly 80 sq ft per gallon per coat. The calculator multiplies your driveway area by the number of coats and divides by that coverage.',
-    example:'<strong>Worked example — a 40&nbsp;ft × 12&nbsp;ft driveway, 1 coat:</strong><br>480 sq ft ÷ 80 = <strong>6 gallons</strong> → <strong>2 five-gallon pails</strong>.',
+    intro:'Enter the coverage printed on your sealer label for the selected coat count. The calculator multiplies your driveway area by the number of coats and divides by that coverage; 80 sq ft per gallon per coat is the starting value, not a product specification.',
+    example:'<strong>Worked example — a 40&nbsp;ft × 12&nbsp;ft driveway, 1 coat:</strong><br>480 sq ft ÷ 80 = <strong>6 gallons</strong> → <strong>2 five-gallon pails</strong>. A label rated at 100 sq ft per gallon needs 4.8 gallons, so buy 5 gallons for this same driveway.',
     h3:'Use the label to plan the purchase',
     p:'Coverage is a planning estimate: use the coverage and coat count on your exact product label, because porous asphalt, rough texture, and repairs can change yield. If your label gives a different coverage rate, divide total coat-area by that label rate and round each container purchase up. Round the estimate up to the container size you are buying — often 5-gallon pails. Fill cracks with a compatible crack filler and let repairs cure as the label directs before sealing; sweep and clean the surface first. Plan a second thin coat as a separate application after the first coat has dried for the label&rsquo;s stated recoat time. Do not seal concrete with an asphalt driveway sealer; use a coating specifically labeled for concrete instead. If the pavement is failing rather than just faded, estimate a replacement with the <a href="/asphalt-calculator">asphalt calculator</a> instead of resealing.',
     faqs:[
