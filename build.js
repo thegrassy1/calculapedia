@@ -1640,6 +1640,7 @@ set('cost',P>0?money(bags*P):'—');`,
     p:'A common rule is to bury at least one-third of the post length. For a 6&nbsp;ft fence using 8&nbsp;ft posts, that means going 2.5–3&nbsp;ft deep — deeper in freeze-thaw climates to get below the frost line. Enter only the depth you plan to fill with concrete, not necessarily the entire hole depth. For a 36-inch-deep hole with a 6-inch gravel base, enter 30 inches; estimate that drainage layer with the <a href="/gravel-calculator">gravel calculator</a>. Confirm the post, footing, drainage, and frost-depth requirements for your site before digging.',
     faqs:[
       {q:'How many bags of concrete per fence post?',a:'About <strong>1–3 bags</strong> (50 lb each) depending on hole size — typically 2 bags for a standard 10-inch diameter, 30-inch deep hole.'},
+      {q:'Should I round concrete bags for each post or for the whole project?',a:'Add the cubic feet for every hole, then round the final bag total up once. Ten 10-inch-diameter holes filled 30 inches deep need about 5.45 cubic feet, or 15 50 lb bags. Rounding each hole separately would incorrectly turn that same example into 20 bags.'},
       {q:'What diameter should a post hole be?',a:'About <strong>3 times the post width</strong> — so a 4-inch post needs roughly a 12-inch hole.'}
     ]
   }
