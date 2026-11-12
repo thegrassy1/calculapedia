@@ -34,6 +34,8 @@ assert.match(html, /How do I calculate tile overage for an L-shaped room\?/);
 assert.match(html, /Split the room into simple rectangles, calculate each area, and add them before applying your waste allowance/);
 assert.match(html, /Does tile overage include box rounding\?/);
 assert.match(html, /If a 100 sq ft floor needs 110 sq ft after a 10% allowance and each box covers 12\.5 sq ft, round 8\.8 boxes up to 9/);
+assert.match(html, /Should I subtract a bathtub or vanity from a tile floor estimate\?/);
+assert.match(html, /Subtract a fixed bathtub or a full-footprint vanity only when no tile will go beneath it/);
 assert.match(html, /href="\/thinset-calculator"/);
 assert.match(html, /href="\/grout-calculator"/);
 assert.match(html, /<link rel="canonical" href="https:\/\/calculapedia\.com\/tile-calculator">/);
