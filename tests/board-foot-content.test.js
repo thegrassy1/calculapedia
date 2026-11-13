@@ -20,6 +20,7 @@ assert.match(html, /The price field is your local per-board-foot estimate; confi
 assert.match(html, /What do 4\/4 and 5\/4 mean when buying hardwood\?/);
 assert.match(html, /4\/4 means four quarters of an inch, or 1 inch rough thickness before surfacing/);
 assert.match(html, /Use the supplier's listed rough thickness in the board-foot formula and confirm the finished size you need/);
+assert.match(html, /A 4\/4 board that is 6 inches wide and 8 feet long is 4 board feet before surfacing: \(1 × 6 × 8\) ÷ 12 = 4/);
 assert.match(html, /Multiply the board-foot total by the supplier's per-board-foot price, then add the waste allowance before comparing the estimate with the quote/);
 assert.match(html, /The calculator's price field is an estimate only: confirm the species, grade, surfacing, and whether the yard prices the rough or finished dimensions/);
 assert.match(html, /href="\/deck-board-calculator"/);
