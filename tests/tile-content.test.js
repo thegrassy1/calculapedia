@@ -36,6 +36,8 @@ assert.match(html, /Does tile overage include box rounding\?/);
 assert.match(html, /If a 100 sq ft floor needs 110 sq ft after a 10% allowance and each box covers 12\.5 sq ft, round 8\.8 boxes up to 9/);
 assert.match(html, /Should I subtract a bathtub or vanity from a tile floor estimate\?/);
 assert.match(html, /Subtract a fixed bathtub or a full-footprint vanity only when no tile will go beneath it/);
+assert.match(html, /How much extra tile should I order for a backsplash\?/);
+assert.match(html, /Measure the backsplash as width × finished height, subtract only large fixed openings, and start with 10% extra for a straight layout/);
 assert.match(html, /href="\/thinset-calculator"/);
 assert.match(html, /href="\/grout-calculator"/);
 assert.match(html, /<link rel="canonical" href="https:\/\/calculapedia\.com\/tile-calculator">/);
