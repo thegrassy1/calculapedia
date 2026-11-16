@@ -15,6 +15,9 @@ assert.match(html, /A 60 ft × 9 ft wall is 540 sq ft; subtracting a 3 × 7 ft d
 assert.match(html, /Use the bag manufacturer&rsquo;s coverage for your exact mix, coat thickness, and substrate rather than treating the calculator&rsquo;s coverage figures as a product specification/);
 assert.match(html, /How do I estimate stucco for a gable end\?/);
 assert.match(html, /Treat the rectangular wall and the triangular gable as separate areas/);
+assert.match(html, /How do I estimate stucco for several walls with different heights\?/);
+assert.match(html, /Add each wall’s width × height separately, then subtract the actual area of every door, window, and other opening before applying the coverage and 10% allowance/);
+assert.match(html, /For example, a 24 × 8 ft wall plus a 16 × 10 ft wall equals 352 sq ft before openings/);
 assert.match(html, /href="\/paint-calculator"/);
 assert.match(html, /href="\/vinyl-siding-calculator"/);
 assert.match(html, /<link rel="canonical" href="https:\/\/calculapedia\.com\/stucco-calculator">/);
