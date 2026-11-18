@@ -12,10 +12,14 @@ assert.match(html, /<h1>Tile Overage Calculator: How Much Extra Tile Do I Need\?
 assert.match(html, /<meta name="description" content="How much overage for tile do you need\? Calculate whole boxes and use 10%, 15%, or 20% extra for cuts and breakage on floors, walls, bathrooms, and showers\.">/);
 assert.match(html, /id="coverage"/);
 assert.match(html, /Box coverage/);
+assert.match(html, /Price per box/);
 assert.match(html, /id="purchaseCoverage"/);
 assert.match(html, /Tile coverage including waste/);
 assert.match(html, /set\('purchaseCoverage',\(area\*\(1\+waste\/100\)\)\.toFixed\(1\)\+' sq ft'\)/);
 assert.match(html, /Math\.ceil\(area\*\(1\+waste\/100\)\/coverage\)/);
+assert.match(html, /var boxes=coverage>0\?Math\.ceil\(area\*\(1\+waste\/100\)\/coverage\):0;/);
+assert.match(html, /set\('boxes',coverage>0\?boxes\+' boxes':'—'\)/);
+assert.match(html, /set\('cost',P>0&&coverage>0\?money\(boxes\*P\):'—'\)/);
 assert.match(html, /Enter the square-foot coverage printed on the box/);
 assert.match(html, /Compare the calculator's tile count with the coverage printed on the box/);
 assert.match(html, /If the package coverage differs from the nominal tile size, use the package coverage to make the purchase decision/);

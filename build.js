@@ -185,7 +185,7 @@ C.push({
     {id:'twid',label:'Tile width',hint:'(inches)',value:'12',step:'0.25'},
     {id:'waste',label:'Waste allowance',type:'select',options:[{v:'10',t:'10% (straight)',sel:true},{v:'15',t:'15% (some cuts)'},{v:'20',t:'20% (diagonal)'}]},
     {id:'coverage',label:'Box coverage',hint:'(sq ft per box)',value:'10',step:'0.1'},
-    {id:'price',label:'Price per tile',hint:'(optional, $)',value:'3',step:'0.25'}
+    {id:'price',label:'Price per box',hint:'(optional, $)',value:'30',step:'0.25'}
   ],
   lines:[
     {id:'area',label:'Area to cover'},
@@ -196,11 +196,12 @@ C.push({
   body:`var L=num('len'),W=num('wid'),TL=num('tlen'),TW=num('twid');
 var waste=parseFloat(val('waste'))||0,coverage=num('coverage'),P=num('price');
 var area=L*W,tsf=(TL*TW)/144,tiles=tsf>0?Math.ceil(area/tsf*(1+waste/100)):0;
+var boxes=coverage>0?Math.ceil(area*(1+waste/100)/coverage):0;
 set('main',tiles+' tiles');
 set('area',area.toFixed(0)+' sq ft');
 set('purchaseCoverage',(area*(1+waste/100)).toFixed(1)+' sq ft');
-set('boxes',coverage>0?Math.ceil(area*(1+waste/100)/coverage)+' boxes':'—');
-set('cost',P>0?money(tiles*P):'—');`,
+set('boxes',coverage>0?boxes+' boxes':'—');
+set('cost',P>0&&coverage>0?money(boxes*P):'—');`,
   content:{
     intro:'It finds the area you&rsquo;re covering and the area of a single tile, divides one by the other, then adds a waste allowance for cuts and breakage and rounds up to whole tiles and boxes.',
     example:'<strong>Worked example — a 10&nbsp;ft × 10&nbsp;ft floor with 12&nbsp;×&nbsp;12 in tiles:</strong><br>Area 100 sq ft, each tile 1 sq ft → 100 tiles. Add 10% → <strong>110 tiles</strong> (11 boxes of 10).',
