@@ -54,6 +54,7 @@ set('cost',P>0?money(cy*1.10*P):'—');`,
       {q:'How much concrete do I need for a 10×10 slab?',a:'At 4 inches thick, the slab is about <strong>1.23 cubic yards</strong>. Its raw volume equals about 74 60 lb bags before waste; because bags are sold whole, buy 75 bags before waste or 82 bags with the calculator\'s 10% allowance.'},
       {q:'How much concrete do I need for a 12×12 slab at 4 inches?',a:'A 12 × 12 slab is 144 sq ft. 144 sq ft × (4 ÷ 12) = 48 cubic feet, or 1.78 cubic yards before waste. With the calculator&rsquo;s 10% allowance, plan for about <strong>1.96 cubic yards</strong>; confirm the supplier&rsquo;s ordering increment before placing a ready-mix order.'},
       {q:'Should I round a ready-mix order up or down?',a:'Round the calculator&rsquo;s waste-adjusted result up to the supplier&rsquo;s ordering increment; do not round down. Confirm the available increment and any minimum load with the supplier, since those policies vary by location.'},
+      {q:'How thick should a concrete patio or slab be?',a:'Use the thickness specified by the project plan, local requirements, and concrete supplier; structural loads, soil, reinforcement, and climate can affect the specification. Changing thickness changes the volume directly: a 5-inch slab needs 25% more concrete than the same area at 4 inches.'},
       {q:'How many 80 lb bags are in a cubic yard?',a:'About <strong>45 bags</strong> — each 80lb bag yields roughly 0.6 cubic feet and a cubic yard is 27 cubic feet.'}
     ]
   }

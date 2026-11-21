@@ -17,6 +17,9 @@ assert.match(html, /144 sq ft × \(4 ÷ 12\) = 48 cubic feet, or 1\.78 cubic yar
 assert.match(html, /about 74 60 lb bags before waste; because bags are sold whole, buy 75 bags before waste or 82 bags with the calculator's 10% allowance/);
 assert.match(html, /Should I round a ready-mix order up or down\?/);
 assert.match(html, /Round the calculator(?:'|&rsquo;)s waste-adjusted result up to the supplier(?:'|&rsquo;)s ordering increment; do not round down/);
+assert.match(html, /How thick should a concrete patio or slab be\?/);
+assert.match(html, /Use the thickness specified by the project plan, local requirements, and concrete supplier/);
+assert.match(html, /Changing thickness changes the volume directly: a 5-inch slab needs 25% more concrete than the same area at 4 inches/);
 assert.match(html, /<link rel="canonical" href="https:\/\/calculapedia\.com\/concrete-calculator">/);
 assert.match(html, /<meta name="description" content="Concrete slab calculator for patios, sheds, and footings\. Estimate cubic yards, 60 lb and 80 lb bags, and planning cost with a 10% waste allowance\.">/);
 
