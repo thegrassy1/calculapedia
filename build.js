@@ -1658,11 +1658,11 @@ C.push({
   slug:'board-foot-calculator', emoji:'🪵', name:'Board Foot Calculator',
   tile:'Board feet of lumber for any project',
   title:'Board Foot Calculator (Lumber Cost & Hardwood Formula)',
-  desc:'Calculate board feet for hardwood lumber: use actual thickness, width, length, quantity, and a cut-list waste allowance to estimate material and cost.',
+  desc:'Calculate board feet for hardwood lumber using rough thickness, actual width, length, quantity, and a cut-list waste allowance to estimate material and cost.',
   h1:'Board Foot Calculator', sub:'How many board feet of lumber do you need? Enter board dimensions, quantity, and a waste allowance.',
   buy:'Shop dimensional lumber →',
   inputs:[
-    {id:'thick',label:'Thickness (actual)',hint:'(inches)',value:'1',step:'0.25'},
+    {id:'thick',label:'Thickness (rough)',hint:'(inches)',value:'1',step:'0.25'},
     {id:'wid',label:'Width (actual)',hint:'(inches)',value:'6',step:'0.25'},
     {id:'len',label:'Length',hint:'(feet)',value:'8',step:'0.5'},
     {id:'qty',label:'Number of boards',hint:'',value:'10',step:'1'},
@@ -1681,14 +1681,14 @@ set('perboard',per.toFixed(2)+' bf per board');
 set('withwaste',total.toFixed(1)+' board feet');
 set('cost',P>0?money(total*P):'—');`,
   content:{
-    intro:'A board foot is a unit of lumber volume equal to 12 × 12 × 1 inch. Multiply thickness (in) × width (in) × length (ft), divide by 12, then multiply by the number of boards. Use the lumberyard\'s actual surfaced dimensions, not a nominal label like 1×6.',
+    intro:'A board foot is a unit of lumber volume equal to 12 × 12 × 1 inch. Multiply thickness (in) × width (in) × length (ft), divide by 12, then multiply by the number of boards. Hardwood yards commonly calculate board feet from the rough thickness before surfacing and the board\'s measured width. A 4/4 board is billed as 1 inch thick even though surfacing makes its finished thickness smaller; confirm the supplier\'s pricing basis rather than substituting a finished thickness.',
     example:'<strong>Worked example — 10 boards at 1&nbsp;in × 6&nbsp;in × 8&nbsp;ft:</strong><br>(1 × 6 × 8) ÷ 12 = 4 board feet each × 10 = <strong>40 board feet</strong>. At $4 per board foot, the lumber estimate is <strong>$160</strong> before tax and delivery.',
     h3:'Plan the lumber order from a cut list',
     p:'Hardwood (oak, maple, walnut) is commonly priced by the board foot; softwood framing lumber is often sold by the piece or linear foot. For a mixed cut list, calculate each stock size as its own line and add the board-foot totals before applying the waste allowance. For example, four 1 × 6 × 8 ft boards equal 16 board feet; with 10% waste, plan to buy at least 17.6 board feet, then choose available board lengths that cover the cut list. Add 10–15% when your cut list has defects, matching grain, or short offcuts, and buy longer boards only after checking the usable cuts. The price field is your local per-board-foot estimate; confirm the grade, milling, and available lengths on the lumberyard quote before buying. For decking measured by coverage rather than volume, use the <a href="/deck-board-calculator">deck board calculator</a>.',
     faqs:[
       {q:'What is a board foot of lumber?',a:'One board foot equals <strong>144 cubic inches</strong> — the volume of a piece 1 inch thick, 12 inches wide, and 1 foot long.'},
       {q:'How do I calculate board feet?',a:'Multiply thickness (inches) × width (inches) × length (feet), then divide by <strong>12</strong>.'},
-      {q:'Should I use nominal or actual lumber dimensions?',a:'Use the lumberyard\'s <strong>actual surfaced thickness and width</strong> for board-foot pricing. Nominal labels such as 1×6 can describe a different finished size.'},
+      {q:'Should I use nominal or actual lumber dimensions?',a:'For hardwood sold by the board foot, use the supplier\'s <strong>rough thickness and measured width</strong>; a 4/4 board is normally billed as 1 inch thick before surfacing. For softwood sold by the piece, use the supplier\'s listed actual dimensions when planning fit and coverage. Confirm the yard\'s pricing basis because milling and product conventions vary.'},
       {q:'What do 4/4 and 5/4 mean when buying hardwood?',a:'<strong>4/4 means four quarters of an inch, or 1 inch rough thickness before surfacing;</strong> 5/4 means 1.25 inches rough. Use the supplier\'s listed rough thickness in the board-foot formula and confirm the finished size you need after milling. A 4/4 board that is 6 inches wide and 8 feet long is 4 board feet before surfacing: (1 × 6 × 8) ÷ 12 = 4.'},
       {q:'How much extra hardwood should I order?',a:'A <strong>10–15% allowance</strong> is a practical starting point for defects, grain matching, and offcuts. Complex parts or short stock can require more.'},
       {q:'How do I estimate the price of hardwood by the board foot?',a:'Multiply the board-foot total by the supplier\'s per-board-foot price, then add the waste allowance before comparing the estimate with the quote. The calculator\'s price field is an estimate only: confirm the species, grade, surfacing, and whether the yard prices the rough or finished dimensions.'},

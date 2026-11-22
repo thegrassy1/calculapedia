@@ -8,11 +8,11 @@ execFileSync(process.execPath, ['build.js'], { cwd: root, stdio: 'pipe' });
 const html = fs.readFileSync(path.join(root, 'dist', 'board-foot-calculator.html'), 'utf8');
 
 assert.match(html, /<title>Board Foot Calculator \(Lumber Cost & Hardwood Formula\)<\/title>/);
-assert.match(html, /<meta name="description" content="Calculate board feet for hardwood lumber: use actual thickness, width, length, quantity, and a cut-list waste allowance to estimate material and cost\.">/);
+assert.match(html, /<meta name="description" content="Calculate board feet for hardwood lumber using rough thickness, actual width, length, quantity, and a cut-list waste allowance to estimate material and cost\.">/);
 assert.match(html, /id="waste"/);
 assert.match(html, /Waste allowance/);
 assert.match(html, /With waste allowance/);
-assert.match(html, /Use the lumberyard's actual surfaced dimensions, not a nominal label like 1×6/);
+assert.match(html, /Hardwood yards commonly calculate board feet from the rough thickness before surfacing and the board's measured width/);
 assert.match(html, /Add 10–15% when your cut list has defects, matching grain, or short offcuts/);
 assert.match(html, /calculate each stock size as its own line and add the board-foot totals before applying the waste allowance/);
 assert.match(html, /For example, four 1 × 6 × 8 ft boards equal 16 board feet; with 10% waste, plan to buy at least 17\.6 board feet, then choose available board lengths that cover the cut list/);
