@@ -190,6 +190,7 @@ C.push({
   ],
   lines:[
     {id:'area',label:'Area to cover'},
+    {id:'wasteTile',label:'Extra tile for cuts and breakage'},
     {id:'purchaseCoverage',label:'Tile coverage including waste'},
     {id:'boxes',label:'Boxes needed'},
     {id:'cost',label:'Estimated cost'}
@@ -200,6 +201,7 @@ var area=L*W,tsf=(TL*TW)/144,tiles=tsf>0?Math.ceil(area/tsf*(1+waste/100)):0;
 var boxes=coverage>0?Math.ceil(area*(1+waste/100)/coverage):0;
 set('main',tiles+' tiles');
 set('area',area.toFixed(0)+' sq ft');
+set('wasteTile',(area*waste/100).toFixed(1)+' sq ft');
 set('purchaseCoverage',(area*(1+waste/100)).toFixed(1)+' sq ft');
 set('boxes',coverage>0?boxes+' boxes':'—');
 set('cost',P>0&&coverage>0?money(boxes*P):'—');`,
